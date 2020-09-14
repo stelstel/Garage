@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
 
 namespace Garage
 {
@@ -9,27 +7,13 @@ namespace Garage
     {
         #region properties ************************************************************************************
         public double Weight { get; set; }
+        
         private string registrationNumber;
 
         public string RegistrationNumber
         {
             get { return registrationNumber; }
-
-            set
-            {
-                char[] regNum = registrationNumber.ToCharArray();
-
-                if (Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2]) &&
-                        Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]) )
-                {
-                    registrationNumber = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Registration number is wrong. Try again!")
-                }
-                
-            }
+            set { registrationNumber = value; }
         }
 
         //public string RegistrationNumber { get; set; }
