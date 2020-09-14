@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Garage
 {
     public static class Menu
     {
+        #region Properties **************************************************************
         static UI Ui { get; set; } = new UI();
+        #endregion
 
+        #region Methods *****************************************************************
         public static void Run()
         {
             PrintFirstChoice();
         }
+
 
         static void PrintFirstChoice() 
         {
@@ -35,14 +40,16 @@ namespace Garage
                         System.Environment.Exit(1);
                         break;
                     default:
+                        Ui.PrintLine(); // TODO bryta ut
+                        Ui.PrintLine("Incorrect choice. Try again!");
+                        Ui.PrintLine();
                         break;
                 }
             } while (!correctFirstChoice);
 
             HandleInput(firstChoice);
-
-
         }
+
 
         private static void HandleInput(string input)
         {
@@ -71,7 +78,7 @@ namespace Garage
         }
 
 
-        private static void CreateVehicle()
+        private static void CreateVehicle() // TODO dela upp
         {
             string vehicleType = "";
             bool correctType = false;
@@ -110,6 +117,10 @@ namespace Garage
                         correctType = true;
                         break;
                     default:
+                        Ui.PrintLine();
+                        Ui.PrintLine("Incorrect input. Try again!");
+                        Ui.PrintLine();
+
                         break;
                 }
             } while (!correctType);        
@@ -123,7 +134,9 @@ namespace Garage
 
                 if (!double.TryParse(Ui.GetInput(), out weight))
                 {
-                    Ui.PrintLine("Incorrect weight. Try again!");
+                    Ui.PrintLine();
+                    Ui.PrintLine("Incorrect input. Try again!");
+                    Ui.PrintLine();
                 }
                 else
                 {
@@ -139,19 +152,22 @@ namespace Garage
                 string registrationNumber = Ui.GetInput();
                 char[] regNum = registrationNumber.ToCharArray();
 
-                if (Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2])
-                        && Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
+                if (registrationNumber.Length == 6 && 
+                        Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2]) && 
+                        Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
                 {
                     correctRegNum = true;
                 }
                 else
                 {
+                    Ui.PrintLine();
                     Ui.PrintLine("Incorrect registration number. try again");
+                    Ui.PrintLine();
                 }
             } while (!correctRegNum);
-
             
             //string registrationNumber, string colour, int numberOfWheels
         }
+        #endregion
     }
 }
