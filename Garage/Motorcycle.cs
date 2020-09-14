@@ -13,5 +13,11 @@ namespace Garage
         {
             EngineVolume = engineVolume;
         }
+
+        public override string ToString()
+        {
+            
+            return $"{base.ToString()}, Engine volume: {EngineVolume}";
+        }
     }
 }

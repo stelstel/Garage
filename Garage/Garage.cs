@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Garage
@@ -39,14 +40,40 @@ namespace Garage
 
         public void seedParkVehicles()
         {
-            Vehicle vehicle = new Vehicle(100, "iop789", "Blue", 4);
-            Vehicle vehicle2 = new Vehicle(1000, "iop889", "Blue", 4);
-            Vehicle vehicle3 = new Vehicle(1100, "BEN789", "White", 4);
+            Vehicle vehicle = new Car(100, "iop789", "Blue", 4, 4);
+            Vehicle vehicle2 = new Boat(1000, "iop889", "Yellow", 4, 8.25);
+            Vehicle vehicle3 = new Bus(1100, "BEN789", "White", 4, 46);
+            Vehicle vehicle4 = new Airplane(6250, "SAS14001", "Grey", 8, 510);
+            Vehicle vehicle5 = new Motorcycle(250, "HJK412", "Black", 2, 900);
+
 
             parkVehicle(vehicle);
             parkVehicle(vehicle2);
             parkVehicle(vehicle3);
-            unparkVehicle(vehicle);
+            parkVehicle(vehicle4);
+            parkVehicle(vehicle5);
+
+            //unparkVehicle(vehicle);
+        }
+
+        /// <summary>
+        ///     Creates a string containing of parked vehicles
+        /// </summary>
+        /// <returns>String containing parked vehicles</returns>
+        public string listParkedVihicles() 
+        {
+            string output = "";
+
+            foreach (Vehicle vehicle in Vehicles)
+            {
+                if (vehicle != null)
+                {
+                    output += vehicle.ToString();
+                    output += "\n";
+                }
+            }
+
+            return output;
         }
     }
 }

@@ -10,10 +10,16 @@ namespace Garage
         
         //public Car() {}
 
-        public Car(int numberOfDoors, double weight, string registrationNumber, string colour, int numberOfWheels) 
+        public Car(double weight, string registrationNumber, string colour, int numberOfWheels, int numberOfDoors) 
             : base(weight, registrationNumber, colour, numberOfWheels)
         {
             NumberOfDoors = numberOfDoors;   
         }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, Number of doors{NumberOfDoors}";
+        }
     }
+
 }

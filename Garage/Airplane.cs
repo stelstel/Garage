@@ -13,5 +13,10 @@ namespace Garage
         {
             NumberOfPassengers = numberOfPassangers;           
         }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, Number of passangers: {NumberOfPassengers}";
+        }
     }
 }

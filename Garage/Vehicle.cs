@@ -34,5 +34,16 @@ namespace Garage
         }
         #endregion
 
+        #region methods *****************************************************************************************
+        /// <summary>
+        /// Creates a string containing values neeeded to find a parked vehicle
+        /// </summary>
+        /// <returns>String containing values neeeded to find a parked vehicle</returns>
+        public override string ToString()
+        {
+            return $"{this.GetType().Name}, Regnummer: {RegistrationNumber}, Colour: {Colour}, ";
+        }
+        #endregion
+
     }
 }
