@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Garage
 {
-    class Garage<T>
+    public class Garage<T>
     {
         private Vehicle[] vehicles;
 
@@ -14,9 +14,15 @@ namespace Garage
             set { vehicles = value; }
         }
 
+        public Garage(int numberOfParkingSpaces)
+        {
+            Vehicles = new Vehicle[numberOfParkingSpaces];
+        }
+
         public void parkVehicle(Vehicle vehicle)
         {
-            //TODO
+            int firstEmptyArraySpace = Array.IndexOf(Vehicles, null);
+            Vehicles[firstEmptyArraySpace] = vehicle;
         }
 
         public void unparkVehicle(Vehicle vehicle)
