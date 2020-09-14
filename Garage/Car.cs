@@ -6,14 +6,14 @@ namespace Garage
 {
     public class Car : Vehicle
     {
-        public int NumberOfSeats { get; set; }
+        public int NumberOfDoors { get; set; }
         
-        public Car() {}
+        //public Car() {}
 
-        public Car(int numberOfSeats, double weight, string registrationNumber, string colour, int numberOfWheels) 
+        public Car(int numberOfDoors, double weight, string registrationNumber, string colour, int numberOfWheels) 
             : base(weight, registrationNumber, colour, numberOfWheels)
         {
-            NumberOfSeats = numberOfSeats;   
+            NumberOfDoors = numberOfDoors;   
         }
     }
 }

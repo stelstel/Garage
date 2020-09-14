@@ -13,7 +13,7 @@ namespace Garage.Tests
         public void Car_constructor_Test()
         {
             // Arrange
-            int expectedSeats = 4;
+            int expectedDoors = 4;
             double expectedWeight = 1500;
             string expectedRegistrationNumber = "222BNM";
             string expectedColour = "Svart";
@@ -21,21 +21,21 @@ namespace Garage.Tests
 
             // Act
             Car car = new Car(
-                numberOfSeats: 4, 
+                numberOfDoors: 4, 
                 weight: 1500, 
                 registrationNumber: "222BNM", 
                 colour: "Svart", 
                 numberOfWheels: 4
             );
 
-            int actualSeats = car.NumberOfSeats;
+            int actualDoors = car.NumberOfDoors;
             double actualWeight = car.Weight;
             string actualRegistrationNumber = car.RegistrationNumber;
             string actualColour = car.Colour;
             int actualWheels = car.NumberOfWheels;
 
             // Assert
-            Assert.AreEqual(expectedSeats, actualSeats);
+            Assert.AreEqual(expectedDoors, actualDoors);
             Assert.AreEqual(expectedWeight, actualWeight);
             Assert.AreEqual(expectedRegistrationNumber, actualRegistrationNumber);
             Assert.AreEqual(expectedColour, actualColour);
@@ -43,9 +43,26 @@ namespace Garage.Tests
         }
 
         [TestMethod()]
-        public void CarTest1()
+        public void Car_set_weight_property_test()
         {
-            Car car = new Car();
+            // Arrange 
+            double expectedWeight = 1600;
+
+            // Act
+            Car car = new Car(
+                numberOfDoors: 4,
+                weight: 1500,
+                registrationNumber: "222BNM",
+                colour: "Svart",
+                numberOfWheels: 4
+            );
+
+            car.Weight = 1600;
+            double actualWeight = car.Weight;
+
+            // Assert
+            Assert.AreEqual(expectedWeight, actualWeight);
+
         }
     }
 }
