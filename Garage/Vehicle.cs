@@ -13,7 +13,21 @@ namespace Garage
         public string RegistrationNumber
         {
             get { return registrationNumber; }
-            set { registrationNumber = value.ToUpper(); } // Reg number always uppercase
+            
+            set 
+            {
+                char[] regNum = registrationNumber.ToCharArray();
+                
+                if (Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2])
+                        && Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
+                {
+                    registrationNumber = value.ToUpper(); // Reg number always uppercase
+                }
+                else
+                {
+                    throw new System.ArgumentException();
+                }
+            } 
         }
 
         public string Colour { get; set; }
