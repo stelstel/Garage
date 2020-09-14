@@ -1,4 +1,4 @@
-﻿namespace SkalProj_Datastrukturer_Minne
+﻿namespace Garage
 {
     interface IUI
     {

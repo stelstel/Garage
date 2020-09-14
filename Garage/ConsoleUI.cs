@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SkalProj_Datastrukturer_Minne
+namespace Garage
 {
     /// <summary>
     /// Prints to and reads from Console
