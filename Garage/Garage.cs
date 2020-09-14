@@ -20,13 +20,13 @@ namespace Garage
             Vehicles = new Vehicle[numberOfParkingSpaces];
         }
 
-        public void parkVehicle(Vehicle vehicle)
+        public void ParkVehicle(Vehicle vehicle)
         {
             int firstEmptyArraySpace = Array.IndexOf(Vehicles, null);
             Vehicles[firstEmptyArraySpace] = vehicle;
         }
 
-        public void unparkVehicle(Vehicle vehicle)
+        public void UnparkVehicle(Vehicle vehicle)
         {
 
             for (int i = 0; i < Vehicles.Length - 1; i++)
@@ -38,7 +38,7 @@ namespace Garage
             }
         }
 
-        public void seedParkVehicles()
+        public void SeedParkVehicles()
         {
             Vehicle vehicle = new Car(100, "iop789", "Blue", 4, 4);
             Vehicle vehicle2 = new Boat(1000, "iop889", "Yellow", 4, 8.25);
@@ -47,11 +47,11 @@ namespace Garage
             Vehicle vehicle5 = new Motorcycle(250, "HJK412", "Black", 2, 900);
 
 
-            parkVehicle(vehicle);
-            parkVehicle(vehicle2);
-            parkVehicle(vehicle3);
-            parkVehicle(vehicle4);
-            parkVehicle(vehicle5);
+            ParkVehicle(vehicle);
+            ParkVehicle(vehicle2);
+            ParkVehicle(vehicle3);
+            ParkVehicle(vehicle4);
+            ParkVehicle(vehicle5);
 
             //unparkVehicle(vehicle);
         }
@@ -60,7 +60,7 @@ namespace Garage
         ///     Creates a string containing of parked vehicles
         /// </summary>
         /// <returns>String containing parked vehicles</returns>
-        public string listParkedVihicles() 
+        public string ListParkedVihicles() 
         {
             string output = "";
 

@@ -9,9 +9,9 @@ namespace Garage
         static void Main(string[] args)
         {
             Garage<Vehicle> garage = new Garage.Garage<Vehicle>(10);
-            garage.seedParkVehicles();
+            garage.SeedParkVehicles();
             
-            string parkedVehicles = garage.listParkedVihicles();
+            string parkedVehicles = garage.ListParkedVihicles();
             Ui.Print(parkedVehicles);
             Ui.GetInput();
         }
