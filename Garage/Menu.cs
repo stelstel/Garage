@@ -16,6 +16,7 @@ namespace Garage
         static void PrintFirstChoice() 
         {
             bool correctFirstChoice = false;
+            string firstChoice;
 
             do
             {
@@ -23,10 +24,24 @@ namespace Garage
                 Ui.PrintLine("1: Register vehicle");
                 Ui.PrintLine("0: Exit");
 
-            } while (!correctFirstChoice);    
-            
+                firstChoice = Ui.GetInput();
 
-                HandleInput(Ui.GetInput());
+                switch (firstChoice)
+                {
+                    case "1":
+                        correctFirstChoice = true;
+                        break;
+                    case "0":
+                        System.Environment.Exit(1);
+                        break;
+                    default:
+                        break;
+                }
+            } while (!correctFirstChoice);
+
+            HandleInput(firstChoice);
+
+
         }
 
         private static void HandleInput(string input)
