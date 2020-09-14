@@ -10,35 +10,51 @@ namespace Garage
 
         public static void Run()
         {
-            PrintChioces();
+            PrintFirstChoice();
         }
 
-        static void PrintChioces() 
+        static void PrintFirstChoice() 
         {
-            Ui.PrintLine("Choose: ");
-            Ui.PrintLine("1: Register vehicle");
-            Ui.PrintLine("0: Exit");
+            bool correctFirstChoice = false;
 
-            HandleInput(Ui.GetInput());
+            do
+            {
+                Ui.PrintLine("Choose: ");
+                Ui.PrintLine("1: Register vehicle");
+                Ui.PrintLine("0: Exit");
+
+            } while (!correctFirstChoice);    
+            
+
+                HandleInput(Ui.GetInput());
         }
 
         private static void HandleInput(string input)
         {
-            if (input.Length != 1)
-            {
-                Ui.PrintLine("Incorrect choice. Try again");
-                return;
-            }
+            bool mainChoiceCorrect = false;
 
-            switch (input)
+            do
             {
-                case "1":
-                    CreateVehicle();
-                    break;
-                default:
-                    break;
-            }
+                if (input.Length != 1)
+                {
+                    Ui.PrintLine("Incorrect choice. Try again");
+                    //return;
+                }
+                else
+                {
+                    switch (input)
+                    {
+                            case "1":
+                                CreateVehicle();
+                                mainChoiceCorrect = true;
+                                break;
+                            default:
+                                break;
+                    }
+                }
+            } while (!mainChoiceCorrect);
         }
+
 
         private static void CreateVehicle()
         {
