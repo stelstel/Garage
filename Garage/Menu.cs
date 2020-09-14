@@ -8,7 +8,7 @@ namespace Garage
     {
         static UI Ui { get; set; } = new UI();
 
-        static void Run()
+        public static void Run()
         {
             PrintChioces();
         }
@@ -105,7 +105,18 @@ namespace Garage
             do
             {
                 Ui.Print($"Input registration number of the {vehicleType}:");
-                string regNum = Ui.GetInput();
+                string registrationNumber = Ui.GetInput();
+                char[] regNum = registrationNumber.ToCharArray();
+
+                if (Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2])
+                        && Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
+                {
+                    correctRegNum = true;
+                }
+                else
+                {
+                    Ui.PrintLine("Incorrect registration number. try again");
+                }
             } while (!correctRegNum);
 
             

@@ -8,12 +8,14 @@ namespace Garage
 
         static void Main(string[] args)
         {
-            Garage<Vehicle> garage = new Garage.Garage<Vehicle>(10);
-            garage.SeedParkVehicles();
+            Menu.Run();
+
+            //Garage<Vehicle> garage = new Garage.Garage<Vehicle>(10);
+            //garage.SeedParkVehicles();
             
-            string parkedVehicles = garage.ListParkedVihicles();
-            Ui.Print(parkedVehicles);
-            Ui.GetInput();
+            //string parkedVehicles = garage.ListParkedVihicles();
+            //Ui.Print(parkedVehicles);
+            //Ui.GetInput();
         }
     }
 }
