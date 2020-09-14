@@ -6,39 +6,27 @@ namespace Garage
 {
     class Garage<T>
     {
-        private List<Vehicle> vehicles = new List<Vehicle>();
+        private Vehicle[] vehicles;
 
-        public List<Vehicle> Vehicles { get => vehicles; set => vehicles = value; }
+        public Vehicle[] Vehicles
+        {
+            get { return vehicles; }
+            set { vehicles = value; }
+        }
 
         public void parkVehicle(Vehicle vehicle)
         {
-            Vehicles.Add(vehicle);
+            //TODO
         }
 
         public void unparkVehicle(Vehicle vehicle)
         {
-            Vehicles.Remove(vehicle);
+            //TODO
         }
 
         public void seedParkVehicles()
         {
             // TODO Vehicle vehicle1 = new Vehicle(100, "ABC123", "Vit", 4);
         }
-
-        // TODO listan får ej vara här
-        /*
-            char[] regNum = registrationNumber.ToCharArray();
-
-                if (Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2]) &&
-                        Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]) 
-                        && garage.Vehicles.R)
-                {
-                    registrationNumber = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Registration number is wrong. Try again!");
-                }
-         */
     }
 }
