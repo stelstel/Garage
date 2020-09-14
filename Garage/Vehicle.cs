@@ -9,13 +9,7 @@ namespace Garage
         public double Weight { get; set; }
         
         private string registrationNumber;
-
-        public string RegistrationNumber
-        {
-            get { return registrationNumber; }
-            set { registrationNumber = value; }
-        }
-
+        public string RegistrationNumber { get; set; }
         public string Colour { get; set; }
         public int NumberOfWheels { get; set; }
         #endregion  
