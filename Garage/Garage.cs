@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Garage
 {
-    class Garage : IGarage
+    class Garage<T>
     {
         private List<Vehicle> vehicles = new List<Vehicle>();
 
