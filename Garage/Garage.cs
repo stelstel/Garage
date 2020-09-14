@@ -32,7 +32,11 @@ namespace Garage
 
         public void seedParkVehicles()
         {
-            // TODO Vehicle vehicle1 = new Vehicle(100, "ABC123", "Vit", 4);
+            Vehicle vehicle = new Vehicle(100, "iop789", "Blue", 4);
+            Vehicle vehicle2 = new Vehicle(1000, "iop889", "Blue", 4);
+
+            parkVehicle(vehicle);
+            parkVehicle(vehicle2);
         }
     }
 }
