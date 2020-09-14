@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Garage
 {
-    class Vehicle : IVehicle
+    public class Vehicle : IVehicle
     {
         #region properties ************************************************************************************
         public double Weight { get; set; }
@@ -16,7 +16,6 @@ namespace Garage
             set { registrationNumber = value; }
         }
 
-        //public string RegistrationNumber { get; set; }
         public string Colour { get; set; }
         public int NumberOfWheels { get; set; }
         #endregion  
