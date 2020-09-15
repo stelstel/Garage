@@ -24,56 +24,52 @@ namespace Garage
 
             do
             {
-                Ui.PrintLine("Choose: ");
-                Ui.PrintLine("1: Register vehicle");
-                Ui.PrintLine("0: Exit");
-
-                firstChoice = Ui.GetInput();
-
-                switch (firstChoice)
+                do
                 {
-                    case "1":
-                        correctFirstChoice = true;
-                        break;
-                    case "0":
-                        System.Environment.Exit(1);
-                        break;
-                    default:
-                        Ui.PrintLine(); // TODO bryta ut
-                        Ui.PrintLine("Incorrect choice. Try again!");
-                        Ui.PrintLine();
-                        break;
-                }
-            } while (!correctFirstChoice);
+                    Ui.Clear();
+                    Ui.PrintLine("Choose option: ");
+                    Ui.PrintLine("1: Register vehicle");
+                    Ui.PrintLine("0: Exit");
 
-            HandleInput(firstChoice);
+                    firstChoice = Ui.GetInput();
+
+                    switch (firstChoice)
+                    {
+                        case "1":
+                            correctFirstChoice = true;
+                            break;
+                        case "0":
+                            System.Environment.Exit(1);
+                            break;
+                        default:
+                            Ui.PrintLine(); // TODO bryta ut
+                            Ui.PrintLine("Incorrect choice. Try again!");
+                            Ui.PrintLine();
+                            break;
+                    }
+                } while (!correctFirstChoice);
+
+                HandleInput(firstChoice);
+            } while (true);
         }
 
 
         private static void HandleInput(string input)
         {
-            bool mainChoiceCorrect = false;
+            bool exitHandle = false;
 
-            do
-            {
-                if (input.Length != 1)
-                {
-                    Ui.PrintLine("Incorrect choice. Try again");
-                    //return;
-                }
-                else
-                {
+            //do
+            //{
                     switch (input)
                     {
                             case "1":
                                 CreateVehicle();
-                                mainChoiceCorrect = true;
                                 break;
                             default:
                                 break;
                     }
-                }
-            } while (!mainChoiceCorrect);
+
+            //} while (!exitHandle);
         }
 
 
