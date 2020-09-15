@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Garage
 {
-    public class Garage<T> // TODO where
+    public class Garage<T> // TODO where LINQ
     {
         #region Properties ***************************************************************
 
@@ -55,7 +55,7 @@ namespace Garage
         ///     Creates a string containing of parked vehicles
         /// </summary>
         /// <returns>String containing parked vehicles</returns>
-        public string ListParkedVihicles() 
+        public string ListParkedVehicles() 
         {
             string output = "";
 

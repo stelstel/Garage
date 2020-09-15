@@ -4,9 +4,18 @@ using System.Text;
 
 namespace Garage
 {
-    class GarageHandler
+    public class GarageHandler
     {
-        public void SeedParkVehicles()
+        #region Properties **************************************************************
+
+        static UI Ui { get; set; } = new UI();
+
+        public Garage<Vehicle> Garage { get; set; }
+
+        #endregion
+
+
+        public void SeedParkVehicles(Garage.Garage<Vehicle> garage)
         {
             Vehicle vehicle = new Car(100, "iop789", "Blue", 4, 4);
             Vehicle vehicle2 = new Boat(1000, "iop889", "Yellow", 4, 8.25);
@@ -14,13 +23,19 @@ namespace Garage
             Vehicle vehicle4 = new Airplane(6250, "SAS14001", "Grey", 8, 510);
             Vehicle vehicle5 = new Motorcycle(250, "HJK412", "Black", 2, 900);
 
-            ParkVehicle(vehicle);
-            ParkVehicle(vehicle2);
-            ParkVehicle(vehicle3);
-            ParkVehicle(vehicle4);
-            ParkVehicle(vehicle5);
+            garage.ParkVehicle(vehicle);
+            garage.ParkVehicle(vehicle2);
+            garage.ParkVehicle(vehicle3);
+            garage.ParkVehicle(vehicle4);
+            garage.ParkVehicle(vehicle5);
+        }
 
-            //unparkVehicle(vehicle); // TODO
+        public Garage.Garage<Vehicle> CreateGarage(int parkingSpaces)
+        {
+            Garage<Vehicle> garage = new Garage<Vehicle>(parkingSpaces);
+            Ui.PrintLine($"A garage with 120 parking spaces created"); // TODO, get parking spaces from user input
+            Ui.GetInput();
+            return garage;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Garage
 
         static void Main(string[] args)
         {
+            GarageHandler garageHandler = new GarageHandler();
             Menu.Run();
 
             //Garage<Vehicle> garage = new Garage.Garage<Vehicle>(10);

@@ -30,6 +30,7 @@ namespace Garage
                     Ui.PrintLine("Choose option: ");
                     Ui.PrintLine("1: Register vehicle");
                     Ui.PrintLine("2: Create garage");
+                    Ui.PrintLine("3: Create garage");
                     Ui.PrintLine("0: Exit");
 
                     firstChoice = Ui.GetInput();
@@ -38,6 +39,7 @@ namespace Garage
                     {
                         case "1":
                         case "2":
+                        case "3":
                             correctFirstChoice = true;
                             break;
                         case "0":
@@ -62,7 +64,7 @@ namespace Garage
                         CreateVehicle();
                         break;
                     case "2":
-                        CreateGarage();
+                        ProduceGarage();
                         break;
                     case "3":
                         CreateAndParkVehicles();
@@ -72,15 +74,20 @@ namespace Garage
             }
         }
 
-        private static void CreateAndParkVehicles()
+        private static void ProduceGarage()
         {
-            SeedParkVehicles();
+            //Garage<Vehicle> garage = new Garage<Vehicle>(120); // TODO Get spaces from user
+            GarageHandler garageHandler = new GarageHandler();
+            garageHandler.CreateGarage(125);
+            Garage.Garage<Vehicle> garage = garageHandler.CreateGarage(115);
         }
 
-        private static void CreateGarage()
+        private static void CreateAndParkVehicles()
         {
-            Garage<Vehicle> garage = new Garage<Vehicle>(120); // TODO, get parking spaces from user input
-            Ui.PrintLine($"A garage with 120 parking spaces created"); // TODO, get parking spaces from user input
+            GarageHandler garageHandler = new GarageHandler();
+            Garage.Garage<Vehicle> garage = garageHandler.CreateGarage(125);
+            garageHandler.SeedParkVehicles(garage);
+            Ui.Print(garage.ListParkedVehicles());
             Ui.GetInput();
         }
 
