@@ -86,6 +86,8 @@ namespace Garage
             {
                 Ui.PrintLine();
                 Ui.Print(garageHandler.Garage.ListParkedVehicles());
+                Ui.PrintLine("\nPress enter to continue!");
+                Ui.GetInput();
             }
             else
             {
