@@ -30,12 +30,11 @@ namespace Garage
             garage.ParkVehicle(vehicle5);
         }
 
-        public Garage.Garage<Vehicle> CreateGarage(int parkingSpaces)
+        public void CreateGarage(int parkingSpaces)
         {
-            Garage<Vehicle> garage = new Garage<Vehicle>(parkingSpaces);
+            Garage = new Garage<Vehicle>(parkingSpaces);
             Ui.PrintLine($"A garage with 120 parking spaces created"); // TODO, get parking spaces from user input
             Ui.GetInput();
-            return garage;
         }
     }
 }
