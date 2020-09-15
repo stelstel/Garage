@@ -42,9 +42,7 @@ namespace Garage
                             System.Environment.Exit(1);
                             break;
                         default:
-                            Ui.PrintLine(); // TODO bryta ut
-                            Ui.PrintLine("Incorrect choice. Try again!");
-                            Ui.PrintLine();
+                            PrintIncorrectInputWarning("input");
                             break;
                     }
                 } while (!correctFirstChoice);
@@ -53,23 +51,17 @@ namespace Garage
             } while (true);
         }
 
-
+        
         private static void HandleInput(string input)
         {
-            //bool exitHandle = false;
-
-            //do
-            //{
-                    switch (input)
-                    {
-                            case "1":
-                                CreateVehicle();
-                                break;
-                            default:
-                                break;
-                    }
-
-            //} while (!exitHandle);
+            switch (input)
+            {
+                    case "1":
+                        CreateVehicle();
+                        break;
+                    default:
+                        break;
+            }
         }
 
 
@@ -80,8 +72,6 @@ namespace Garage
             string registrationNumber;
             string colour;
             int numberOfWheels;
-
-            
             bool correctType = false;
 
             do
@@ -118,10 +108,7 @@ namespace Garage
                         correctType = true;
                         break;
                     default:
-                        Ui.PrintLine();
-                        Ui.PrintLine("Incorrect input. Try again!");
-                        Ui.PrintLine();
-
+                        PrintIncorrectInputWarning("input");
                         break;
                 }
             } while (!correctType);        
@@ -131,13 +118,10 @@ namespace Garage
             do
             {
                 Ui.Print($"Input weight of the {vehicleType}: ");
-                //double weight;
-
+               
                 if (!double.TryParse(Ui.GetInput(), out weight))
                 {
-                    Ui.PrintLine();
-                    Ui.PrintLine("Incorrect input. Try again!");
-                    Ui.PrintLine();
+                    PrintIncorrectInputWarning("input");
                 }
                 else
                 {
@@ -161,9 +145,7 @@ namespace Garage
                 }
                 else
                 {
-                    Ui.PrintLine();
-                    Ui.PrintLine("Incorrect registration number. try again");
-                    Ui.PrintLine();
+                    PrintIncorrectInputWarning("registration number");
                 }
             } while (!correctRegNum);
 
@@ -180,9 +162,7 @@ namespace Garage
                 }
                 else
                 {
-                    Ui.PrintLine();
-                    Ui.PrintLine("Incorrect colour. try again");
-                    Ui.PrintLine();
+                    PrintIncorrectInputWarning("colour");
                 }
 
             } while (!correctColour);
@@ -197,9 +177,7 @@ namespace Garage
 
                 if (numberOfWheels > 100 || numberOfWheels < 0 || !intOK)
                 {
-                    Ui.PrintLine();
-                    Ui.PrintLine("Incorrect number of wheels. Try again");
-                    Ui.PrintLine();
+                    PrintIncorrectInputWarning("number of wheels");
                 }
                 else
                 {
@@ -219,9 +197,7 @@ namespace Garage
 
                     if (numberOfPassengers < 0 || !intOK)
                     {
-                        Ui.PrintLine();
-                        Ui.PrintLine("Incorrect number of passengers. Try again");
-                        Ui.PrintLine();
+                        PrintIncorrectInputWarning("number of passengers");
                     }
                     else
                     {
@@ -240,13 +216,11 @@ namespace Garage
                 do
                 {
                     Ui.Print($"Input the length of the {vehicleType}:");
-                    bool intOK = Double.TryParse(Ui.GetInput(), out length);
+                    bool doubleOK = Double.TryParse(Ui.GetInput(), out length);
 
-                    if (length < 0 || !intOK)
+                    if (length < 0 || !doubleOK)
                     {
-                        Ui.PrintLine();
-                        Ui.PrintLine("Incorrect number of passengers. Try again");
-                        Ui.PrintLine();
+                        PrintIncorrectInputWarning("length");
                     }
                     else
                     {
@@ -269,9 +243,7 @@ namespace Garage
 
                     if (numberOfSeats < 0 || !intOK)
                     {
-                        Ui.PrintLine();
-                        Ui.PrintLine("Incorrect number of seats. Try again");
-                        Ui.PrintLine();
+                        PrintIncorrectInputWarning("number of seats");
                     }
                     else
                     {
@@ -294,9 +266,7 @@ namespace Garage
 
                     if (numberOfDoors < 0 || !intOK)
                     {
-                        Ui.PrintLine();
-                        Ui.PrintLine("Incorrect number of seats. Try again");
-                        Ui.PrintLine();
+                        PrintIncorrectInputWarning("number of doors");
                     }
                     else
                     {
@@ -307,8 +277,31 @@ namespace Garage
                 Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
                 PrintCreatedSuccess(car);
             }
-            // TodoMotorcycle
+            else if (vehicleType == "Motorcycle")
+            {
+                bool correctVolume = false;
+                int engineVolume;
+
+                do
+                {
+                    Ui.Print($"Input the engine volumeof the {vehicleType}:");
+                    bool intOK = Int32.TryParse(Ui.GetInput(), out engineVolume);
+
+                    if (engineVolume < 0 || !intOK)
+                    {
+                        PrintIncorrectInputWarning("engine volume");
+                    }
+                    else
+                    {
+                        correctVolume = true;
+                    }
+                } while (!correctVolume);
+
+                Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
+                PrintCreatedSuccess(motorcycle);
+            }
         }
+
 
         /// <summary>
         ///     Prints message to user when a vehicle has been created
@@ -318,6 +311,18 @@ namespace Garage
         {
             Ui.Print($"Created vehicle {vehicle.ToString()}");
             Ui.GetInput();
+        }
+
+
+        /// <summary>
+        /// Prints message to user when inout was wrong
+        /// </summary>
+        /// <param name="msg">Text to add to default message</param>
+        private static void PrintIncorrectInputWarning(String msg)
+        {
+            Ui.PrintLine();
+            Ui.PrintLine($"Incorrect {msg}. Please try again!");
+            Ui.PrintLine();
         }
         #endregion
     }
