@@ -8,8 +8,6 @@ namespace Garage
     {
         #region Properties **************************************************************
 
-        static UI Ui { get; set; } = new UI();
-
         public Garage<Vehicle> Garage { get; set; }
 
         #endregion

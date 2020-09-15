@@ -84,7 +84,8 @@ namespace Garage
         {
             if (garageHandler.Garage != null)
             {
-                garageHandler.Garage.ListParkedVehicles();
+                Ui.PrintLine();
+                Ui.Print(garageHandler.Garage.ListParkedVehicles());
             }
             else
             {
@@ -388,7 +389,7 @@ namespace Garage
         /// <param name="vehicle">The Vehicle that was created</param>
         static void PrintCreatedVehicleSuccess(Vehicle vehicle)
         {
-            Ui.Print($"Created vehicle {vehicle.ToString()}");
+            Ui.Print($"Created vehicle {vehicle}");
             Ui.GetInput();
         }
 
@@ -400,7 +401,7 @@ namespace Garage
         private static void PrintIncorrectInputWarning(String msg)
         {
             Ui.PrintLine();
-            Ui.PrintLine($"Incorrect {msg}. Please try again!");
+            Ui.PrintLine($"Incorrect input. {msg}. Please try again!");
             Ui.PrintLine();
         }
         #endregion
