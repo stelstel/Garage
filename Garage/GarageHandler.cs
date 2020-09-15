@@ -14,8 +14,9 @@ namespace Garage
 
         #endregion
 
+        #region methods *****************************************************************
 
-        public void SeedParkVehicles(Garage.Garage<Vehicle> garage)
+        public void SeedParkVehicles()
         {
             Vehicle vehicle = new Car(100, "iop789", "Blue", 4, 4);
             Vehicle vehicle2 = new Boat(1000, "iop889", "Yellow", 4, 8.25);
@@ -23,18 +24,18 @@ namespace Garage
             Vehicle vehicle4 = new Airplane(6250, "SAS14001", "Grey", 8, 510);
             Vehicle vehicle5 = new Motorcycle(250, "HJK412", "Black", 2, 900);
 
-            garage.ParkVehicle(vehicle);
-            garage.ParkVehicle(vehicle2);
-            garage.ParkVehicle(vehicle3);
-            garage.ParkVehicle(vehicle4);
-            garage.ParkVehicle(vehicle5);
+            Garage.ParkVehicle(vehicle);
+            Garage.ParkVehicle(vehicle2);
+            Garage.ParkVehicle(vehicle3);
+            Garage.ParkVehicle(vehicle4);
+            Garage.ParkVehicle(vehicle5);
         }
 
         public void CreateGarage(int parkingSpaces)
         {
             Garage = new Garage<Vehicle>(parkingSpaces);
-            Ui.PrintLine($"A garage with 120 parking spaces created"); // TODO, get parking spaces from user input
-            Ui.GetInput();
         }
+
+        #endregion
     }
 }

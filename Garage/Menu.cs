@@ -8,6 +8,7 @@ namespace Garage
     {
         #region Properties **************************************************************
         static UI Ui { get; set; } = new UI();
+        static GarageHandler garageHandler = new GarageHandler();
         #endregion
 
         #region Methods *****************************************************************
@@ -21,7 +22,7 @@ namespace Garage
         {
             bool correctFirstChoice = false;
             string firstChoice;
-
+            
             do
             {
                 do
@@ -29,8 +30,9 @@ namespace Garage
                     Ui.Clear();
                     Ui.PrintLine("Choose option: ");
                     Ui.PrintLine("1: Register vehicle");
-                    Ui.PrintLine("2: Create garage");
-                    Ui.PrintLine("3: Create garage");
+                    Ui.PrintLine("2: Create the garage");
+                    Ui.PrintLine("3: Create five vehicles and add them to the garage");
+                    Ui.PrintLine("4: List the vehicles in the garage");
                     Ui.PrintLine("0: Exit");
 
                     firstChoice = Ui.GetInput();
@@ -40,6 +42,7 @@ namespace Garage
                         case "1":
                         case "2":
                         case "3":
+                        case "4":
                             correctFirstChoice = true;
                             break;
                         case "0":
@@ -69,26 +72,62 @@ namespace Garage
                     case "3":
                         CreateAndParkVehicles();
                         break;
+                    case "4":
+                        ListVehicles();
+                        break;
                 default:
                         break;
             }
         }
 
+        private static void ListVehicles()
+        {
+            if (garageHandler.Garage != null)
+            {
+                garageHandler.Garage.ListParkedVehicles();
+            }
+            else
+            {
+                PrintIncorrectInputWarning(". No garage exists. Create a garage first");
+            }
+        }
+
         private static void ProduceGarage()
         {
-            //Garage<Vehicle> garage = new Garage<Vehicle>(120); // TODO Get spaces from user
-            GarageHandler garageHandler = new GarageHandler();
-            garageHandler.CreateGarage(125);
-            Garage.Garage<Vehicle> garage = garageHandler.CreateGarage(115);
+            int parkingSpaces;
+            bool correctSpaces = false;
+
+            do
+            {
+                Ui.Print($"Input number of parking spaces for the garage: ");
+
+                if (!int.TryParse(Ui.GetInput(), out parkingSpaces))
+                {
+                    PrintIncorrectInputWarning("input");
+                }
+                else
+                {
+                    correctSpaces = true;
+                }
+            } while (!correctSpaces);
+
+            garageHandler.CreateGarage(parkingSpaces);
+            Ui.PrintLine($"A garage with {parkingSpaces} spaces created");
+            Ui.GetInput();
         }
 
         private static void CreateAndParkVehicles()
         {
-            GarageHandler garageHandler = new GarageHandler();
-            Garage.Garage<Vehicle> garage = garageHandler.CreateGarage(125);
-            garageHandler.SeedParkVehicles(garage);
-            Ui.Print(garage.ListParkedVehicles());
-            Ui.GetInput();
+            if (garageHandler.Garage != null)
+            {
+                garageHandler.SeedParkVehicles();
+                Ui.Print("Five cars has been added to the garage");
+                Ui.GetInput();
+            }
+            else
+            {
+                PrintIncorrectInputWarning(". No garage exists. Create a garage first");
+            }
         }
 
         private static void CreateVehicle() // TODO dela upp
