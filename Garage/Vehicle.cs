@@ -16,17 +16,8 @@ namespace Garage
             
             set 
             {
-                char[] regNum = registrationNumber.ToCharArray();
-                
-                if (Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2])
-                        && Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
-                {
-                    registrationNumber = value.ToUpper(); // Reg number always uppercase
-                }
-                else
-                {
-                    throw new System.ArgumentException();
-                }
+                // Reg number sholud always be uppercase
+                registrationNumber = value.ToUpper(); // Reg number always uppercase
             } 
         }
 
@@ -41,8 +32,9 @@ namespace Garage
         //}
         public Vehicle(double weight, string registrationNumber, string colour, int numberOfWheels)
         {
-            RegistrationNumber = registrationNumber;
             Weight = weight;
+            RegistrationNumber = registrationNumber;
+            // string strB = String.Copy(strA); 
             Colour = colour;
             NumberOfWheels = numberOfWheels;
         }

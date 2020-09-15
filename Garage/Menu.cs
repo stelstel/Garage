@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace Garage
 {
@@ -82,6 +80,12 @@ namespace Garage
         private static void CreateVehicle() // TODO dela upp
         {
             string vehicleType = "";
+            double weight;
+            string registrationNumber;
+            string colour;
+            int numberOfWheels;
+
+            
             bool correctType = false;
 
             do
@@ -131,7 +135,7 @@ namespace Garage
             do
             {
                 Ui.Print($"Input weight of the {vehicleType}: ");
-                double weight;
+                //double weight;
 
                 if (!double.TryParse(Ui.GetInput(), out weight))
                 {
@@ -150,7 +154,7 @@ namespace Garage
             do
             {
                 Ui.Print($"Input registration number of the {vehicleType}:");
-                string registrationNumber = Ui.GetInput();
+                registrationNumber = Ui.GetInput();
                 char[] regNum = registrationNumber.ToCharArray();
 
                 if (registrationNumber.Length == 6 && 
@@ -172,9 +176,9 @@ namespace Garage
             do
             {
                 Ui.Print($"Input the colour of the {vehicleType}:");
-                string colour = Ui.GetInput();
+                colour = Ui.GetInput();
 
-                if (colour.Length >= 3 && colour.Any(c => char.IsDigit(c)))
+                if (colour.Length >= 3 && !colour.Any(c => char.IsDigit(c)))
                 {
                     correctColour = true;
                 }
@@ -193,13 +197,17 @@ namespace Garage
             {
                 Ui.Print($"Input how many wheels the {vehicleType} has:");
                 string wheels = Ui.GetInput();
-                bool intOK = Int32.TryParse(wheels, out int numberOfWheels);
+                bool intOK = Int32.TryParse(wheels, out numberOfWheels);
 
                 if (numberOfWheels > 100 || !intOK)
                 {
                     Ui.PrintLine();
                     Ui.PrintLine("Incorrect number of wheels. Try again");
                     Ui.PrintLine();
+                }
+                else
+                {
+                    correctWheels = true;
                 }
             } while (!correctWheels);
 
