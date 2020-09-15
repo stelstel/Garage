@@ -56,7 +56,7 @@ namespace Garage
 
         private static void HandleInput(string input)
         {
-            bool exitHandle = false;
+            //bool exitHandle = false;
 
             //do
             //{
@@ -207,7 +207,17 @@ namespace Garage
                 }
             } while (!correctWheels);
 
-            Vehicle vehicle = new Vehicle(weight, registrationNumber, colour, numberOfWheels);
+
+            if (vehicleType == "Airplane")
+            {
+                Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, 0); // Todo passengers
+            }
+            else if (vehicleType == "Boat")
+            {
+                Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, 0); // Todo length
+            }
+            // Todo Bus, car, motorcycle
+            //Vehicle vehicle = new Vehicle(weight, registrationNumber, colour, numberOfWheels);
         }
         #endregion
     }
