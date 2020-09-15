@@ -25,7 +25,7 @@ namespace Garage
 
         #region Methods *****************************************************************
 
-        public void ParkVehicle(Vehicle vehicle)
+        public void ParkVehicle(Vehicle vehicle) // TODO if no spaces left???
         {
             int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
             vehicles[firstEmptyArraySpace] = vehicle;
