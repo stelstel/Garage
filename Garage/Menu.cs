@@ -228,18 +228,69 @@ namespace Garage
                         correctPassengers = true;
                     }
                 } while (!correctPassengers);
-                
+
                 Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
-                Ui.Print($"Created vehicle {airplane.ToString()}"); // TODO remove
-                Ui.GetInput();
+                PrintCreatedSuccess(airplane);
             }
             else if (vehicleType == "Boat")
             {
-                Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, 0); // Todo length
+                bool correctLength = false;
+                double length;
+
+                do
+                {
+                    Ui.Print($"Input the length of the {vehicleType}:");
+                    bool intOK = Double.TryParse(Ui.GetInput(), out length);
+
+                    if (length < 0 || !intOK)
+                    {
+                        Ui.PrintLine();
+                        Ui.PrintLine("Incorrect number of passengers. Try again");
+                        Ui.PrintLine();
+                    }
+                    else
+                    {
+                        correctLength = true;
+                    }
+                } while (!correctLength);
+
+                Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length); // Todo length
             }
-            // Todo Bus, car, motorcycle
-            
-            //Vehicle vehicle = new Vehicle(weight, registrationNumber, colour, numberOfWheels);
+            else if (vehicleType == "Bus")
+            {
+                bool correctSeats = false;
+                int numberOfSeats;
+
+                do
+                {
+                    Ui.Print($"Input the number of seats the {vehicleType} has:");
+                    bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfSeats);
+
+                    if (numberOfSeats < 0 || !intOK)
+                    {
+                        Ui.PrintLine();
+                        Ui.PrintLine("Incorrect number of seats. Try again");
+                        Ui.PrintLine();
+                    }
+                    else
+                    {
+                        correctSeats = true;
+                    }
+                } while (!correctSeats);
+
+                Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
+            }
+            // Todo Car, motorcycle
+        }
+
+        /// <summary>
+        ///     Prints message to user when a vehicle has been created
+        /// </summary>
+        /// <param name="vehicle">The Vehicle that was created</param>
+        static void PrintCreatedSuccess(Vehicle vehicle)
+        {
+            Ui.Print($"Created vehicle {vehicle.ToString()}");
+            Ui.GetInput();
         }
         #endregion
     }
