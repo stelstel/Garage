@@ -51,7 +51,16 @@ namespace Garage.Tests
         [TestMethod()]
         public void ListParkedVehiclesTest()
         {
-            
+            // Arrange
+            string expectedOutput = "Cars in garage:\n-------------------------------------------------------------\n";
+
+            // Act
+            Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(1); 
+            string actualOutput = garage.ListParkedVehicles();
+
+            // Assert
+            Assert.AreEqual(expectedOutput, actualOutput);
+                
         }
     }
 }
