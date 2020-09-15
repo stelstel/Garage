@@ -11,14 +11,6 @@ namespace Garage
         #region Properties ***************************************************************
 
         private Vehicle[] vehicles;
-
-        /*
-         * public Vehicle[] Vehicles
-        {
-            get { return vehicles; }
-            set { vehicles = value; }
-        }
-        */
         #endregion
 
 
