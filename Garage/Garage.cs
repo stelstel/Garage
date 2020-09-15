@@ -12,11 +12,13 @@ namespace Garage
 
         private Vehicle[] vehicles;
 
-        public Vehicle[] Vehicles
+        /*
+         * public Vehicle[] Vehicles
         {
             get { return vehicles; }
             set { vehicles = value; }
         }
+        */
         #endregion
 
 
@@ -24,7 +26,7 @@ namespace Garage
 
         public Garage(int numberOfParkingSpaces)
         {
-            Vehicles = new Vehicle[numberOfParkingSpaces];
+            vehicles = new Vehicle[numberOfParkingSpaces];
         }
         #endregion
 
@@ -33,19 +35,19 @@ namespace Garage
 
         public void ParkVehicle(Vehicle vehicle)
         {
-            int firstEmptyArraySpace = Array.IndexOf(Vehicles, null);
-            Vehicles[firstEmptyArraySpace] = vehicle;
+            int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
+            vehicles[firstEmptyArraySpace] = vehicle;
         }
 
 
         public void UnparkVehicle(Vehicle vehicle)
         {
 
-            for (int i = 0; i < Vehicles.Length - 1; i++)
+            for (int i = 0; i < vehicles.Length - 1; i++)
             {
-                if (vehicle.RegistrationNumber == Vehicles[i]?.RegistrationNumber)
+                if (vehicle.RegistrationNumber == vehicles[i]?.RegistrationNumber)
                 {
-                    Vehicles[i] = null;
+                    vehicles[i] = null;
                 }
             }
         }
@@ -59,7 +61,7 @@ namespace Garage
         {
             string output = "";
 
-            foreach (Vehicle vehicle in Vehicles)
+            foreach (Vehicle vehicle in vehicles)
             {
                 if (vehicle != null)
                 {
