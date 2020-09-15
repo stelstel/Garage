@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Linq;
 
 namespace Garage
 {
-    public class Garage<T>
+    public class Garage<T> // TODO where
     {
+        #region Properties ***************************************************************
+
         private Vehicle[] vehicles;
 
         public Vehicle[] Vehicles
@@ -14,17 +17,26 @@ namespace Garage
             get { return vehicles; }
             set { vehicles = value; }
         }
+        #endregion
+
+
+        #region Constructors ************************************************************
 
         public Garage(int numberOfParkingSpaces)
         {
             Vehicles = new Vehicle[numberOfParkingSpaces];
         }
+        #endregion
+
+
+        #region Methods *****************************************************************
 
         public void ParkVehicle(Vehicle vehicle)
         {
             int firstEmptyArraySpace = Array.IndexOf(Vehicles, null);
             Vehicles[firstEmptyArraySpace] = vehicle;
         }
+
 
         public void UnparkVehicle(Vehicle vehicle)
         {
@@ -38,6 +50,7 @@ namespace Garage
             }
         }
 
+
         public void SeedParkVehicles()
         {
             Vehicle vehicle = new Car(100, "iop789", "Blue", 4, 4);
@@ -46,15 +59,15 @@ namespace Garage
             Vehicle vehicle4 = new Airplane(6250, "SAS14001", "Grey", 8, 510);
             Vehicle vehicle5 = new Motorcycle(250, "HJK412", "Black", 2, 900);
 
-
             ParkVehicle(vehicle);
             ParkVehicle(vehicle2);
             ParkVehicle(vehicle3);
             ParkVehicle(vehicle4);
             ParkVehicle(vehicle5);
 
-            //unparkVehicle(vehicle);
+            //unparkVehicle(vehicle); // TODO
         }
+
 
         /// <summary>
         ///     Creates a string containing of parked vehicles
@@ -75,5 +88,6 @@ namespace Garage
 
             return output;
         }
+        #endregion
     }
 }

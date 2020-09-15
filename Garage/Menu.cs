@@ -29,6 +29,7 @@ namespace Garage
                     Ui.Clear();
                     Ui.PrintLine("Choose option: ");
                     Ui.PrintLine("1: Register vehicle");
+                    Ui.PrintLine("2: Create garage");
                     Ui.PrintLine("0: Exit");
 
                     firstChoice = Ui.GetInput();
@@ -36,6 +37,7 @@ namespace Garage
                     switch (firstChoice)
                     {
                         case "1":
+                        case "2":
                             correctFirstChoice = true;
                             break;
                         case "0":
@@ -59,11 +61,20 @@ namespace Garage
                     case "1":
                         CreateVehicle();
                         break;
+                    case "2":
+                        CreateGarage();
+                        break;
                     default:
                         break;
             }
         }
 
+        private static void CreateGarage()
+        {
+            Garage<Vehicle> garage = new Garage<Vehicle>(120); // TODO, get parking spaces from user input
+            Ui.PrintLine($"A garage with 120 parking spaces created"); // TODO, get parking spaces from user input
+            Ui.GetInput();
+        }
 
         private static void CreateVehicle() // TODO dela upp
         {
@@ -72,53 +83,15 @@ namespace Garage
             string registrationNumber;
             string colour;
             int numberOfWheels;
-            bool correctType = false;
 
-            do
-            {
-                Ui.PrintLine("Input type of vehicle: ");
-                Ui.PrintLine("1: Airplane");
-                Ui.PrintLine("2: Boat");
-                Ui.PrintLine("3: Bus");
-                Ui.PrintLine("4: Car");
-                Ui.PrintLine("5: Motorcycle");
-
-                string type = Ui.GetInput();
-
-                switch (type)
-                {
-                    case "1":
-                        vehicleType = "Airplane";
-                        correctType = true;
-                        break;
-                    case "2":
-                        vehicleType = "Boat";
-                        correctType = true;
-                        break;
-                    case "3":
-                        vehicleType = "Bus";
-                        correctType = true;
-                        break;
-                    case "4":
-                        vehicleType = "Car";
-                        correctType = true;
-                        break;
-                    case "5":
-                        vehicleType = "Motorcycle";
-                        correctType = true;
-                        break;
-                    default:
-                        PrintIncorrectInputWarning("input");
-                        break;
-                }
-            } while (!correctType);        
+            vehicleType = TypeOfVehicleMenu();
 
             bool correctWeight = false;
 
             do
             {
                 Ui.Print($"Input weight of the {vehicleType}: ");
-               
+
                 if (!double.TryParse(Ui.GetInput(), out weight))
                 {
                     PrintIncorrectInputWarning("input");
@@ -137,8 +110,8 @@ namespace Garage
                 registrationNumber = Ui.GetInput();
                 char[] regNum = registrationNumber.ToCharArray();
 
-                if (registrationNumber.Length == 6 && 
-                        Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2]) && 
+                if (registrationNumber.Length == 6 &&
+                        Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2]) &&
                         Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
                 {
                     correctRegNum = true;
@@ -206,7 +179,7 @@ namespace Garage
                 } while (!correctPassengers);
 
                 Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
-                PrintCreatedSuccess(airplane);
+                PrintCreatedVehicleSuccess(airplane);
             }
             else if (vehicleType == "Boat")
             {
@@ -229,7 +202,7 @@ namespace Garage
                 } while (!correctLength);
 
                 Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
-                PrintCreatedSuccess(boat);
+                PrintCreatedVehicleSuccess(boat);
             }
             else if (vehicleType == "Bus")
             {
@@ -252,7 +225,7 @@ namespace Garage
                 } while (!correctSeats);
 
                 Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
-                PrintCreatedSuccess(bus);
+                PrintCreatedVehicleSuccess(bus);
             }
             else if (vehicleType == "Car")
             {
@@ -275,7 +248,7 @@ namespace Garage
                 } while (!correctDoors);
 
                 Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
-                PrintCreatedSuccess(car);
+                PrintCreatedVehicleSuccess(car);
             }
             else if (vehicleType == "Motorcycle")
             {
@@ -298,8 +271,60 @@ namespace Garage
                 } while (!correctVolume);
 
                 Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
-                PrintCreatedSuccess(motorcycle);
+                PrintCreatedVehicleSuccess(motorcycle);
             }
+        }
+
+        /// <summary>
+        /// Menu for the user to choose type of Vehicle
+        /// </summary>
+        /// <param name="vehicleType">Type of Vehicle</param>
+        /// <returns></returns>
+        private static string TypeOfVehicleMenu()
+        {
+            string vehicleType = "";
+            bool correctType = false;
+
+            do
+            {
+                Ui.PrintLine("Input type of vehicle: ");
+                Ui.PrintLine("1: Airplane");
+                Ui.PrintLine("2: Boat");
+                Ui.PrintLine("3: Bus");
+                Ui.PrintLine("4: Car");
+                Ui.PrintLine("5: Motorcycle");
+
+                string type = Ui.GetInput();
+
+                switch (type)
+                {
+                    case "1":
+                        vehicleType = "Airplane";
+                        correctType = true;
+                        break;
+                    case "2":
+                        vehicleType = "Boat";
+                        correctType = true;
+                        break;
+                    case "3":
+                        vehicleType = "Bus";
+                        correctType = true;
+                        break;
+                    case "4":
+                        vehicleType = "Car";
+                        correctType = true;
+                        break;
+                    case "5":
+                        vehicleType = "Motorcycle";
+                        correctType = true;
+                        break;
+                    default:
+                        PrintIncorrectInputWarning("input");
+                        break;
+                }
+            } while (!correctType);
+
+            return vehicleType;
         }
 
 
@@ -307,7 +332,7 @@ namespace Garage
         ///     Prints message to user when a vehicle has been created
         /// </summary>
         /// <param name="vehicle">The Vehicle that was created</param>
-        static void PrintCreatedSuccess(Vehicle vehicle)
+        static void PrintCreatedVehicleSuccess(Vehicle vehicle)
         {
             Ui.Print($"Created vehicle {vehicle.ToString()}");
             Ui.GetInput();
