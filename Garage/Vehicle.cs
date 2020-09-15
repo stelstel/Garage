@@ -26,10 +26,7 @@ namespace Garage
         #endregion  
 
         #region constructors ***********************************************************************************
-        //public Vehicle()
-        //{
-
-        //}
+       
         public Vehicle(double weight, string registrationNumber, string colour, int numberOfWheels)
         {
             Weight = weight;

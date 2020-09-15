@@ -212,7 +212,6 @@ namespace Garage
             } while (!correctWheels);
 
             Vehicle vehicle = new Vehicle(weight, registrationNumber, colour, numberOfWheels);
-            //double weight, string registrationNumber, string colour, int numberOfWheels
         }
         #endregion
     }
