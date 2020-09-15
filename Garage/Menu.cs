@@ -64,9 +64,17 @@ namespace Garage
                     case "2":
                         CreateGarage();
                         break;
-                    default:
+                    case "3":
+                        CreateAndParkVehicles();
+                        break;
+                default:
                         break;
             }
+        }
+
+        private static void CreateAndParkVehicles()
+        {
+            SeedParkVehicles();
         }
 
         private static void CreateGarage()

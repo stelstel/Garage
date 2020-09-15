@@ -44,7 +44,7 @@ namespace Garage
         /// <returns>String containing values neeeded to find a parked vehicle</returns>
         public override string ToString()
         {
-            return $"{this.GetType().Name}, Regnummer: {RegistrationNumber}, Colour: {Colour}, ";
+            return $"{this.GetType().Name}, Regnummer: {RegistrationNumber}, Colour: {Colour}";
         }
         #endregion
 
