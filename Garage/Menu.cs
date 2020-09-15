@@ -195,7 +195,7 @@ namespace Garage
                 string wheels = Ui.GetInput();
                 bool intOK = Int32.TryParse(wheels, out numberOfWheels);
 
-                if (numberOfWheels > 100 || !intOK)
+                if (numberOfWheels > 100 || numberOfWheels < 0 || !intOK)
                 {
                     Ui.PrintLine();
                     Ui.PrintLine("Incorrect number of wheels. Try again");
@@ -210,13 +210,35 @@ namespace Garage
 
             if (vehicleType == "Airplane")
             {
-                Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, 0); // Todo passengers
+                bool correctPassengers = false;
+                int numberOfPassengers;
+                do
+                {
+                    Ui.Print($"Input how many passengers the {vehicleType} has:");
+                    bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfPassengers);
+
+                    if (numberOfPassengers < 0 || !intOK)
+                    {
+                        Ui.PrintLine();
+                        Ui.PrintLine("Incorrect number of passengers. Try again");
+                        Ui.PrintLine();
+                    }
+                    else
+                    {
+                        correctPassengers = true;
+                    }
+                } while (!correctPassengers);
+                
+                Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
+                Ui.Print($"Created vehicle {airplane.ToString()}"); // TODO remove
+                Ui.GetInput();
             }
             else if (vehicleType == "Boat")
             {
                 Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, 0); // Todo length
             }
             // Todo Bus, car, motorcycle
+            
             //Vehicle vehicle = new Vehicle(weight, registrationNumber, colour, numberOfWheels);
         }
         #endregion
