@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Garage
@@ -165,8 +166,45 @@ namespace Garage
                     Ui.PrintLine();
                 }
             } while (!correctRegNum);
-            
-            //string registrationNumber, string colour, int numberOfWheels
+
+            bool correctColour = false;
+
+            do
+            {
+                Ui.Print($"Input the colour of the {vehicleType}:");
+                string colour = Ui.GetInput();
+
+                if (colour.Length >= 3 && colour.Any(c => char.IsDigit(c)))
+                {
+                    correctColour = true;
+                }
+                else
+                {
+                    Ui.PrintLine();
+                    Ui.PrintLine("Incorrect colour. try again");
+                    Ui.PrintLine();
+                }
+
+            } while (!correctColour);
+
+            bool correctWheels = false;
+
+            do
+            {
+                Ui.Print($"Input how many wheels the {vehicleType} has:");
+                string wheels = Ui.GetInput();
+                bool intOK = Int32.TryParse(wheels, out int numberOfWheels);
+
+                if (numberOfWheels > 100 || !intOK)
+                {
+                    Ui.PrintLine();
+                    Ui.PrintLine("Incorrect number of wheels. Try again");
+                    Ui.PrintLine();
+                }
+            } while (!correctWheels);
+
+            Vehicle vehicle = new Vehicle(weight, registrationNumber, colour, numberOfWheels);
+            //double weight, string registrationNumber, string colour, int numberOfWheels
         }
         #endregion
     }
