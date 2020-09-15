@@ -254,7 +254,8 @@ namespace Garage
                     }
                 } while (!correctLength);
 
-                Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length); // Todo length
+                Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
+                PrintCreatedSuccess(boat);
             }
             else if (vehicleType == "Bus")
             {
@@ -279,8 +280,34 @@ namespace Garage
                 } while (!correctSeats);
 
                 Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
+                PrintCreatedSuccess(bus);
             }
-            // Todo Car, motorcycle
+            else if (vehicleType == "Car")
+            {
+                bool correctDoors = false;
+                int numberOfDoors;
+
+                do
+                {
+                    Ui.Print($"Input the number of doors the {vehicleType} has:");
+                    bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfDoors);
+
+                    if (numberOfDoors < 0 || !intOK)
+                    {
+                        Ui.PrintLine();
+                        Ui.PrintLine("Incorrect number of seats. Try again");
+                        Ui.PrintLine();
+                    }
+                    else
+                    {
+                        correctDoors = true;
+                    }
+                } while (!correctDoors);
+
+                Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
+                PrintCreatedSuccess(car);
+            }
+            // TodoMotorcycle
         }
 
         /// <summary>
