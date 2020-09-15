@@ -55,7 +55,7 @@ namespace Garage
         ///     Creates a string containing of parked vehicles
         /// </summary>
         /// <returns>String containing parked vehicles</returns>
-        public string ListParkedVehicles() 
+        public string ListParkedVehicles()
         {
             string output = "";
 

@@ -122,12 +122,12 @@ namespace Garage
             if (garageHandler.Garage != null)
             {
                 garageHandler.SeedParkVehicles();
-                Ui.Print("Five cars has been added to the garage");
+                Ui.Print("Five vehicles has been added to the garage");
                 Ui.GetInput();
             }
             else
             {
-                PrintIncorrectInputWarning(". No garage exists. Create a garage first");
+                PrintIncorrectInputWarning("No garage exists. Create a garage first");
             }
         }
 
