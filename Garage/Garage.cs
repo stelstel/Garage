@@ -51,7 +51,7 @@ namespace Garage
         /// <returns>String containing parked vehicles</returns>
         public string ListParkedVehicles()
         {
-            string output = "";
+            string output = "Cars in garage:\n-------------------------------------------------------------\n";
 
             foreach (Vehicle vehicle in vehicles)
             {

@@ -9,7 +9,7 @@ namespace Garage
 
         static void Main(string[] args)
         {
-            GarageHandler garageHandler = new GarageHandler();
+            //GarageHandler garageHandler = new GarageHandler();
             Menu.Run();
         }
     }
