@@ -32,7 +32,7 @@ namespace Garage
                 if (veh != null)
                 {
                     // Vehicle with the same registration number is already parked
-                    if (veh.RegistrationNumber == veh.RegistrationNumber)
+                    if (veh.RegistrationNumber == vehicle.RegistrationNumber)
                     {
                         throw new ArgumentException($"A vehicle with the registration number {veh.RegistrationNumber} is already parked in the garage");
                     }
@@ -63,7 +63,7 @@ namespace Garage
         /// <returns>String containing parked vehicles</returns>
         public string ListParkedVehicles()
         {
-            string output = "Cars in garage:\n-------------------------------------------------------------\n";
+            string output = "Vehicles in garage:\n-------------------------------------------------------------\n";
 
             foreach (Vehicle vehicle in vehicles)
             {
@@ -76,6 +76,50 @@ namespace Garage
 
             return output;
         }
+
+
+        SortedList<string, int> typeNumberList = new SortedList<string, int>();
+        
+        public string ListParkedVehiclesByType()
+        {
+            string output = "Vehicles in garage, by type:\n-------------------------------------------------------------\n";
+            SortedList<string, int> typeNumberList = new SortedList<string, int>();
+            
+            typeNumberList.Add("Airplane", 0);
+            typeNumberList.Add("Boat", 0);
+            typeNumberList.Add("Bus", 0);
+            typeNumberList.Add("Car", 0);
+            typeNumberList.Add("Motorcycle", 0);
+            
+            int tempValue;
+            string tempKey;
+
+            foreach (Vehicle vehicle in vehicles)
+            {
+                if (vehicle != null)
+                {
+                    for (int i = 0; i < typeNumberList.Count; i++)
+                    {
+                        if (String.Equals( vehicle.GetType().Name, typeNumberList.ElementAt(i).Key) )
+                        {
+                            // TODO This should be done in a better way
+                            tempValue = typeNumberList.ElementAt(i).Value;
+                            tempKey = typeNumberList.ElementAt(i).Key;
+                            typeNumberList.Remove(typeNumberList.ElementAt(i).Key);
+                            typeNumberList.Add(tempKey, ++tempValue);
+                        }
+                    }
+                }
+            }
+
+            foreach (var typeNumber in typeNumberList)
+            {
+                output += $"{typeNumber.Key}(s): {typeNumber.Value}\n"; // TODO add stringbuilder 
+            }
+
+            return output;
+        }
+
         #endregion
     }
 }

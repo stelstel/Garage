@@ -33,6 +33,7 @@ namespace Garage
                     Ui.PrintLine("2: Create the garage");
                     Ui.PrintLine("3: Create five vehicles and add them to the garage");
                     Ui.PrintLine("4: List the vehicles in the garage");
+                    Ui.PrintLine("5: List number of vehicles in the garage by type");
                     Ui.PrintLine("0: Exit");
 
                     firstChoice = Ui.GetInput();
@@ -43,6 +44,7 @@ namespace Garage
                         case "2":
                         case "3":
                         case "4":
+                        case "5":
                             correctFirstChoice = true;
                             break;
                         case "0":
@@ -75,8 +77,26 @@ namespace Garage
                     case "4":
                         ListVehicles();
                         break;
+                    case "5":
+                        ListTypes();
+                        break;
                 default:
                         break;
+            }
+        }
+
+        private static void ListTypes()
+        {
+            if (garageHandler.Garage != null)
+            {
+                Ui.PrintLine();
+                Ui.Print(garageHandler.Garage.ListParkedVehiclesByType());
+                Ui.PrintLine("\nPress enter to continue!");
+                Ui.GetInput();
+            }
+            else
+            {
+                PrintIncorrectInputWarning(". No garage exists. Create a garage first");
             }
         }
 
@@ -272,15 +292,6 @@ namespace Garage
 
                     Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
                     garageHandler.TryToPark(boat);
-                    //try
-                    //{
-                    //    garageHandler.Garage.ParkVehicle(boat);
-                    //    PrintCreatedVehicleSuccess(boat);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    PrintIncorrectInputWarning($"{ex.Message}");
-                    //}
                 }
                 else if (vehicleType == "Bus")
                 {
