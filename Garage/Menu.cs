@@ -100,8 +100,28 @@ namespace Garage
         /// </summary>
         private static void RemoveVehicle()
         {
-            Ui.PrintLine("Input the registration number of the vehicle");
+            bool regNumOK = false;
+            string registrationNum;
 
+            do
+            {
+                Ui.PrintLine("Input the registration number of the vehicle");
+                registrationNum = Ui.GetInput().ToUpper();
+                
+                if (!garageHandler.ValidateRegNum(registrationNum))
+                {
+                    PrintIncorrectInputWarning(". The registration number is invalid. Please try again!");
+                }
+                else if (garageHandler.Garage == null)
+                {
+                    PrintIncorrectInputWarning(". No garage exists. Create a garage first");
+                }
+                else
+                {
+                    regNumOK = true;
+                    garageHandler.Garage.UnparkVehicle(registrationNum);
+                }
+            } while (!regNumOK);
         }
 
 
@@ -217,7 +237,7 @@ namespace Garage
                     registrationNumber = Ui.GetInput();
                     char[] regNum = registrationNumber.ToCharArray();
 
-                    if (garageHandler.ValidateRegNum(registrationNumber)
+                    if (garageHandler.ValidateRegNum(registrationNumber))
                     {
                         correctRegNum = true;
                     }
@@ -284,17 +304,15 @@ namespace Garage
                     } while (!correctPassengers);
 
                     Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
-                    garageHandler.TryToPark(airplane);
-
-                    //try
-                    //{
-                    //    garageHandler.Garage.ParkVehicle(airplane);
-                    //    PrintCreatedVehicleSuccess(airplane);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    PrintIncorrectInputWarning($"{ex.Message}");
-                    //}
+                    try
+                    {
+                        garageHandler.TryToPark(airplane);
+                    }
+                    catch (NullReferenceException ex)
+                    {
+                        PrintIncorrectInputWarning($"{ex.Message}");
+                    }
+                    
                 }
                 else if (vehicleType == "Boat")
                 {

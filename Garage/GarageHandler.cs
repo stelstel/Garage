@@ -46,7 +46,6 @@ namespace Garage
             Garage = new Garage<Vehicle>(parkingSpaces);
         }
 
-
         public void TryToPark(Vehicle vehicle)
         {
             try

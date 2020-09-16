@@ -44,16 +44,11 @@ namespace Garage
         }
 
 
-        public void UnparkVehicle( /*Vehicle vehicle*/ string regNum)
+        public void UnparkVehicle(string regNum)
         {
 
             for (int i = 0; i < vehicles.Length - 1; i++)
             {
-                //if (vehicle.RegistrationNumber == vehicles[i]?.RegistrationNumber)
-                //{
-                //    vehicles[i] = null;
-                //}
-
                 if (regNum == vehicles[i]?.RegistrationNumber)
                 {
                     vehicles[i] = null;
