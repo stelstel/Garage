@@ -31,20 +31,24 @@ namespace Garage
                     Ui.PrintLine("Choose option: ");
                     Ui.PrintLine("1: Park new vehicle");
                     Ui.PrintLine("2: Create the garage");
-                    Ui.PrintLine("3: Create five vehicles and add them to the garage");
+                    Ui.PrintLine("3: DEV. SHORTCUT: Create eight vehicles and add them to the garage");
                     Ui.PrintLine("4: List the vehicles in the garage");
                     Ui.PrintLine("5: List number of vehicles in the garage by type");
+                    Ui.PrintLine("6: DEV. SHORTCUT: Create garage, create vehicles");
+                    Ui.PrintLine("7: Remove car from garage");
                     Ui.PrintLine("0: Exit");
 
                     firstChoice = Ui.GetInput();
 
-                    switch (firstChoice)
+                    switch (firstChoice) // TODO byta till if
                     {
                         case "1":
                         case "2":
                         case "3":
                         case "4":
                         case "5":
+                        case "6":
+                        case "7":
                             correctFirstChoice = true;
                             break;
                         case "0":
@@ -80,9 +84,33 @@ namespace Garage
                     case "5":
                         ListTypes();
                         break;
+                    case "6":
+                        CreateGarageAndVehicles();
+                        break;
+                    case "7":
+                        RemoveVehicle();
+                        break;
                 default:
                         break;
             }
+        }
+
+        /// <summary>
+        /// Unpark car
+        /// </summary>
+        private static void RemoveVehicle()
+        {
+            Ui.PrintLine("Input the registration number of the vehicle");
+
+        }
+
+
+        private static void CreateGarageAndVehicles()
+        {
+            garageHandler.CreateGarage(100);
+            garageHandler.SeedParkVehicles();
+            Ui.Print("Garage with 100 parking spaces created. Eight vehicles have been added to the garage");
+            Ui.GetInput();
         }
 
         private static void ListTypes()
@@ -144,7 +172,7 @@ namespace Garage
             if (garageHandler.Garage != null)
             {
                 garageHandler.SeedParkVehicles();
-                Ui.Print("Five vehicles has been added to the garage");
+                Ui.Print("Eight vehicles has been added to the garage");
                 Ui.GetInput();
             }
             else
@@ -189,9 +217,7 @@ namespace Garage
                     registrationNumber = Ui.GetInput();
                     char[] regNum = registrationNumber.ToCharArray();
 
-                    if (registrationNumber.Length == 6 &&
-                            Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2]) &&
-                            Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
+                    if (garageHandler.ValidateRegNum(registrationNumber)
                     {
                         correctRegNum = true;
                     }

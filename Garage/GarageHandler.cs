@@ -60,6 +60,26 @@ namespace Garage
             }
         }
 
+        /// <summary>
+        /// Validates registration number
+        /// </summary>
+        /// <param name="regNum">String containing registratin number</param>
+        /// <returns></returns>
+        public bool ValidateRegNum(string regNum) {
+            if (regNum.Length == 6 &&
+                            Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2]) &&
+                            Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
+            {
+                return true;
+            }
+            else
+            {
+            return false;
+            }
+
+            
+        }
+
         #endregion
     }
 }
