@@ -238,7 +238,7 @@ namespace Garage
                     } while (!correctPassengers);
 
                     Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
-                    TryToPark(airplane);
+                    garageHandler.TryToPark(airplane);
 
                     //try
                     //{
@@ -271,7 +271,7 @@ namespace Garage
                     } while (!correctLength);
 
                     Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
-                    TryToPark(boat);
+                    garageHandler.TryToPark(boat);
                     //try
                     //{
                     //    garageHandler.Garage.ParkVehicle(boat);
@@ -303,7 +303,7 @@ namespace Garage
                     } while (!correctSeats);
 
                     Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
-                    TryToPark(bus);
+                    garageHandler.TryToPark(bus);
                 }
                 else if (vehicleType == "Car")
                 {
@@ -326,7 +326,7 @@ namespace Garage
                     } while (!correctDoors);
 
                     Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
-                    TryToPark(car);
+                    garageHandler.TryToPark(car);
                     //garageHandler.Garage.ParkVehicle(car);
                     //PrintCreatedVehicleSuccess(car);
                 }
@@ -351,7 +351,7 @@ namespace Garage
                     } while (!correctVolume);
 
                     Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
-                    TryToPark(motorcycle);
+                    garageHandler.TryToPark(motorcycle);
                     //garageHandler.Garage.ParkVehicle(motorcycle);
                     //PrintCreatedVehicleSuccess(motorcycle);
                 }
@@ -359,23 +359,9 @@ namespace Garage
             else
             {
                 PrintIncorrectInputWarning("No garage exists or garage is empty. \nCreate a garage or park a vehicle in the garage");
-
             }
         }
 
-
-        private static void TryToPark(Vehicle vehicle)
-        {
-            try
-            {
-                garageHandler.Garage.ParkVehicle(vehicle);
-                PrintCreatedVehicleSuccess(vehicle);
-            }
-            catch (Exception ex)
-            {
-                PrintIncorrectInputWarning($"{ex.Message}");
-            }
-        }
 
         /// <summary>
         /// Menu for the user to choose type of Vehicle
@@ -434,7 +420,7 @@ namespace Garage
         ///     Prints message to user when a vehicle has been created
         /// </summary>
         /// <param name="vehicle">The Vehicle that was created</param>
-        static void PrintCreatedVehicleSuccess(Vehicle vehicle)
+        public static void PrintCreatedVehicleSuccess(Vehicle vehicle)
         {
             Ui.Print($"Created vehicle {vehicle}");
             Ui.GetInput();
@@ -445,7 +431,7 @@ namespace Garage
         /// Prints message to user when inout was wrong
         /// </summary>
         /// <param name="msg">Text to add to default message</param>
-        private static void PrintIncorrectInputWarning(String msg)
+        public static void PrintIncorrectInputWarning(String msg)
         {
             Ui.PrintLine();
             Ui.PrintLine($"Incorrect input. {msg}. Please try again!");

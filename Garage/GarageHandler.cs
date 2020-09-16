@@ -29,9 +29,24 @@ namespace Garage
             Garage.ParkVehicle(vehicle5);
         }
 
+
         public void CreateGarage(int parkingSpaces)
         {
             Garage = new Garage<Vehicle>(parkingSpaces);
+        }
+
+
+        public void TryToPark(Vehicle vehicle)
+        {
+            try
+            {
+                Garage.ParkVehicle(vehicle);
+                Menu.PrintCreatedVehicleSuccess(vehicle);
+            }
+            catch (Exception ex)
+            {
+                Menu.PrintIncorrectInputWarning($"{ex.Message}");
+            }
         }
 
         #endregion
