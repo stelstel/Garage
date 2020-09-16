@@ -110,16 +110,25 @@ namespace Garage
                 
                 if (!garageHandler.ValidateRegNum(registrationNum))
                 {
-                    PrintIncorrectInputWarning(". The registration number is invalid. Please try again!");
+                    PrintIncorrectInputWarning("The registration number is invalid. Please try again!");
                 }
                 else if (garageHandler.Garage == null)
                 {
-                    PrintIncorrectInputWarning(". No garage exists. Create a garage first");
+                    PrintIncorrectInputWarning("No garage exists. Create a garage first");
                 }
                 else
                 {
                     regNumOK = true;
-                    garageHandler.Garage.UnparkVehicle(registrationNum);
+                    if (garageHandler.Garage.UnparkVehicle(registrationNum))
+                    {
+                        Ui.PrintLine($"\nThe vehicle with registration number {registrationNum} has been removed from the garage\nPress enter to continue ");
+                        Ui.GetInput();
+
+                    }
+                    else
+                    {
+                        PrintIncorrectInputWarning("No vehicle with registration number {registrationNum} was found in the garage");
+                    }
                 }
             } while (!regNumOK);
         }
@@ -382,8 +391,6 @@ namespace Garage
 
                     Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
                     garageHandler.TryToPark(car);
-                    //garageHandler.Garage.ParkVehicle(car);
-                    //PrintCreatedVehicleSuccess(car);
                 }
                 else if (vehicleType == "Motorcycle")
                 {
@@ -407,8 +414,6 @@ namespace Garage
 
                     Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
                     garageHandler.TryToPark(motorcycle);
-                    //garageHandler.Garage.ParkVehicle(motorcycle);
-                    //PrintCreatedVehicleSuccess(motorcycle);
                 }
             }
             else
@@ -488,9 +493,7 @@ namespace Garage
         /// <param name="msg">Text to add to default message</param>
         public static void PrintIncorrectInputWarning(String msg)
         {
-            Ui.PrintLine();
-            Ui.PrintLine($"Incorrect input. {msg}. Please try again!");
-            Ui.PrintLine("Press enter to continue");
+            Ui.PrintLine($"\nIncorrect input. {msg}. Please try again!\nPress enter to continue");
             Ui.GetInput();
             
         }

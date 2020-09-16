@@ -44,16 +44,20 @@ namespace Garage
         }
 
 
-        public void UnparkVehicle(string regNum)
+        public bool UnparkVehicle(string regNum)
         {
+            bool unparkingSuccess = false;
 
             for (int i = 0; i < vehicles.Length - 1; i++)
             {
                 if (regNum == vehicles[i]?.RegistrationNumber)
                 {
                     vehicles[i] = null;
+                    unparkingSuccess = true;
                 }
             }
+
+            return unparkingSuccess;
         }
 
 
@@ -77,9 +81,7 @@ namespace Garage
             return output;
         }
 
-
-        SortedList<string, int> typeNumberList = new SortedList<string, int>();
-        
+   
         public string ListParkedVehiclesByType()
         {
             string output = "Vehicles in garage, by type:\n-------------------------------------------------------------\n";
@@ -112,10 +114,19 @@ namespace Garage
                 }
             }
 
+            int totalNumVehicles = 0;
+
+            foreach (var typeNumber in typeNumberList)
+            {
+                totalNumVehicles += typeNumber.Value;
+            }
+
             foreach (var typeNumber in typeNumberList)
             {
                 output += $"{typeNumber.Key}(s): {typeNumber.Value}\n"; // TODO add stringbuilder 
             }
+
+            output += $"-----------------------------------------\nTotal: {totalNumVehicles} vehicles";
 
             return output;
         }

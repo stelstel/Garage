@@ -26,7 +26,7 @@ namespace Garage
                 numberOfDoors:      4
             );
 
-            seededVehicles[1] = new Boat(1000, "iop889", "Yellow", 4, 8.25);
+            seededVehicles[1] = new Boat(1000, "abc123", "Yellow", 4, 8.25);
             seededVehicles[2] = new Bus(1100, "BEN789", "White", 4, 46);
             seededVehicles[3] = new Airplane(6250, "SAS14001", "Grey", 8, 510);
             seededVehicles[4] = new Motorcycle(250, "HJK412", "Black", 2, 900);

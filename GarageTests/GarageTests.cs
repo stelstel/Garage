@@ -9,7 +9,7 @@ namespace Garage.Tests
     [TestClass()]
     public class GarageTests
     {
-        static GarageHandler garageHandler = new GarageHandler();
+        //static GarageHandler garageHandler = new GarageHandler();
 
         [TestMethod()]
         public void GarageTest()
@@ -27,7 +27,7 @@ namespace Garage.Tests
         public void ListParkedVehiclesTest()
         {
             // Arrange
-            string expectedOutput = "Cars in garage:\n-------------------------------------------------------------\n";
+            string expectedOutput = "Vehicles in garage:\n-------------------------------------------------------------\n";
 
             // Act
             Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(1);
@@ -45,7 +45,7 @@ namespace Garage.Tests
             Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(10);
             Vehicle vehicle = new Vehicle(100, "qwe456", "Yellow", 4);
             string expectedOutput = 
-                "Cars in garage:\n-------------------------------------------------------------\nVehicle, Regnummer: QWE456, Colour: Yellow\n";
+                "Vehicles in garage:\n-------------------------------------------------------------\nVehicle, Regnummer: QWE456, Colour: Yellow\n";
             
             // Act
             garage.ParkVehicle(vehicle);
