@@ -34,7 +34,7 @@ namespace Garage
                     // Vehicle with the same registration number is already parked
                     if (veh.RegistrationNumber == veh.RegistrationNumber)
                     {
-                        throw new ArgumentException($"A vehicle with the registration number {veh.RegistrationNumber} is already parked in the garage")
+                        throw new ArgumentException($"A vehicle with the registration number {veh.RegistrationNumber} is already parked in the garage");
                     }
                 }
             }     
