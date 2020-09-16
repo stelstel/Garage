@@ -14,38 +14,13 @@ namespace Garage.Tests
         [TestMethod()]
         public void GarageTest()
         {
-            
-        }
 
-        [TestMethod()]
-        public void ParkVehicleTest()
-        {
-            /*
-            // Arrange
-            double expectedWeight = 250;
-            string expectedRegNum = "HJK812";
-            string expectedColour = "Red";
-
-            int expectedWheels = 4;
-            int expectedDoors = 2;
-            int expectedSize = 2;
-
-            // Act
-            Vehicle vehicle = new Motorcycle(250, "hjK812", "Red", 3, 950);
-            garageHandler.Garage.ParkVehicle(vehicle);
-            Vehicle vehicle2 = new Car(290, "HJK812", "Blue", 4, 2);
-            garageHandler.Garage.ParkVehicle(vehicle2);
-
-            double actualWeight = garageHandler.Garage.?????
-
-            // Assert
-            */
         }
 
         [TestMethod()]
         public void UnparkVehicleTest()
         {
-            
+
         }
 
         [TestMethod()]
@@ -55,12 +30,29 @@ namespace Garage.Tests
             string expectedOutput = "Cars in garage:\n-------------------------------------------------------------\n";
 
             // Act
-            Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(1); 
+            Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(1);
             string actualOutput = garage.ListParkedVehicles();
 
             // Assert
             Assert.AreEqual(expectedOutput, actualOutput);
-                
+
+        }
+
+        [TestMethod()]
+        public void ParkVehicleTest1()
+        {
+            // Arrange
+            Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(10);
+            Vehicle vehicle = new Vehicle(100, "qwe456", "Yellow", 4);
+            string expectedOutput = 
+                "Cars in garage:\n-------------------------------------------------------------\nVehicle, Regnummer: QWE456, Colour: Yellow\n";
+            
+            // Act
+            garage.ParkVehicle(vehicle);
+            string actualOutput = garage.ListParkedVehicles();
+
+            /// Assert
+            Assert.AreEqual(expectedOutput, actualOutput);
         }
     }
 }
