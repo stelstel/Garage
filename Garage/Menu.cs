@@ -238,7 +238,17 @@ namespace Garage
                     } while (!correctPassengers);
 
                     Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
-                    garageHandler.Garage.ParkVehicle(airplane);
+
+                    try
+                    {
+                        garageHandler.Garage.ParkVehicle(airplane);
+                    }
+                    catch (Exception ex)
+                    {
+                        PrintIncorrectInputWarning($"{ex.Message}");
+                    }
+                        
+                    
                     PrintCreatedVehicleSuccess(airplane);
                 }
                 else if (vehicleType == "Boat")

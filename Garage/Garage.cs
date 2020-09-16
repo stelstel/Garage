@@ -27,8 +27,19 @@ namespace Garage
 
         public void ParkVehicle(Vehicle vehicle) // TODO if no spaces left???
         {
-            int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
-            vehicles[firstEmptyArraySpace] = vehicle;
+            foreach (Vehicle veh in vehicles)
+            {
+                if (veh != null)
+                {
+                    // Vehicle with the same registration number is already parked
+                    if (veh.RegistrationNumber == veh.RegistrationNumber)
+                    {
+                        throw new ArgumentException($"A vehicle with the registration number {veh.RegistrationNumber} is already parked in the garage")
+                    }
+                }
+            }     
+                int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
+                vehicles[firstEmptyArraySpace] = vehicle;
         }
 
 
