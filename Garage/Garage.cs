@@ -37,9 +37,10 @@ namespace Garage
                         throw new ArgumentException($"A vehicle with the registration number {veh.RegistrationNumber} is already parked in the garage");
                     }
                 }
-            }     
-                int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
-                vehicles[firstEmptyArraySpace] = vehicle;
+            } 
+            
+            int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
+            vehicles[firstEmptyArraySpace] = vehicle;
         }
 
 

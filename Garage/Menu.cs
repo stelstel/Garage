@@ -238,18 +238,17 @@ namespace Garage
                     } while (!correctPassengers);
 
                     Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
+                    TryToPark(airplane);
 
-                    try
-                    {
-                        garageHandler.Garage.ParkVehicle(airplane);
-                    }
-                    catch (Exception ex)
-                    {
-                        PrintIncorrectInputWarning($"{ex.Message}");
-                    }
-                        
-                    
-                    PrintCreatedVehicleSuccess(airplane);
+                    //try
+                    //{
+                    //    garageHandler.Garage.ParkVehicle(airplane);
+                    //    PrintCreatedVehicleSuccess(airplane);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    PrintIncorrectInputWarning($"{ex.Message}");
+                    //}
                 }
                 else if (vehicleType == "Boat")
                 {
@@ -272,8 +271,16 @@ namespace Garage
                     } while (!correctLength);
 
                     Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
-                    garageHandler.Garage.ParkVehicle(boat);
-                    PrintCreatedVehicleSuccess(boat);
+                    TryToPark(boat);
+                    //try
+                    //{
+                    //    garageHandler.Garage.ParkVehicle(boat);
+                    //    PrintCreatedVehicleSuccess(boat);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    PrintIncorrectInputWarning($"{ex.Message}");
+                    //}
                 }
                 else if (vehicleType == "Bus")
                 {
@@ -296,8 +303,7 @@ namespace Garage
                     } while (!correctSeats);
 
                     Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
-                    garageHandler.Garage.ParkVehicle(bus);
-                    PrintCreatedVehicleSuccess(bus);
+                    TryToPark(bus);
                 }
                 else if (vehicleType == "Car")
                 {
@@ -320,8 +326,9 @@ namespace Garage
                     } while (!correctDoors);
 
                     Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
-                    garageHandler.Garage.ParkVehicle(car);
-                    PrintCreatedVehicleSuccess(car);
+                    TryToPark(car);
+                    //garageHandler.Garage.ParkVehicle(car);
+                    //PrintCreatedVehicleSuccess(car);
                 }
                 else if (vehicleType == "Motorcycle")
                 {
@@ -344,14 +351,29 @@ namespace Garage
                     } while (!correctVolume);
 
                     Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
-                    garageHandler.Garage.ParkVehicle(motorcycle);
-                    PrintCreatedVehicleSuccess(motorcycle);
+                    TryToPark(motorcycle);
+                    //garageHandler.Garage.ParkVehicle(motorcycle);
+                    //PrintCreatedVehicleSuccess(motorcycle);
                 }
             }
             else
             {
                 PrintIncorrectInputWarning("No garage exists or garage is empty. \nCreate a garage or park a vehicle in the garage");
 
+            }
+        }
+
+
+        private static void TryToPark(Vehicle vehicle)
+        {
+            try
+            {
+                garageHandler.Garage.ParkVehicle(vehicle);
+                PrintCreatedVehicleSuccess(vehicle);
+            }
+            catch (Exception ex)
+            {
+                PrintIncorrectInputWarning($"{ex.Message}");
             }
         }
 
