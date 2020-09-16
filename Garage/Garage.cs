@@ -56,7 +56,6 @@ namespace Garage
                     unparkingSuccess = true;
                 }
             }
-
             return unparkingSuccess;
         }
 
@@ -77,7 +76,6 @@ namespace Garage
                     output += "\n";
                 }
             }
-
             return output;
         }
 
@@ -104,7 +102,7 @@ namespace Garage
                     {
                         if (String.Equals( vehicle.GetType().Name, typeNumberList.ElementAt(i).Key) )
                         {
-                            // TODO This should be done in a better way
+                            // TODO This should be done in a better way. Oscar
                             tempValue = typeNumberList.ElementAt(i).Value;
                             tempKey = typeNumberList.ElementAt(i).Key;
                             typeNumberList.Remove(typeNumberList.ElementAt(i).Key);

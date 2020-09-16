@@ -75,8 +75,6 @@ namespace Garage
             {
             return false;
             }
-
-            
         }
 
         #endregion

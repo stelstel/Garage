@@ -271,7 +271,6 @@ namespace Garage
                     {
                         PrintIncorrectInputWarning("colour");
                     }
-
                 } while (!correctColour);
 
                 bool correctWheels = false;
@@ -291,7 +290,6 @@ namespace Garage
                         correctWheels = true;
                     }
                 } while (!correctWheels);
-
 
                 if (vehicleType == "Airplane")
                 {
@@ -321,7 +319,6 @@ namespace Garage
                     {
                         PrintIncorrectInputWarning($"{ex.Message}");
                     }
-                    
                 }
                 else if (vehicleType == "Boat")
                 {
@@ -488,14 +485,13 @@ namespace Garage
 
 
         /// <summary>
-        /// Prints message to user when inout was wrong
+        /// Prints message to user when input is incorrect
         /// </summary>
         /// <param name="msg">Text to add to default message</param>
         public static void PrintIncorrectInputWarning(String msg)
         {
             Ui.PrintLine($"\nIncorrect input. {msg}. Please try again!\nPress enter to continue");
             Ui.GetInput();
-            
         }
         #endregion
     }
