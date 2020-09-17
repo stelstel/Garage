@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Garage
 {
-    public class Garage<T> : IEnumerable<int> where T : Vehicle
+    public class Garage<T> : IEnumerable<Vehicle> where T : Vehicle
     {
         #region Properties **************************************************************
 
@@ -127,40 +127,17 @@ namespace Garage
             return output.ToString();
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<Vehicle> GetEnumerator()
         {
-            return new StelEnumerator();   
+            return GetEnumerator();
         }
 
-        IEnumerator<int> IEnumerable<int>.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return new StelEnumerator();
+            return GetEnumerator();
         }
+
         #endregion
-    }
-
-
-    public class StelEnumerator : IEnumerator<int>
-    {
-        public int Current { get; private set; } = 0;
-
-        object IEnumerator.Current => Current;
-
-        public void Dispose()
-        {
-             
-        }
-
-        public bool MoveNext()
-        {
-            Current++;
-            return true;
-        }
-
-        public void Reset()
-        {
-            Current = 0;
-        }
     }
 }
  

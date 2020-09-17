@@ -153,7 +153,6 @@ namespace Garage
                 Ui.Print("\nGarage with 15 parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
                 Ui.GetInput();
             }
-        
         }
 
 
@@ -171,6 +170,7 @@ namespace Garage
                 PrintIncorrectInputWarning("No garage exists. Create a garage");
             }
         }
+
 
         private static void ListVehicles()
         {
@@ -229,6 +229,7 @@ namespace Garage
             }
         }
 
+
         static double weight;
         static string registrationNumber;
         static string colour;
@@ -247,6 +248,8 @@ namespace Garage
                 PrintIncorrectInputWarning("No garage exists or garage is empty. \nCreate a garage or park a vehicle in the garage");
             }
         }
+
+
         /// <summary>
         /// Sets the unique properties of the subclasses of vehicle
         /// (Airplane, Boat, Bus, Car and Motorcycle)
@@ -432,7 +435,6 @@ namespace Garage
         private static void SetVehicleProps() 
         {
             vehicleType = TypeOfVehicleMenu();
-
             bool correctWeight = false;
 
             do

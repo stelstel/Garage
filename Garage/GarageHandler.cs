@@ -49,7 +49,7 @@ namespace Garage
             
             foreach (var g in Garage)
             {
-                Console.WriteLine(g); ///////////
+                Console.WriteLine(g.NumberOfWheels); ///////////
             }
         }
 
