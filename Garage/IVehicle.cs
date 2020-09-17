@@ -1,6 +1,6 @@
 ﻿namespace Garage
 {
-    interface IVehicle
+    public interface IVehicle
     {
         string Colour { get; set; }
         int NumberOfWheels { get; set; }

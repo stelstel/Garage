@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Garage
 {
-    public class Garage<T> // TODO where LINQ
+    public class Garage<T> where T : Vehicle
     {
         #region Properties ***************************************************************
 
