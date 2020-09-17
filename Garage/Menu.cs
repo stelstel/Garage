@@ -33,13 +33,13 @@ namespace Garage
 
                     switch (firstChoice)
                     {
+                        case "a": case "A":
+                        case "b": case "B":
                         case "1":
                         case "2":
                         case "3":
                         case "4":
-                        case "5":
                         case "6":
-                        case "7":
                             correctFirstChoice = true;
                             break;
                         case "0":
@@ -55,7 +55,6 @@ namespace Garage
             } while (true);
         }
 
-
         /// <summary>
         /// Prints out the first choice menu
         /// </summary>
@@ -63,13 +62,13 @@ namespace Garage
         {
             Ui.Clear();
             Ui.PrintLine("Choose option: ");
+            Ui.PrintLine("a: DEV. SHORTCUT: Create garage, create vehicles");
+            Ui.PrintLine("b: DEV. SHORTCUT: Create eight vehicles and add them to the garage");
             Ui.PrintLine("1: Park new vehicle");
             Ui.PrintLine("2: Create the garage");
-            Ui.PrintLine("3: DEV. SHORTCUT: Create eight vehicles and add them to the garage");
-            Ui.PrintLine("4: List the vehicles in the garage");
-            Ui.PrintLine("5: List number of vehicles in the garage by type");
-            Ui.PrintLine("6: DEV. SHORTCUT: Create garage, create vehicles");
-            Ui.PrintLine("7: Remove car from garage");
+            Ui.PrintLine("3: List the vehicles in the garage");
+            Ui.PrintLine("4: List number of vehicles in the garage by type");
+            Ui.PrintLine("6: Remove car from garage");
             Ui.PrintLine("0: Exit");
         }
 
@@ -78,6 +77,12 @@ namespace Garage
         {
             switch (input)
             {
+                    case "a":
+                        CreateGarageAndVehicles();
+                        break;
+                    case "b":
+                        CreateAndParkVehicles();
+                        break;
                     case "1":
                         ParkNewVehicle();
                         break;
@@ -85,18 +90,12 @@ namespace Garage
                         ProduceGarage();
                         break;
                     case "3":
-                        CreateAndParkVehicles();
-                        break;
-                    case "4":
                         ListVehicles();
                         break;
-                    case "5":
+                    case "4":
                         ListTypes();
                         break;
                     case "6":
-                        CreateGarageAndVehicles();
-                        break;
-                    case "7":
                         RemoveVehicle();
                         break;
                 default:

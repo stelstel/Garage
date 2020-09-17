@@ -36,7 +36,7 @@ namespace Garage
 
             foreach (var seededVehicle in seededVehicles)
             {
-                Garage.ParkVehicle(seededVehicle);
+                TryToPark(seededVehicle);
             }
         }
 
