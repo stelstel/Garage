@@ -61,9 +61,9 @@ namespace Garage
         private static void PrintFirstChoice()
         {
             Ui.Clear();
-            Ui.PrintLine("Choose option: ");
+            Ui.PrintLine("Choose option:\n");
             Ui.PrintLine("a: DEV. SHORTCUT: Create garage, create vehicles");
-            Ui.PrintLine("b: DEV. SHORTCUT: Create eight vehicles and add them to the garage");
+            Ui.PrintLine("b: DEV. SHORTCUT: Create eight vehicles and add them to the garage\n");
             Ui.PrintLine("1: Park new vehicle");
             Ui.PrintLine("2: Create the garage");
             Ui.PrintLine("3: List the vehicles in the garage");
@@ -146,11 +146,11 @@ namespace Garage
 
         private static void CreateGarageAndVehicles()
         {
-            garageHandler.CreateGarage(100);
+            garageHandler.CreateGarage(15);
             
             if (garageHandler.SeedParkVehicles() == true)
             {
-                Ui.Print("\nGarage with 100 parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
+                Ui.Print("\nGarage with 15 parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
                 Ui.GetInput();
             }
         

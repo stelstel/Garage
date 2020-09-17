@@ -43,7 +43,6 @@ namespace Garage
             return success;
         }
 
-
         public void CreateGarage(int parkingSpaces)
         {
             Garage = new Garage<Vehicle>(parkingSpaces);
