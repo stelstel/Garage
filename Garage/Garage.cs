@@ -1,21 +1,22 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Text;
 using System.Linq;
+using System.Text;
 
 namespace Garage
 {
-    public class Garage<T> where T : Vehicle
+    public class Garage<T> : IEnumerable<int> where T : Vehicle
     {
-        #region Properties ***************************************************************
+        #region Properties **************************************************************
 
         private Vehicle[] vehicles;
+
+        public object Current => throw new NotImplementedException();
         #endregion
 
 
         #region Constructors ************************************************************
-
         public Garage(int numberOfParkingSpaces)
         {
             vehicles = new Vehicle[numberOfParkingSpaces];
@@ -126,6 +127,40 @@ namespace Garage
             return output.ToString();
         }
 
+        public IEnumerator GetEnumerator()
+        {
+            return new StelEnumerator();   
+        }
+
+        IEnumerator<int> IEnumerable<int>.GetEnumerator()
+        {
+            return new StelEnumerator();
+        }
         #endregion
     }
+
+
+    public class StelEnumerator : IEnumerator<int>
+    {
+        public int Current { get; private set; } = 0;
+
+        object IEnumerator.Current => Current;
+
+        public void Dispose()
+        {
+             
+        }
+
+        public bool MoveNext()
+        {
+            Current++;
+            return true;
+        }
+
+        public void Reset()
+        {
+            Current = 0;
+        }
+    }
 }
+ 

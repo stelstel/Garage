@@ -46,6 +46,11 @@ namespace Garage
         public void CreateGarage(int parkingSpaces)
         {
             Garage = new Garage<Vehicle>(parkingSpaces);
+            
+            foreach (var g in Garage)
+            {
+                Console.WriteLine(g); ///////////
+            }
         }
 
         public bool TryToPark(Vehicle vehicle)
