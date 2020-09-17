@@ -14,8 +14,9 @@ namespace Garage
 
         #region methods *****************************************************************
 
-        public void SeedParkVehicles()
+        public bool SeedParkVehicles()
         {
+            bool success = false;
             Vehicle[] seededVehicles = new Vehicle[8];
 
             seededVehicles[0] = new Car(
@@ -36,8 +37,10 @@ namespace Garage
 
             foreach (var seededVehicle in seededVehicles)
             {
-                TryToPark(seededVehicle);
+                success = TryToPark(seededVehicle);
             }
+
+            return success;
         }
 
 
@@ -46,23 +49,28 @@ namespace Garage
             Garage = new Garage<Vehicle>(parkingSpaces);
         }
 
-        public void TryToPark(Vehicle vehicle)
+        public bool TryToPark(Vehicle vehicle)
         {
+            bool success = false;
+
             try
             {
                 Garage.ParkVehicle(vehicle);
                 Menu.PrintCreatedVehicleSuccess(vehicle);
+                success = true;
             }
             catch (Exception ex)
             {
                 Menu.PrintIncorrectInputWarning($"{ex.Message}");
             }
+
+            return success;
         }
 
         /// <summary>
         /// Validates registration number
         /// </summary>
-        /// <param name="regNum">String containing registratin number</param>
+        /// <param name="regNum">String containing registration number</param>
         /// <returns></returns>
         public bool ValidateRegNum(string regNum) {
             if (regNum.Length == 6 &&

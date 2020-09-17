@@ -39,7 +39,7 @@ namespace Garage
                         case "2":
                         case "3":
                         case "4":
-                        case "6":
+                        case "5":
                             correctFirstChoice = true;
                             break;
                         case "0":
@@ -68,7 +68,7 @@ namespace Garage
             Ui.PrintLine("2: Create the garage");
             Ui.PrintLine("3: List the vehicles in the garage");
             Ui.PrintLine("4: List number of vehicles in the garage by type");
-            Ui.PrintLine("6: Remove car from garage");
+            Ui.PrintLine("5: Remove car from garage");
             Ui.PrintLine("0: Exit");
         }
 
@@ -95,7 +95,7 @@ namespace Garage
                     case "4":
                         ListTypes();
                         break;
-                    case "6":
+                    case "5":
                         RemoveVehicle();
                         break;
                 default:
@@ -147,9 +147,13 @@ namespace Garage
         private static void CreateGarageAndVehicles()
         {
             garageHandler.CreateGarage(100);
-            garageHandler.SeedParkVehicles();
-            Ui.Print("\nGarage with 100 parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
-            Ui.GetInput();
+            
+            if (garageHandler.SeedParkVehicles() == true)
+            {
+                Ui.Print("\nGarage with 100 parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
+                Ui.GetInput();
+            }
+        
         }
 
 
@@ -213,9 +217,11 @@ namespace Garage
         {
             if (garageHandler.Garage != null)
             {
-                garageHandler.SeedParkVehicles();
-                Ui.Print("Eight vehicles has been added to the garage");
-                Ui.GetInput();
+                if (garageHandler.SeedParkVehicles() == true)
+                {
+                    Ui.Print("Eight vehicles has been added to the garage");
+                    Ui.GetInput();
+                }
             }
             else
             {
