@@ -144,7 +144,7 @@ namespace Garage
         }
 
 
-        private static void CreateGarageAndVehicles()
+        public static void CreateGarageAndVehicles()
         {
             garageHandler.CreateGarage(15);
             

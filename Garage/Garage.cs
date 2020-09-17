@@ -83,7 +83,6 @@ namespace Garage
         public string ListParkedVehiclesByType()
         {
             StringBuilder output = new StringBuilder("Vehicles in garage, by type:\n-------------------------------------------------------------\n");
-            //SortedList<string, int> typeNumberList = new SortedList<string, int>();
             Dictionary<string, int> typeNumberDict = new Dictionary<string, int>();
 
 
