@@ -83,24 +83,26 @@ namespace Garage
         public string ListParkedVehiclesByType()
         {
             StringBuilder output = new StringBuilder("Vehicles in garage, by type:\n-------------------------------------------------------------\n");
-            SortedList<string, int> typeNumberList = new SortedList<string, int>();
-            
-            typeNumberList.Add("Airplane", 0);
-            typeNumberList.Add("Boat", 0);
-            typeNumberList.Add("Bus", 0);
-            typeNumberList.Add("Car", 0);
-            typeNumberList.Add("Motorcycle", 0);
+            //SortedList<string, int> typeNumberList = new SortedList<string, int>();
+            Dictionary<string, int> typeNumberDict = new Dictionary<string, int>();
+
+
+            typeNumberDict.Add("Airplane", 0);
+            typeNumberDict.Add("Boat", 0);
+            typeNumberDict.Add("Bus", 0);
+            typeNumberDict.Add("Car", 0);
+            typeNumberDict.Add("Motorcycle", 0);
             
             foreach (Vehicle vehicle in vehicles)
             {
                 if (vehicle != null)
                 {
-                    for (int i = 0; i < typeNumberList.Count; i++)
+                    for (int i = 0; i < typeNumberDict.Count; i++)
                     {
                         // Vehicle in garage == vehicle in the list counting different types of vehicles
-                        if (String.Equals( vehicle.GetType().Name, typeNumberList.ElementAt(i).Key) )
+                        if (String.Equals( vehicle.GetType().Name, typeNumberDict.ElementAt(i).Key) )
                         {
-                            typeNumberList[typeNumberList.ElementAt(i).Key] = typeNumberList.ElementAt(i).Value + 1;
+                            typeNumberDict[typeNumberDict.ElementAt(i).Key] = typeNumberDict.ElementAt(i).Value + 1;
                         }
                     }
                 }
@@ -108,12 +110,12 @@ namespace Garage
 
             int totalNumVehicles = 0;
 
-            foreach (var typeNumber in typeNumberList)
+            foreach (var typeNumber in typeNumberDict)
             {
                 totalNumVehicles += typeNumber.Value;
             }
 
-            foreach (var typeNumber in typeNumberList)
+            foreach (var typeNumber in typeNumberDict)
             {
                 if (typeNumber.Value > 0)
                 {
