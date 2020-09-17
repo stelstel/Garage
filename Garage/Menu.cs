@@ -14,11 +14,11 @@ namespace Garage
         #region Methods *****************************************************************
         public static void Run()
         {
-            PrintFirstChoice();
+            FirstChoice();
         }
 
 
-        static void PrintFirstChoice() 
+        static void FirstChoice() 
         {
             bool correctFirstChoice = false;
             string firstChoice;
@@ -27,20 +27,11 @@ namespace Garage
             {
                 do
                 {
-                    Ui.Clear();
-                    Ui.PrintLine("Choose option: ");
-                    Ui.PrintLine("1: Park new vehicle");
-                    Ui.PrintLine("2: Create the garage");
-                    Ui.PrintLine("3: DEV. SHORTCUT: Create eight vehicles and add them to the garage");
-                    Ui.PrintLine("4: List the vehicles in the garage");
-                    Ui.PrintLine("5: List number of vehicles in the garage by type");
-                    Ui.PrintLine("6: DEV. SHORTCUT: Create garage, create vehicles");
-                    Ui.PrintLine("7: Remove car from garage");
-                    Ui.PrintLine("0: Exit");
+                    PrintFirstChoice();
 
                     firstChoice = Ui.GetInput();
 
-                    switch (firstChoice) // TODO byta till if
+                    switch (firstChoice)
                     {
                         case "1":
                         case "2":
@@ -64,7 +55,25 @@ namespace Garage
             } while (true);
         }
 
-        
+
+        /// <summary>
+        /// Prints out the first choice menu
+        /// </summary>
+        private static void PrintFirstChoice()
+        {
+            Ui.Clear();
+            Ui.PrintLine("Choose option: ");
+            Ui.PrintLine("1: Park new vehicle");
+            Ui.PrintLine("2: Create the garage");
+            Ui.PrintLine("3: DEV. SHORTCUT: Create eight vehicles and add them to the garage");
+            Ui.PrintLine("4: List the vehicles in the garage");
+            Ui.PrintLine("5: List number of vehicles in the garage by type");
+            Ui.PrintLine("6: DEV. SHORTCUT: Create garage, create vehicles");
+            Ui.PrintLine("7: Remove car from garage");
+            Ui.PrintLine("0: Exit");
+        }
+
+
         private static void HandleInput(string input)
         {
             switch (input)
@@ -211,7 +220,7 @@ namespace Garage
             }
             else
             {
-                PrintIncorrectInputWarning("No garage exists. Create a garage first");
+                PrintIncorrectInputWarning("No garage exists. Create a garage!");
             }
         }
 
@@ -221,7 +230,7 @@ namespace Garage
         static int numberOfWheels;
         static string vehicleType = "";
 
-        private static void ParkNewVehicle() // TODO dela upp
+        private static void ParkNewVehicle()
         {
             if (garageHandler.Garage != null)
             {
@@ -255,9 +264,9 @@ namespace Garage
 
                 Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
                 try
-                { garageHandler.TryToPark(airplane); }
+                    { garageHandler.TryToPark(airplane); }
                 catch (NullReferenceException ex)
-                { PrintIncorrectInputWarning($"{ex.Message}"); }
+                    { PrintIncorrectInputWarning($"{ex.Message}"); }
             }
             else if (vehicleType == "Boat")
             {
@@ -270,9 +279,9 @@ namespace Garage
                     bool doubleOK = Double.TryParse(Ui.GetInput(), out length);
 
                     if (length < 0 || !doubleOK)
-                    { PrintIncorrectInputWarning("length"); }
+                        { PrintIncorrectInputWarning("length"); }
                     else
-                    { correctLength = true; }
+                        { correctLength = true; }
                 } while (!correctLength);
 
                 Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
@@ -289,9 +298,9 @@ namespace Garage
                     bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfSeats);
 
                     if (numberOfSeats < 0 || !intOK)
-                    { PrintIncorrectInputWarning("number of seats"); }
+                        { PrintIncorrectInputWarning("number of seats"); }
                     else
-                    { correctSeats = true; }
+                        { correctSeats = true; }
                 } while (!correctSeats);
 
                 Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
@@ -308,9 +317,9 @@ namespace Garage
                     bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfDoors);
 
                     if (numberOfDoors < 0 || !intOK)
-                    { PrintIncorrectInputWarning("number of doors"); }
+                        { PrintIncorrectInputWarning("number of doors"); }
                     else
-                    { correctDoors = true; }
+                        { correctDoors = true; }
                 } while (!correctDoors);
 
                 Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
@@ -327,9 +336,9 @@ namespace Garage
                     bool intOK = Int32.TryParse(Ui.GetInput(), out engineVolume);
 
                     if (engineVolume < 0 || !intOK)
-                    { PrintIncorrectInputWarning("engine volume"); }
+                        { PrintIncorrectInputWarning("engine volume"); }
                     else
-                    { correctVolume = true; }
+                        { correctVolume = true; }
                 } while (!correctVolume);
 
                 Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
@@ -397,7 +406,7 @@ namespace Garage
         /// <param name="vehicle">The Vehicle that was created</param>
         public static void PrintCreatedVehicleSuccess(Vehicle vehicle)
         {
-            Ui.Print($"Created vehicle {vehicle}");
+            Ui.Print($"\nCreated vehicle {vehicle}\nPress enter to continue");
             Ui.GetInput();
         }
 
@@ -417,12 +426,6 @@ namespace Garage
         /// </summary>
         private static void SetVehicleProps() 
         {
-            //string vehicleType = "";
-            //double weight;
-            //string registrationNumber;
-            //string colour;
-            // int numberOfWheels;
-
             vehicleType = TypeOfVehicleMenu();
 
             bool correctWeight = false;
@@ -432,9 +435,9 @@ namespace Garage
                 Ui.Print($"Input weight of the {vehicleType}: ");
 
                 if (!double.TryParse(Ui.GetInput(), out weight))
-                { PrintIncorrectInputWarning("input"); }
+                    { PrintIncorrectInputWarning("input"); }
                 else
-                { correctWeight = true; }
+                    { correctWeight = true; }
             } while (!correctWeight);
 
             bool correctRegNum = false;
@@ -446,9 +449,9 @@ namespace Garage
                 char[] regNum = registrationNumber.ToCharArray();
 
                 if (garageHandler.ValidateRegNum(registrationNumber))
-                { correctRegNum = true; }
+                    { correctRegNum = true; }
                 else
-                { PrintIncorrectInputWarning("registration number"); }
+                    { PrintIncorrectInputWarning("registration number"); }
             } while (!correctRegNum);
 
             bool correctColour = false;
@@ -459,9 +462,9 @@ namespace Garage
                 colour = Ui.GetInput();
 
                 if (colour.Length >= 3 && !colour.Any(c => char.IsDigit(c)))
-                { correctColour = true; }
+                    { correctColour = true; }
                 else
-                { PrintIncorrectInputWarning("colour"); }
+                    { PrintIncorrectInputWarning("colour"); }
             } while (!correctColour);
 
             bool correctWheels = false;
