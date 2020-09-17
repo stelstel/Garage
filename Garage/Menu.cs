@@ -226,109 +226,114 @@ namespace Garage
             if (garageHandler.Garage != null)
             {
                 SetVehicleProps();
-
-                
-
-                if (vehicleType == "Airplane")
-                {
-                    bool correctPassengers = false;
-                    int numberOfPassengers;
-                    do
-                    {
-                        Ui.Print($"Input how many passengers the {vehicleType} has:");
-                        bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfPassengers);
-
-                        if (numberOfPassengers < 0 || !intOK)
-                            {PrintIncorrectInputWarning("number of passengers");}
-                        else{correctPassengers = true;}
-                    } while (!correctPassengers);
-
-                    Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
-                    try
-                        {garageHandler.TryToPark(airplane);}
-                    catch (NullReferenceException ex)
-                        {PrintIncorrectInputWarning($"{ex.Message}");}
-                }
-                else if (vehicleType == "Boat")
-                {
-                    bool correctLength = false;
-                    double length;
-
-                    do
-                    {
-                        Ui.Print($"Input the length of the {vehicleType}:");
-                        bool doubleOK = Double.TryParse(Ui.GetInput(), out length);
-
-                        if (length < 0 || !doubleOK)
-                            {PrintIncorrectInputWarning("length");}
-                        else
-                            {correctLength = true;}
-                    } while (!correctLength);
-
-                    Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
-                    garageHandler.TryToPark(boat);
-                }
-                else if (vehicleType == "Bus")
-                {
-                    bool correctSeats = false;
-                    int numberOfSeats;
-
-                    do
-                    {
-                        Ui.Print($"Input the number of seats the {vehicleType} has:");
-                        bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfSeats);
-
-                        if (numberOfSeats < 0 || !intOK)
-                            {PrintIncorrectInputWarning("number of seats");}
-                        else
-                            {correctSeats = true;}
-                    } while (!correctSeats);
-
-                    Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
-                    garageHandler.TryToPark(bus);
-                }
-                else if (vehicleType == "Car")
-                {
-                    bool correctDoors = false;
-                    int numberOfDoors;
-
-                    do
-                    {
-                        Ui.Print($"Input the number of doors the {vehicleType} has:");
-                        bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfDoors);
-
-                        if (numberOfDoors < 0 || !intOK)
-                            {PrintIncorrectInputWarning("number of doors");}
-                        else
-                            {correctDoors = true;}
-                    } while (!correctDoors);
-
-                    Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
-                    garageHandler.TryToPark(car);
-                }
-                else if (vehicleType == "Motorcycle")
-                {
-                    bool correctVolume = false;
-                    int engineVolume;
-
-                    do
-                    {
-                        Ui.Print($"Input the engine volumeof the {vehicleType}:");
-                        bool intOK = Int32.TryParse(Ui.GetInput(), out engineVolume);
-
-                        if (engineVolume < 0 || !intOK)
-                            {PrintIncorrectInputWarning("engine volume");}
-                        else
-                            {correctVolume = true;}
-                    } while (!correctVolume);
-
-                    Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
-                    garageHandler.TryToPark(motorcycle);
-                }
+                SetUniqueProps();
             }
             else
             {
                 PrintIncorrectInputWarning("No garage exists or garage is empty. \nCreate a garage or park a vehicle in the garage");
+            }
+        }
+        /// <summary>
+        /// Sets the unique properties of the subclasses of vehicle
+        /// (Airplane, Boat, Bus, Car and Motorcycle)
+        /// </summary>
+        private static void SetUniqueProps()
+        {
+            if (vehicleType == "Airplane")
+            {
+                bool correctPassengers = false;
+                int numberOfPassengers;
+                do
+                {
+                    Ui.Print($"Input how many passengers the {vehicleType} has:");
+                    bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfPassengers);
+
+                    if (numberOfPassengers < 0 || !intOK)
+                    { PrintIncorrectInputWarning("number of passengers"); }
+                    else { correctPassengers = true; }
+                } while (!correctPassengers);
+
+                Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
+                try
+                { garageHandler.TryToPark(airplane); }
+                catch (NullReferenceException ex)
+                { PrintIncorrectInputWarning($"{ex.Message}"); }
+            }
+            else if (vehicleType == "Boat")
+            {
+                bool correctLength = false;
+                double length;
+
+                do
+                {
+                    Ui.Print($"Input the length of the {vehicleType}:");
+                    bool doubleOK = Double.TryParse(Ui.GetInput(), out length);
+
+                    if (length < 0 || !doubleOK)
+                    { PrintIncorrectInputWarning("length"); }
+                    else
+                    { correctLength = true; }
+                } while (!correctLength);
+
+                Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
+                garageHandler.TryToPark(boat);
+            }
+            else if (vehicleType == "Bus")
+            {
+                bool correctSeats = false;
+                int numberOfSeats;
+
+                do
+                {
+                    Ui.Print($"Input the number of seats the {vehicleType} has:");
+                    bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfSeats);
+
+                    if (numberOfSeats < 0 || !intOK)
+                    { PrintIncorrectInputWarning("number of seats"); }
+                    else
+                    { correctSeats = true; }
+                } while (!correctSeats);
+
+                Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
+                garageHandler.TryToPark(bus);
+            }
+            else if (vehicleType == "Car")
+            {
+                bool correctDoors = false;
+                int numberOfDoors;
+
+                do
+                {
+                    Ui.Print($"Input the number of doors the {vehicleType} has:");
+                    bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfDoors);
+
+                    if (numberOfDoors < 0 || !intOK)
+                    { PrintIncorrectInputWarning("number of doors"); }
+                    else
+                    { correctDoors = true; }
+                } while (!correctDoors);
+
+                Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
+                garageHandler.TryToPark(car);
+            }
+            else if (vehicleType == "Motorcycle")
+            {
+                bool correctVolume = false;
+                int engineVolume;
+
+                do
+                {
+                    Ui.Print($"Input the engine volumeof the {vehicleType}:");
+                    bool intOK = Int32.TryParse(Ui.GetInput(), out engineVolume);
+
+                    if (engineVolume < 0 || !intOK)
+                    { PrintIncorrectInputWarning("engine volume"); }
+                    else
+                    { correctVolume = true; }
+                } while (!correctVolume);
+
+                Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
+                garageHandler.TryToPark(motorcycle);
             }
         }
 
@@ -407,7 +412,9 @@ namespace Garage
             Ui.GetInput();
         }
 
-
+        /// <summary>
+        /// Sets the properties of the vehicles
+        /// </summary>
         private static void SetVehicleProps() 
         {
             //string vehicleType = "";
@@ -470,7 +477,6 @@ namespace Garage
                 else
                 { correctWheels = true; }
             } while (!correctWheels);
-
         }
 
         #endregion
