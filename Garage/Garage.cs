@@ -100,7 +100,7 @@ namespace Garage
                         // Vehicle in garage == vehicle in the list counting different types of vehicles
                         if (String.Equals( vehicle.GetType().Name, typeNumberList.ElementAt(i).Key) )
                         {
-                            typeNumberList[typeNumberList.ElementAt(i).Key] += typeNumberList.ElementAt(i).Value;
+                            typeNumberList[typeNumberList.ElementAt(i).Key] = typeNumberList.ElementAt(i).Value + 1;
                         }
                     }
                 }

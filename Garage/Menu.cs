@@ -149,7 +149,7 @@ namespace Garage
         {
             garageHandler.CreateGarage(100);
             garageHandler.SeedParkVehicles();
-            Ui.Print("Garage with 100 parking spaces created. Eight vehicles have been added to the garage");
+            Ui.Print("\nGarage with 100 parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
             Ui.GetInput();
         }
 
