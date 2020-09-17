@@ -66,23 +66,23 @@ namespace Garage
         /// <returns>String containing parked vehicles</returns>
         public string ListParkedVehicles()
         {
-            string output = "Vehicles in garage:\n-------------------------------------------------------------\n";
+            StringBuilder output = new StringBuilder("Vehicles in garage:\n-------------------------------------------------------------\n");
 
             foreach (Vehicle vehicle in vehicles)
             {
                 if (vehicle != null)
                 {
-                    output += vehicle.ToString();
-                    output += "\n";
+                    output.Append(vehicle.ToString());
+                    output.Append("\n");
                 }
             }
-            return output;
+            return output.ToString();
         }
 
    
         public string ListParkedVehiclesByType()
         {
-            string output = "Vehicles in garage, by type:\n-------------------------------------------------------------\n";
+            StringBuilder output = new StringBuilder("Vehicles in garage, by type:\n-------------------------------------------------------------\n");
             SortedList<string, int> typeNumberList = new SortedList<string, int>();
             
             typeNumberList.Add("Airplane", 0);
@@ -97,6 +97,7 @@ namespace Garage
                 {
                     for (int i = 0; i < typeNumberList.Count; i++)
                     {
+                        // Vehicle in garage == vehicle in the list counting different types of vehicles
                         if (String.Equals( vehicle.GetType().Name, typeNumberList.ElementAt(i).Key) )
                         {
                             typeNumberList[typeNumberList.ElementAt(i).Key] += typeNumberList.ElementAt(i).Value;
@@ -114,12 +115,15 @@ namespace Garage
 
             foreach (var typeNumber in typeNumberList)
             {
-                output += $"{typeNumber.Key}(s): {typeNumber.Value}\n"; // TODO add stringbuilder 
+                if (typeNumber.Value > 0)
+                {
+                    output.Append($"{typeNumber.Key}(s): {typeNumber.Value}\n"); 
+                }
             }
 
-            output += $"-----------------------------------------\nTotal: {totalNumVehicles} vehicles";
+            output.Append($"-----------------------------------------\nTotal: {totalNumVehicles} vehicles");
 
-            return output;
+            return output.ToString();
         }
 
         #endregion
