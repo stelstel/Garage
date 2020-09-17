@@ -91,9 +91,6 @@ namespace Garage
             typeNumberList.Add("Car", 0);
             typeNumberList.Add("Motorcycle", 0);
             
-            int tempValue;
-            string tempKey;
-
             foreach (Vehicle vehicle in vehicles)
             {
                 if (vehicle != null)
@@ -102,11 +99,7 @@ namespace Garage
                     {
                         if (String.Equals( vehicle.GetType().Name, typeNumberList.ElementAt(i).Key) )
                         {
-                            // TODO This should be done in a better way. Oscar
-                            tempValue = typeNumberList.ElementAt(i).Value;
-                            tempKey = typeNumberList.ElementAt(i).Key;
-                            typeNumberList.Remove(typeNumberList.ElementAt(i).Key);
-                            typeNumberList.Add(tempKey, ++tempValue);
+                            typeNumberList[typeNumberList.ElementAt(i).Key] += typeNumberList.ElementAt(i).Value;
                         }
                     }
                 }
