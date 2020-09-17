@@ -122,7 +122,6 @@ namespace Garage
             }
 
             output.Append($"-----------------------------------------\nTotal: {totalNumVehicles} vehicles");
-
             return output.ToString();
         }
 

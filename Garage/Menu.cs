@@ -95,6 +95,7 @@ namespace Garage
             }
         }
 
+
         /// <summary>
         /// Unpark car
         /// </summary>
@@ -119,7 +120,8 @@ namespace Garage
                 else
                 {
                     regNumOK = true;
-                    if (garageHandler.Garage.UnparkVehicle(registrationNum))
+
+                    if (garageHandler.Garage.UnparkVehicle(registrationNum) == true)
                     {
                         Ui.PrintLine($"\nThe vehicle with registration number {registrationNum} has been removed from the garage\nPress enter to continue ");
                         Ui.GetInput();
@@ -142,6 +144,7 @@ namespace Garage
             Ui.GetInput();
         }
 
+
         private static void ListTypes()
         {
             if (garageHandler.Garage != null)
@@ -153,7 +156,7 @@ namespace Garage
             }
             else
             {
-                PrintIncorrectInputWarning(". No garage exists. Create a garage first");
+                PrintIncorrectInputWarning("No garage exists. Create a garage");
             }
         }
 
@@ -171,6 +174,7 @@ namespace Garage
                 PrintIncorrectInputWarning(". No garage exists. Create a garage first");
             }
         }
+
 
         private static void ProduceGarage()
         {
@@ -195,6 +199,7 @@ namespace Garage
             Ui.PrintLine($"A garage with {parkingSpaces} spaces created");
             Ui.GetInput();
         }
+
 
         private static void CreateAndParkVehicles()
         {
@@ -229,31 +234,23 @@ namespace Garage
                     Ui.Print($"Input weight of the {vehicleType}: ");
 
                     if (!double.TryParse(Ui.GetInput(), out weight))
-                    {
-                        PrintIncorrectInputWarning("input");
-                    }
-                    else
-                    {
-                        correctWeight = true;
-                    }
+                        {PrintIncorrectInputWarning("input");}
+                    else 
+                        {correctWeight = true;}
                 } while (!correctWeight);
 
                 bool correctRegNum = false;
 
                 do
                 {
-                    Ui.Print($"Input registration number of the {vehicleType}:");
+                    Ui.Print($"Input the registration number of the {vehicleType}:");
                     registrationNumber = Ui.GetInput();
                     char[] regNum = registrationNumber.ToCharArray();
 
                     if (garageHandler.ValidateRegNum(registrationNumber))
-                    {
-                        correctRegNum = true;
-                    }
+                        {correctRegNum = true;}
                     else
-                    {
-                        PrintIncorrectInputWarning("registration number");
-                    }
+                        {PrintIncorrectInputWarning("registration number");}
                 } while (!correctRegNum);
 
                 bool correctColour = false;
@@ -264,13 +261,9 @@ namespace Garage
                     colour = Ui.GetInput();
 
                     if (colour.Length >= 3 && !colour.Any(c => char.IsDigit(c)))
-                    {
-                        correctColour = true;
-                    }
+                        {correctColour = true;}
                     else
-                    {
-                        PrintIncorrectInputWarning("colour");
-                    }
+                        {PrintIncorrectInputWarning("colour");}
                 } while (!correctColour);
 
                 bool correctWheels = false;
@@ -282,13 +275,9 @@ namespace Garage
                     bool intOK = Int32.TryParse(wheels, out numberOfWheels);
 
                     if (numberOfWheels > 100 || numberOfWheels < 0 || !intOK)
-                    {
-                        PrintIncorrectInputWarning("number of wheels");
-                    }
+                        {PrintIncorrectInputWarning("number of wheels");}
                     else
-                    {
-                        correctWheels = true;
-                    }
+                        {correctWheels = true;}
                 } while (!correctWheels);
 
                 if (vehicleType == "Airplane")
@@ -301,24 +290,15 @@ namespace Garage
                         bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfPassengers);
 
                         if (numberOfPassengers < 0 || !intOK)
-                        {
-                            PrintIncorrectInputWarning("number of passengers");
-                        }
-                        else
-                        {
-                            correctPassengers = true;
-                        }
+                            {PrintIncorrectInputWarning("number of passengers");}
+                        else{correctPassengers = true;}
                     } while (!correctPassengers);
 
                     Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
                     try
-                    {
-                        garageHandler.TryToPark(airplane);
-                    }
+                        {garageHandler.TryToPark(airplane);}
                     catch (NullReferenceException ex)
-                    {
-                        PrintIncorrectInputWarning($"{ex.Message}");
-                    }
+                        {PrintIncorrectInputWarning($"{ex.Message}");}
                 }
                 else if (vehicleType == "Boat")
                 {
@@ -331,13 +311,9 @@ namespace Garage
                         bool doubleOK = Double.TryParse(Ui.GetInput(), out length);
 
                         if (length < 0 || !doubleOK)
-                        {
-                            PrintIncorrectInputWarning("length");
-                        }
+                            {PrintIncorrectInputWarning("length");}
                         else
-                        {
-                            correctLength = true;
-                        }
+                            {correctLength = true;}
                     } while (!correctLength);
 
                     Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
@@ -354,13 +330,9 @@ namespace Garage
                         bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfSeats);
 
                         if (numberOfSeats < 0 || !intOK)
-                        {
-                            PrintIncorrectInputWarning("number of seats");
-                        }
+                            {PrintIncorrectInputWarning("number of seats");}
                         else
-                        {
-                            correctSeats = true;
-                        }
+                            {correctSeats = true;}
                     } while (!correctSeats);
 
                     Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
@@ -377,13 +349,9 @@ namespace Garage
                         bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfDoors);
 
                         if (numberOfDoors < 0 || !intOK)
-                        {
-                            PrintIncorrectInputWarning("number of doors");
-                        }
+                            {PrintIncorrectInputWarning("number of doors");}
                         else
-                        {
-                            correctDoors = true;
-                        }
+                            {correctDoors = true;}
                     } while (!correctDoors);
 
                     Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
@@ -400,13 +368,9 @@ namespace Garage
                         bool intOK = Int32.TryParse(Ui.GetInput(), out engineVolume);
 
                         if (engineVolume < 0 || !intOK)
-                        {
-                            PrintIncorrectInputWarning("engine volume");
-                        }
+                            {PrintIncorrectInputWarning("engine volume");}
                         else
-                        {
-                            correctVolume = true;
-                        }
+                            {correctVolume = true;}
                     } while (!correctVolume);
 
                     Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
