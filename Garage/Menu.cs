@@ -215,70 +215,19 @@ namespace Garage
             }
         }
 
+        static double weight;
+        static string registrationNumber;
+        static string colour;
+        static int numberOfWheels;
+        static string vehicleType = "";
+
         private static void ParkNewVehicle() // TODO dela upp
         {
             if (garageHandler.Garage != null)
             {
-                string vehicleType = "";
-                double weight;
-                string registrationNumber;
-                string colour;
-                int numberOfWheels;
+                SetVehicleProps();
 
-                vehicleType = TypeOfVehicleMenu();
-
-                bool correctWeight = false;
-
-                do
-                {
-                    Ui.Print($"Input weight of the {vehicleType}: ");
-
-                    if (!double.TryParse(Ui.GetInput(), out weight))
-                        {PrintIncorrectInputWarning("input");}
-                    else 
-                        {correctWeight = true;}
-                } while (!correctWeight);
-
-                bool correctRegNum = false;
-
-                do
-                {
-                    Ui.Print($"Input the registration number of the {vehicleType}:");
-                    registrationNumber = Ui.GetInput();
-                    char[] regNum = registrationNumber.ToCharArray();
-
-                    if (garageHandler.ValidateRegNum(registrationNumber))
-                        {correctRegNum = true;}
-                    else
-                        {PrintIncorrectInputWarning("registration number");}
-                } while (!correctRegNum);
-
-                bool correctColour = false;
-
-                do
-                {
-                    Ui.Print($"Input the colour of the {vehicleType}:");
-                    colour = Ui.GetInput();
-
-                    if (colour.Length >= 3 && !colour.Any(c => char.IsDigit(c)))
-                        {correctColour = true;}
-                    else
-                        {PrintIncorrectInputWarning("colour");}
-                } while (!correctColour);
-
-                bool correctWheels = false;
-
-                do
-                {
-                    Ui.Print($"Input how many wheels the {vehicleType} has:");
-                    string wheels = Ui.GetInput();
-                    bool intOK = Int32.TryParse(wheels, out numberOfWheels);
-
-                    if (numberOfWheels > 100 || numberOfWheels < 0 || !intOK)
-                        {PrintIncorrectInputWarning("number of wheels");}
-                    else
-                        {correctWheels = true;}
-                } while (!correctWheels);
+                
 
                 if (vehicleType == "Airplane")
                 {
@@ -457,6 +406,73 @@ namespace Garage
             Ui.PrintLine($"\nIncorrect input. {msg}. Please try again!\nPress enter to continue");
             Ui.GetInput();
         }
+
+
+        private static void SetVehicleProps() 
+        {
+            //string vehicleType = "";
+            //double weight;
+            //string registrationNumber;
+            //string colour;
+            // int numberOfWheels;
+
+            vehicleType = TypeOfVehicleMenu();
+
+            bool correctWeight = false;
+
+            do
+            {
+                Ui.Print($"Input weight of the {vehicleType}: ");
+
+                if (!double.TryParse(Ui.GetInput(), out weight))
+                { PrintIncorrectInputWarning("input"); }
+                else
+                { correctWeight = true; }
+            } while (!correctWeight);
+
+            bool correctRegNum = false;
+
+            do
+            {
+                Ui.Print($"Input the registration number of the {vehicleType}:");
+                registrationNumber = Ui.GetInput();
+                char[] regNum = registrationNumber.ToCharArray();
+
+                if (garageHandler.ValidateRegNum(registrationNumber))
+                { correctRegNum = true; }
+                else
+                { PrintIncorrectInputWarning("registration number"); }
+            } while (!correctRegNum);
+
+            bool correctColour = false;
+
+            do
+            {
+                Ui.Print($"Input the colour of the {vehicleType}:");
+                colour = Ui.GetInput();
+
+                if (colour.Length >= 3 && !colour.Any(c => char.IsDigit(c)))
+                { correctColour = true; }
+                else
+                { PrintIncorrectInputWarning("colour"); }
+            } while (!correctColour);
+
+            bool correctWheels = false;
+
+            do
+            {
+                Ui.Print($"Input how many wheels the {vehicleType} has:");
+                string wheels = Ui.GetInput();
+                bool intOK = Int32.TryParse(wheels, out numberOfWheels);
+
+                if (numberOfWheels > 100 || numberOfWheels < 0 || !intOK)
+                { PrintIncorrectInputWarning("number of wheels"); }
+                else
+                { correctWheels = true; }
+            } while (!correctWheels);
+
+        }
+
         #endregion
     }
 }
