@@ -93,7 +93,9 @@ namespace Garage
             //    "where vehic.Colour = 'Blue' " +
             //    "select vehic";
 
-            Garage.ProduceAdvancedList();
+            string colour = "Black"; // Todo get from user
+
+            Garage.ProduceAdvancedList(colour);
         }
         #endregion
     }
