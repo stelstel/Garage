@@ -136,8 +136,8 @@ namespace Garage
 
             var query = 
                 from vehic in vehicles 
-                //where vehic != null && vehic.Weight > 0
-                where vehic != null && vehic.Colour.ToUpper().Equals(colour.ToUpper())
+                where vehic != null
+                where vehic.Colour.ToUpper().Equals(colour.ToUpper())
                 select vehic;
 
             //where vehic.Colour == "Blue"
@@ -149,7 +149,6 @@ namespace Garage
             }
 
             Console.ReadLine();
-
         }
 
 
