@@ -140,11 +140,9 @@ namespace Garage
 
             foreach (Vehicle veh in query)
             {
-                //Console.WriteLine(veh);
                 output += veh;
             }
 
-            //Console.ReadLine();
             return output;
         }
 
