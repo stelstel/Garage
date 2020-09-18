@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Garage
 {
-    public class Garage<T> : IEnumerable<Vehicle> where T : Vehicle
+    public class Garage<T> : IEnumerable<T> where T : Vehicle
     {
         #region Properties **************************************************************
 
@@ -38,8 +38,8 @@ namespace Garage
                         throw new ArgumentException($"A vehicle with the registration number {veh.RegistrationNumber} is already parked in the garage");
                     }
                 }
-            } 
-            
+            }
+
             int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
             vehicles[firstEmptyArraySpace] = vehicle;
         }
@@ -60,7 +60,6 @@ namespace Garage
             return unparkingSuccess;
         }
 
-
         /// <summary>
         ///     Creates a string containing of parked vehicles
         /// </summary>
@@ -80,7 +79,7 @@ namespace Garage
             return output.ToString();
         }
 
-   
+
         public string ListParkedVehiclesByType()
         {
             StringBuilder output = new StringBuilder("Vehicles in garage, by type:\n-------------------------------------------------------------\n");
@@ -92,7 +91,7 @@ namespace Garage
             typeNumberDict.Add("Bus", 0);
             typeNumberDict.Add("Car", 0);
             typeNumberDict.Add("Motorcycle", 0);
-            
+
             foreach (Vehicle vehicle in vehicles)
             {
                 if (vehicle != null)
@@ -100,7 +99,7 @@ namespace Garage
                     for (int i = 0; i < typeNumberDict.Count; i++)
                     {
                         // Vehicle in garage == vehicle in the list counting different types of vehicles
-                        if (String.Equals( vehicle.GetType().Name, typeNumberDict.ElementAt(i).Key) )
+                        if (String.Equals(vehicle.GetType().Name, typeNumberDict.ElementAt(i).Key))
                         {
                             typeNumberDict[typeNumberDict.ElementAt(i).Key] = typeNumberDict.ElementAt(i).Value + 1;
                         }
@@ -119,7 +118,7 @@ namespace Garage
             {
                 if (typeNumber.Value > 0)
                 {
-                    output.Append($"{typeNumber.Key}(s): {typeNumber.Value}\n"); 
+                    output.Append($"{typeNumber.Key}(s): {typeNumber.Value}\n");
                 }
             }
 
@@ -127,7 +126,32 @@ namespace Garage
             return output.ToString();
         }
 
-        public IEnumerator<Vehicle> GetEnumerator()
+        public void ProduceAdvancedList()
+        {
+            //vehicles[0].Colour;
+
+            Console.WriteLine(vehicles.Length);
+            Console.WriteLine(vehicles[0]);
+
+            var query = 
+                from vehic in vehicles 
+                where vehic != null && vehic.Weight > 0
+                select vehic;
+
+            //where vehic.Colour == "Blue"
+            //LINQ: … .Where(x => x.FirstName.Equals(simpleParam)) …
+           
+            foreach (Vehicle veh in query)
+            {
+                Console.WriteLine(veh);    
+            }
+
+            Console.ReadLine();
+
+        }
+
+
+        public IEnumerator<T> GetEnumerator()
         {
             return GetEnumerator();
         }

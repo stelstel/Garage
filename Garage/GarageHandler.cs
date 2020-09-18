@@ -46,11 +46,6 @@ namespace Garage
         public void CreateGarage(int parkingSpaces)
         {
             Garage = new Garage<Vehicle>(parkingSpaces);
-            
-            foreach (var g in Garage)
-            {
-                Console.WriteLine(g.NumberOfWheels); ///////////
-            }
         }
 
         public bool TryToPark(Vehicle vehicle)
@@ -89,6 +84,17 @@ namespace Garage
             }
         }
 
+        public void constructQuery()
+        {
+            //CreateGarage(10); // TODO tabort sedan
+
+            //var query =
+            //    "from vehic in vehicles " +
+            //    "where vehic.Colour = 'Blue' " +
+            //    "select vehic";
+
+            Garage.ProduceAdvancedList();
+        }
         #endregion
     }
 }

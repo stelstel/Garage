@@ -25,7 +25,7 @@ namespace Garage.Tests
             string expectedOutput = "Vehicles in garage:\n-------------------------------------------------------------\n";
 
             // Act
-            Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(1);
+            Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(5);
             string actualOutput = garage.ListParkedVehicles();
 
             // Assert

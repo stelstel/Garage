@@ -33,13 +33,14 @@ namespace Garage
 
                     switch (firstChoice)
                     {
-                        case "a": case "A":
-                        case "b": case "B":
+                        case "a": case "A": 
+                        case "b": case "B": 
                         case "1":
                         case "2":
                         case "3":
                         case "4":
                         case "5":
+                        case "6":
                             correctFirstChoice = true;
                             break;
                         case "0":
@@ -69,6 +70,7 @@ namespace Garage
             Ui.PrintLine("3: List the vehicles in the garage");
             Ui.PrintLine("4: List number of vehicles in the garage by type");
             Ui.PrintLine("5: Remove car from garage");
+            Ui.PrintLine("6: Filtered list of vehicles in garage");
             Ui.PrintLine("0: Exit");
         }
 
@@ -97,6 +99,9 @@ namespace Garage
                         break;
                     case "5":
                         RemoveVehicle();
+                        break;
+                    case "6":
+                        garageHandler.constructQuery();
                         break;
                 default:
                         break;
@@ -197,7 +202,7 @@ namespace Garage
             {
                 Ui.Print($"Input number of parking spaces for the garage: ");
 
-                if (!int.TryParse(Ui.GetInput(), out parkingSpaces))
+                if (!int.TryParse(Ui.GetInput(), out parkingSpaces) && parkingSpaces > 0)
                 {
                     PrintIncorrectInputWarning("input");
                 }

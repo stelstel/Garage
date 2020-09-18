@@ -9,10 +9,21 @@ namespace Garage.Tests
     [TestClass()]
     public class GarageHandlerTests
     {
+        GarageHandler gh = new GarageHandler();
+
         [TestMethod()]
         public void SeedParkVehiclesTest()
         {
-            
+
+        }
+
+        [TestMethod()]
+        public void CreateGarage_with_p_spaces_Test()
+        {
+            int parkingSpaces = 10;
+            gh.CreateGarage(parkingSpaces);
+
+            // Expecting not fail
         }
 
         // TODO this test wo'nt run
