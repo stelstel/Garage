@@ -101,11 +101,19 @@ namespace Garage
                         RemoveVehicle();
                         break;
                     case "6":
+                        FilteredList();
                         garageHandler.constructQuery();
                         break;
                 default:
                         break;
             }
+        }
+
+
+        private static void FilteredList()
+        {
+            Ui.Print($"{garageHandler.constructQuery()}\nPress enter to continue!");
+            Ui.GetInput();
         }
 
 
@@ -136,7 +144,7 @@ namespace Garage
 
                     if (garageHandler.Garage.UnparkVehicle(registrationNum) == true)
                     {
-                        Ui.PrintLine($"\nThe vehicle with registration number {registrationNum} has been removed from the garage\nPress enter to continue ");
+                        Ui.PrintLine($"\nThe vehicle with registration number {registrationNum} has been removed from the garage\nPress enter to continue!");
                         Ui.GetInput();
 
                     }

@@ -84,20 +84,13 @@ namespace Garage
             }
         }
 
-        public void constructQuery()
+        public string constructQuery()
         {
-            //CreateGarage(10); // TODO tabort sedan
-
-            //var query =
-            //    "from vehic in vehicles " +
-            //    "where vehic.Colour = 'Blue' " +
-            //    "select vehic";
-
             string colour = "Black"; // Todo get from user
                         
             Type type = Type.GetType("Garage.Car, Garage"); // Todo get from user
 
-            Garage.ProduceAdvancedList(colour, type);
+            return Garage.ProduceAdvancedList(colour, type);
         }
         #endregion
     }

@@ -126,11 +126,10 @@ namespace Garage
             return output.ToString();
         }
 
-        public void ProduceAdvancedList(string colour, Type type)
+        public string ProduceAdvancedList(string colour, Type type)
         {
+            string output = ""; // TODO stringbuilder
             //vehicles[0].
-
-           
 
             var query = 
                 from vehic in vehicles 
@@ -141,10 +140,12 @@ namespace Garage
 
             foreach (Vehicle veh in query)
             {
-                Console.WriteLine(veh);    
+                //Console.WriteLine(veh);
+                output += veh;
             }
 
-            Console.ReadLine();
+            //Console.ReadLine();
+            return output;
         }
 
 
