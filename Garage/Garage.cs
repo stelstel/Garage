@@ -126,23 +126,19 @@ namespace Garage
             return output.ToString();
         }
 
-        public void ProduceAdvancedList(string colour)
+        public void ProduceAdvancedList(string colour, Type type)
         {
-            
-            //vehicles[0].Colour;
+            //vehicles[0].
 
-            //Console.WriteLine(vehicles.Length);
-            //Console.WriteLine(vehicles[0]);
+           
 
             var query = 
                 from vehic in vehicles 
                 where vehic != null
+                where vehic.GetType() == type
                 where vehic.Colour.ToUpper().Equals(colour.ToUpper())
                 select vehic;
 
-            //where vehic.Colour == "Blue"
-            //LINQ: … .Where(x => x.FirstName.Equals(simpleParam)) …
-           
             foreach (Vehicle veh in query)
             {
                 Console.WriteLine(veh);    

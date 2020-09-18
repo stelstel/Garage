@@ -94,8 +94,10 @@ namespace Garage
             //    "select vehic";
 
             string colour = "Black"; // Todo get from user
+                        
+            Type type = Type.GetType("Garage.Car, Garage"); // Todo get from user
 
-            Garage.ProduceAdvancedList(colour);
+            Garage.ProduceAdvancedList(colour, type);
         }
         #endregion
     }
