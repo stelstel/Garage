@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Garage
 {
@@ -96,20 +97,48 @@ namespace Garage
             }
         }
 
-        public string constructQuery()
+
+        public string handleFilteredSearch(string selectedTypes)
         {
+            List<Type> typeList = new List<Type>();
+
+            // Remove all spaces
+            selectedTypes = Regex.Replace(selectedTypes, @"\s+", "");
+
+            string[] selTypes = selectedTypes.Split(",");
+
+            foreach (string typ in selTypes)
+            {
+                switch (typ.ToLower())
+                {
+                    case "airplane":
+                        typeList.Add(Type.GetType("Garage.Airplane, Garage"));
+                        break;
+                    case "boat":
+                        typeList.Add(Type.GetType("Garage.Boat, Garage"));
+                        break;
+                    case "bus":
+                        typeList.Add(Type.GetType("Garage.Bus, Garage"));
+                        break;
+                    case "car":
+                        typeList.Add(Type.GetType("Garage.Car, Garage"));
+                        break;
+                    case "motorcycle":
+                        typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
             string colour = "Black"; // Todo get from user
 
-            List<Type> typeList = new List<Type>() 
-            {
-                Type.GetType("Garage.Airplane, Garage"),
-                Type.GetType("Garage.Boat, Garage"),
-                Type.GetType("Garage.Bus, Garage"),
-                Type.GetType("Garage.Car, Garage"),
-                Type.GetType("Garage.Motorcycle, Garage"),
-            };
-                        
-            return Garage.ProduceAdvancedList(colour, typeList);
+            return Garage.ProduceAdvancedList(
+                colour: colour, 
+                typeList: typeList, 
+                minWheels: 0,
+                maxWheels: int.MaxValue);
         }
         #endregion
     }

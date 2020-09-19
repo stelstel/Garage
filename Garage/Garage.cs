@@ -136,10 +136,10 @@ namespace Garage
             var query = 
                 from vehic in vehicles
                 where vehic != null
-                where typeList.Contains(vehic.GetType())
+               where typeList.Contains(vehic.GetType())
                 where vehic.NumberOfWheels >= minWheels
                 where vehic.NumberOfWheels <= maxWheels
-                where vehic.Weight >= minWeight/*
+                /*where vehic.Weight >= minWeight
                 where vehic.Weight <= maxWeight*/
                 where vehic.Colour.ToUpper().Equals(colour.ToUpper())
                 select vehic;

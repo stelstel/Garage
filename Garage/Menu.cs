@@ -102,7 +102,7 @@ namespace Garage
                         break;
                     case "6":
                         FilteredList();
-                        garageHandler.constructQuery();
+                        //garageHandler.constructQuery();
                         break;
                 default:
                         break;
@@ -112,7 +112,10 @@ namespace Garage
 
         private static void FilteredList()
         {
-            Ui.Print($"{garageHandler.constructQuery()}\nPress enter to continue!");
+            Ui.Print("Choose type(s) comma separated: ");
+            string userSelectedTypes = Ui.GetInput();
+            
+            Ui.Print($"{garageHandler.handleFilteredSearch(userSelectedTypes)}\nPress enter to continue!");
             Ui.GetInput();
         }
 
