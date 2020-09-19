@@ -159,11 +159,12 @@ namespace Garage
 
         public static void CreateGarageAndVehicles()
         {
-            garageHandler.CreateGarage(15);
+            int numberOfParkingSpaces = 25;
+            garageHandler.CreateGarage(numberOfParkingSpaces);
             
             if (garageHandler.SeedParkVehicles() == true)
             {
-                Ui.Print("\nGarage with 15 parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
+                Ui.Print($"\nGarage with {numberOfParkingSpaces} parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
                 Ui.GetInput();
             }
         }
@@ -285,7 +286,7 @@ namespace Garage
 
                 Airplane airplane = new Airplane(weight, registrationNumber, colour, numberOfWheels, numberOfPassengers);
                 try
-                    { garageHandler.TryToPark(airplane); }
+                    { garageHandler.TryToPark(airplane, true); }
                 catch (NullReferenceException ex)
                     { PrintIncorrectInputWarning($"{ex.Message}"); }
             }
@@ -306,7 +307,7 @@ namespace Garage
                 } while (!correctLength);
 
                 Boat boat = new Boat(weight, registrationNumber, colour, numberOfWheels, length);
-                garageHandler.TryToPark(boat);
+                garageHandler.TryToPark(boat, true);
             }
             else if (vehicleType == "Bus")
             {
@@ -325,7 +326,7 @@ namespace Garage
                 } while (!correctSeats);
 
                 Bus bus = new Bus(weight, registrationNumber, colour, numberOfWheels, numberOfSeats);
-                garageHandler.TryToPark(bus);
+                garageHandler.TryToPark(bus, true);
             }
             else if (vehicleType == "Car")
             {
@@ -344,7 +345,7 @@ namespace Garage
                 } while (!correctDoors);
 
                 Car car = new Car(weight, registrationNumber, colour, numberOfWheels, numberOfDoors);
-                garageHandler.TryToPark(car);
+                garageHandler.TryToPark(car, true);
             }
             else if (vehicleType == "Motorcycle")
             {
@@ -363,7 +364,7 @@ namespace Garage
                 } while (!correctVolume);
 
                 Motorcycle motorcycle = new Motorcycle(weight, registrationNumber, colour, numberOfWheels, engineVolume);
-                garageHandler.TryToPark(motorcycle);
+                garageHandler.TryToPark(motorcycle, true);
             }
         }
 

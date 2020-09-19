@@ -18,7 +18,7 @@ namespace Garage
 
         public override string ToString()
         {
-            return $"{base.ToString()}, Number of doors{NumberOfDoors}";
+            return $"{base.ToString()}, Number of doors: {NumberOfDoors}";
         }
     }
 
