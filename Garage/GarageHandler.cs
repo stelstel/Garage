@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -98,14 +99,17 @@ namespace Garage
         }
 
 
-        public string handleFilteredSearch(string selectedTypes)
+        public string handleFilteredSearch(string selectedTypes, string selectedColours)
         {
             List<Type> typeList = new List<Type>();
+            List<Type> colourList = new List<Type>();
 
             // Remove all spaces
             selectedTypes = Regex.Replace(selectedTypes, @"\s+", "");
+            selectedColours = Regex.Replace(selectedColours, @"\s+", "");
 
             string[] selTypes = selectedTypes.Split(",");
+            string[] selColours = selectedColours.Split(",");
 
             foreach (string typ in selTypes)
             {
@@ -131,14 +135,29 @@ namespace Garage
                 }
             }
 
-
-            string colour = "Black"; // Todo get from user
+            for (int i = 0; i < selColours.Count(); i++)
+            {
+                // First letter uppercase
+                selColours[i] = UppercaseFirst(selColours[i]);
+            }
 
             return Garage.ProduceAdvancedList(
-                colour: colour, 
+                colourList: selColours, 
                 typeList: typeList, 
                 minWheels: 0,
                 maxWheels: int.MaxValue);
+        }
+
+
+        static string UppercaseFirst(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            char[] a = s.ToCharArray();
+            a[0] = char.ToUpper(a[0]);
+            return new string(a);
         }
         #endregion
     }

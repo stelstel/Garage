@@ -64,7 +64,7 @@ namespace Garage
             Ui.Clear();
             Ui.PrintLine("Choose option:\n");
             Ui.PrintLine("a: DEV. SHORTCUT: Create garage, create vehicles");
-            Ui.PrintLine("b: DEV. SHORTCUT: Create eight vehicles and add them to the garage\n");
+            Ui.PrintLine("b: DEV. SHORTCUT: Create 15 vehicles and add them to the garage\n");
             Ui.PrintLine("1: Park new vehicle");
             Ui.PrintLine("2: Create the garage");
             Ui.PrintLine("3: List the vehicles in the garage");
@@ -115,7 +115,13 @@ namespace Garage
             Ui.Print("Choose type(s) comma separated: ");
             string userSelectedTypes = Ui.GetInput();
             
-            Ui.Print($"{garageHandler.handleFilteredSearch(userSelectedTypes)}\nPress enter to continue!");
+            //Ui.Print($"{garageHandler.handleFilteredSearch(userSelectedTypes)}\nPress enter to continue!");
+            //Ui.GetInput();
+
+            Ui.Print("Choose colour(s) comma separated: ");
+            string userSelectedColours = Ui.GetInput();
+
+            Ui.Print($"\n{garageHandler.handleFilteredSearch(userSelectedTypes, userSelectedColours)}\nPress enter to continue!");
             Ui.GetInput();
         }
 
@@ -165,9 +171,10 @@ namespace Garage
             int numberOfParkingSpaces = 25;
             garageHandler.CreateGarage(numberOfParkingSpaces);
             
+            
             if (garageHandler.SeedParkVehicles() == true)
             {
-                Ui.Print($"\nGarage with {numberOfParkingSpaces} parking spaces created.\nEight vehicles have been added to the garage\nPress enter to continue");
+                Ui.Print($"\nGarage with {numberOfParkingSpaces} parking spaces created.\n15 vehicles have been parked in the garage\nPress enter to continue");
                 Ui.GetInput();
             }
         }
