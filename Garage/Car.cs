@@ -8,8 +8,6 @@ namespace Garage
     {
         public int NumberOfDoors { get; set; }
         
-        //public Car() {}
-
         public Car(double weight, string registrationNumber, string colour, int numberOfWheels, int numberOfDoors) 
             : base(weight, registrationNumber, colour, numberOfWheels)
         {
