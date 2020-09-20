@@ -145,13 +145,7 @@ namespace Garage
 
         public string ProduceAdvancedList(List<Type> typeList, string[] colourList, int minWheels, int maxWheels, string registrationNumber , double minWeight, double maxWeight)
         {
-            //string output = ""; // TODO stringbuilder
             StringBuilder output = new StringBuilder();
-
-            if (vehicles[0] != null) ///////////////
-            {
-                Console.WriteLine(vehicles[0]);
-            }
 
             IEnumerable<Vehicle> query = 
                 from vehic in vehicles
@@ -196,11 +190,6 @@ namespace Garage
 
             foreach (Vehicle veh in query)
             {
-                //output += $"{veh}\n";
-                if (vehicles != null)
-                {
-
-                }
                 output.Append($"{veh}\n");
             }
 

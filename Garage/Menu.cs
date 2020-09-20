@@ -102,7 +102,6 @@ namespace Garage
                         break;
                     case "6":
                         FilteredList();
-                        //garageHandler.constructQuery();
                         break;
                 default:
                         break;
@@ -112,30 +111,135 @@ namespace Garage
 
         private static void FilteredList()
         {
-            Ui.Print("Choose type(s) of vehicle, comma separated. Use * as wildcard: ");
-            string userSelectedTypes = Ui.GetInput();
+            bool correctInput = false;
+            string userSelectedTypes;
 
-            Ui.Print("Choose colour(s) comma separated. Use * as wildcard: ");
-            string userSelectedColours = Ui.GetInput();
+            do
+            {
+                Ui.Print("Choose type(s) of vehicle, comma separated. Use * as wildcard: ");
+                userSelectedTypes = Ui.GetInput();
 
-            Ui.Print("Choose minimum number of wheels: ");
-            int minWheels;
-            int.TryParse(Ui.GetInput(), out minWheels);
+                if (userSelectedTypes.Length > 0)
+                {
+                    correctInput = true;
+                }
+                else
+                {
+                    PrintIncorrectInputWarning("");
+                }
+            } while (!correctInput);
 
-            Ui.Print("Choose maximum number of wheels: ");
+            correctInput = false;
+            string userSelectedColours;
+
+            do
+            {
+                Ui.Print("Choose colour(s) comma separated. Use * as wildcard: ");
+                userSelectedColours = Ui.GetInput();
+
+                if (userSelectedColours.Length > 0)
+                {
+                    correctInput = true;
+                }
+                else
+                {
+                    PrintIncorrectInputWarning("");
+                }
+            } while (!correctInput);
+
+            correctInput = false;
+            int minWheels = 0;
+
+            do
+            {
+                Ui.Print("Choose minimum number of wheels: ");
+
+                string tempString = Ui.GetInput();
+                int.TryParse(tempString, out minWheels);
+
+                if (tempString.Length > 0 && minWheels >= 0)
+                {
+                    correctInput = true;
+                }
+                else
+                {
+                    PrintIncorrectInputWarning("");
+                }
+            } while (!correctInput);
+
+            correctInput = false;
             int maxWheels;
-            int.TryParse(Ui.GetInput(), out maxWheels);
 
-            Ui.Print("Choose registration number. Use * as wildcard: ");
-            string regNum = Ui.GetInput();
+            do
+            {
+                Ui.Print("Choose maximum number of wheels: ");
 
-            Ui.Print("Choose minimum weight: ");
+                string tempString = Ui.GetInput();
+                int.TryParse(tempString, out maxWheels);
+
+                if (tempString.Length > 0 && maxWheels >= 0)
+                {
+                    correctInput = true;
+                }
+                else
+                {
+                    PrintIncorrectInputWarning("");
+                }
+            } while (!correctInput);
+
+            correctInput = false;
+            string regNum;
+
+            do
+            {
+                Ui.Print("Choose registration number. Use * as wildcard: ");
+                regNum = Ui.GetInput();
+
+                if (garageHandler.ValidateRegNum(regNum) || regNum == "*")
+                {
+                    correctInput = true;
+                }
+                else
+                {
+                    PrintIncorrectInputWarning("");
+                }
+            } while (!correctInput);
+
+            correctInput = false;
             double minWeight;
-            double.TryParse(Ui.GetInput(), out minWeight);
 
-            Ui.Print("Choose maximum weight: ");
+            do // TODO validate as in maxWheels and minWheels
+            {
+                Ui.Print("Choose minimum weight: ");
+                double.TryParse(Ui.GetInput(), out minWeight);
+
+                if (minWeight >= 0)
+                {
+                    correctInput = true;
+                }
+                else
+                {
+                    PrintIncorrectInputWarning("");
+                }
+            } while (!correctInput);
+
+            correctInput = false;
             double maxWeight;
-            double.TryParse(Ui.GetInput(), out maxWeight);
+
+            do // TODO validate as in maxWheels and minWheels
+            {
+                Ui.Print("Choose maximum weight: ");
+                double.TryParse(Ui.GetInput(), out maxWeight);
+
+                if (maxWeight >= 0 && maxWeight < int.MaxValue)
+                {
+                    correctInput = true;
+                }
+                else
+                {
+                    PrintIncorrectInputWarning("");
+                }
+            } while (!correctInput);
 
             Ui.Print($"\n{garageHandler.HandleFilteredSearch(userSelectedTypes, userSelectedColours, minWheels, maxWheels, regNum, minWeight, maxWeight)}\nPress enter to continue!");
             Ui.GetInput();
@@ -465,7 +569,7 @@ namespace Garage
         /// <param name="msg">Text to add to default message</param>
         public static void PrintIncorrectInputWarning(String msg)
         {
-            Ui.PrintLine($"\nIncorrect input. {msg}. Please try again!\nPress enter to continue");
+            Ui.PrintLine($"\nIncorrect input. {msg} Please try again!\nPress enter to continue");
             Ui.GetInput();
         }
 
