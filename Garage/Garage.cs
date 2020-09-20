@@ -148,19 +148,31 @@ namespace Garage
             string output = ""; // TODO stringbuilder
             //vehicles[0].
 
-            //NumberOfWheels
-
             var query = 
                 from vehic in vehicles
-                where vehic != null
+                //where vehic != null
                 where typeList.Contains(vehic.GetType())
-                where colourList.Contains(vehic.Colour)
-                where vehic.NumberOfWheels >= minWheels
-                where vehic.NumberOfWheels <= maxWheels
-                where vehic.RegistrationNumber == registrationNumber.ToUpper()
-                /*where vehic.Weight >= minWeight
-                where vehic.Weight <= maxWeight*/
+                //where colourList.Contains(vehic.Colour)
+                //where vehic.NumberOfWheels >= minWheels
+                //where vehic.NumberOfWheels <= maxWheels
+                //where vehic.RegistrationNumber == registrationNumber.ToUpper()
+                //where vehic.Weight >= minWeight
+                //where vehic.Weight <= maxWeight
                 select vehic;
+            i
+            query =
+                from vehic in query
+                //where vehic != null
+                //where typeList.Contains(vehic.GetType())
+                where colourList.Contains(vehic.Colour)
+                //where vehic.NumberOfWheels >= minWheels
+                //where vehic.NumberOfWheels <= maxWheels
+                //where vehic.RegistrationNumber == registrationNumber.ToUpper()
+                //where vehic.Weight >= minWeight
+                //where vehic.Weight <= maxWeight
+                select vehic;
+
+
 
             foreach (Vehicle veh in query)
             {
