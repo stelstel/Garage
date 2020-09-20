@@ -114,19 +114,25 @@ namespace Garage
         {
             Ui.Print("Choose type(s) of vehicle, comma separated. Use * as wildcard: ");
             string userSelectedTypes = Ui.GetInput();
+
             Ui.Print("Choose colour(s) comma separated. Use * as wildcard: ");
             string userSelectedColours = Ui.GetInput();
+
             Ui.Print("Choose minimum number of wheels: ");
             int minWheels;
             int.TryParse(Ui.GetInput(), out minWheels);
+
             Ui.Print("Choose maximum number of wheels: ");
             int maxWheels;
             int.TryParse(Ui.GetInput(), out maxWheels);
+
             Ui.Print("Choose registration number. Use * as wildcard: ");
             string regNum = Ui.GetInput();
+
             Ui.Print("Choose minimum weight: ");
             double minWeight;
             double.TryParse(Ui.GetInput(), out minWeight);
+
             Ui.Print("Choose maximum weight: ");
             double maxWeight;
             double.TryParse(Ui.GetInput(), out maxWeight);

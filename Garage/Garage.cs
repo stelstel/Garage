@@ -146,33 +146,61 @@ namespace Garage
         public string ProduceAdvancedList(List<Type> typeList, string[] colourList, int minWheels, int maxWheels, string registrationNumber , double minWeight, double maxWeight)
         {
             string output = ""; // TODO stringbuilder
-            //vehicles[0].
 
-            var query = 
+            if (vehicles[0] != null) ///////////////
+            {
+                Console.WriteLine(vehicles[0]);
+            }
+
+
+            /*
+             IEnumerable<int> scoreQuery =
+            from score in scores
+            where score > 80
+            select score;
+             */
+
+            IEnumerable<Vehicle> query = 
                 from vehic in vehicles
-                //where vehic != null
-                where typeList.Contains(vehic.GetType())
-                //where colourList.Contains(vehic.Colour)
-                //where vehic.NumberOfWheels >= minWheels
-                //where vehic.NumberOfWheels <= maxWheels
-                //where vehic.RegistrationNumber == registrationNumber.ToUpper()
-                //where vehic.Weight >= minWeight
-                //where vehic.Weight <= maxWeight
+                where vehic != null
                 select vehic;
-            i
+
+            if (typeList.Count > 0)
+            {
+                query =
+                    from vehic in vehicles
+                    where typeList.Contains(vehic.GetType())
+                    select vehic;
+            }
+
+
+            if (colourList[0] != "*")
+            {
+                query =
+                    from vehic in vehicles
+                    where colourList.Contains(vehic.Colour)
+                    select vehic;
+            }
+
             query =
-                from vehic in query
-                //where vehic != null
-                //where typeList.Contains(vehic.GetType())
-                where colourList.Contains(vehic.Colour)
-                //where vehic.NumberOfWheels >= minWheels
-                //where vehic.NumberOfWheels <= maxWheels
-                //where vehic.RegistrationNumber == registrationNumber.ToUpper()
-                //where vehic.Weight >= minWeight
-                //where vehic.Weight <= maxWeight
+                from vehic in vehicles
+                where vehic.NumberOfWheels >= minWheels
+                where vehic.NumberOfWheels <= maxWheels
                 select vehic;
 
+            if (registrationNumber != "*")
+            {
+                query =
+                    from vehic in query
+                    where vehic.RegistrationNumber == registrationNumber.ToUpper()
+                    select vehic;
+            }
 
+            query =
+                    from vehic in query
+                    where vehic.Weight >= minWeight
+                    where vehic.Weight <= maxWeight
+                    select vehic;
 
             foreach (Vehicle veh in query)
             {

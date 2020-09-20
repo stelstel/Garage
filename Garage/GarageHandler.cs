@@ -129,24 +129,19 @@ namespace Garage
                     case "motorcycle":
                         typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
                         break;
-                    case "*":
-                        typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
-                        typeList.Add(Type.GetType("Garage.Boat, Garage"));
-                        typeList.Add(Type.GetType("Garage.Bus, Garage"));
-                        typeList.Add(Type.GetType("Garage.Car, Garage"));
-                        typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
-                        break;
+                    //case "*":
+                    //    typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+                    //    typeList.Add(Type.GetType("Garage.Boat, Garage"));
+                    //    typeList.Add(Type.GetType("Garage.Bus, Garage"));
+                    //    typeList.Add(Type.GetType("Garage.Car, Garage"));
+                    //    typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+                    //    break;
                     default:
                         break;
                 }
             }
 
-            // Wildcard used. All colours chosen
-            if (selColours.First() == "*")
-            {
-                selColours = Garage.ListParkedVehiclesColours();
-            }
-            else
+            if (selColours.First() != "*")
             {
                 for (int i = 0; i < selColours.Count(); i++)
                 {
@@ -157,13 +152,13 @@ namespace Garage
 
             return Garage.ProduceAdvancedList
             (
-                typeList: typeList,
+                typeList:   typeList,
                 colourList: selColours,
-                minWheels: minNumberOfWheels,
-                maxWheels: maxNumberOfWheels,
+                minWheels:  minNumberOfWheels,
+                maxWheels:  maxNumberOfWheels,
                 registrationNumber: registrationNumber,
-                minWeight: minWeight,
-                maxWeight: maxWeight
+                minWeight:  minWeight,
+                maxWeight:  maxWeight
             );
         }
 
