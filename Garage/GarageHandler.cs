@@ -98,7 +98,7 @@ namespace Garage
         }
 
 
-        public string handleFilteredSearch(string selectedTypes, string selectedColours, int minNumberOfWheels, int maxNumberOfWheels, string registrationNumber, double minWeight, double maxWeight)
+        public string HandleFilteredSearch(string selectedTypes, string selectedColours, int minNumberOfWheels, int maxNumberOfWheels, string registrationNumber, double minWeight, double maxWeight)
         {
             List<Type> typeList = new List<Type>();
             List<Type> colourList = new List<Type>();

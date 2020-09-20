@@ -137,7 +137,7 @@ namespace Garage
             double maxWeight;
             double.TryParse(Ui.GetInput(), out maxWeight);
 
-            Ui.Print($"\n{garageHandler.handleFilteredSearch(userSelectedTypes, userSelectedColours, minWheels, maxWheels, regNum, minWeight, maxWeight)}\nPress enter to continue!");
+            Ui.Print($"\n{garageHandler.HandleFilteredSearch(userSelectedTypes, userSelectedColours, minWheels, maxWheels, regNum, minWeight, maxWeight)}\nPress enter to continue!");
             Ui.GetInput();
         }
 

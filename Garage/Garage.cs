@@ -145,20 +145,13 @@ namespace Garage
 
         public string ProduceAdvancedList(List<Type> typeList, string[] colourList, int minWheels, int maxWheels, string registrationNumber , double minWeight, double maxWeight)
         {
-            string output = ""; // TODO stringbuilder
+            //string output = ""; // TODO stringbuilder
+            StringBuilder output = new StringBuilder();
 
             if (vehicles[0] != null) ///////////////
             {
                 Console.WriteLine(vehicles[0]);
             }
-
-
-            /*
-             IEnumerable<int> scoreQuery =
-            from score in scores
-            where score > 80
-            select score;
-             */
 
             IEnumerable<Vehicle> query = 
                 from vehic in vehicles
@@ -168,22 +161,21 @@ namespace Garage
             if (typeList.Count > 0)
             {
                 query =
-                    from vehic in vehicles
+                    from vehic in query
                     where typeList.Contains(vehic.GetType())
                     select vehic;
             }
 
-
             if (colourList[0] != "*")
             {
                 query =
-                    from vehic in vehicles
+                    from vehic in query
                     where colourList.Contains(vehic.Colour)
                     select vehic;
             }
 
             query =
-                from vehic in vehicles
+                from vehic in query
                 where vehic.NumberOfWheels >= minWheels
                 where vehic.NumberOfWheels <= maxWheels
                 select vehic;
@@ -204,10 +196,15 @@ namespace Garage
 
             foreach (Vehicle veh in query)
             {
-                output += $"{veh}\n";
+                //output += $"{veh}\n";
+                if (vehicles != null)
+                {
+
+                }
+                output.Append($"{veh}\n");
             }
 
-            return output;
+            return output.ToString();
         }
 
 
