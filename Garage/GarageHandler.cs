@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Garage
@@ -99,7 +98,7 @@ namespace Garage
         }
 
 
-        public string handleFilteredSearch(string selectedTypes, string selectedColours)
+        public string handleFilteredSearch(string selectedTypes, string selectedColours, int minNumberOfWheels, int maxNumberOfWheels, string registrationNumber, double minWeight, double maxWeight)
         {
             List<Type> typeList = new List<Type>();
             List<Type> colourList = new List<Type>();
@@ -130,22 +129,42 @@ namespace Garage
                     case "motorcycle":
                         typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
                         break;
+                    case "*":
+                        typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+                        typeList.Add(Type.GetType("Garage.Boat, Garage"));
+                        typeList.Add(Type.GetType("Garage.Bus, Garage"));
+                        typeList.Add(Type.GetType("Garage.Car, Garage"));
+                        typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+                        break;
                     default:
                         break;
                 }
             }
 
-            for (int i = 0; i < selColours.Count(); i++)
+            // Wildcard used. All colours chosen
+            if (selColours.First() == "*")
             {
-                // First letter uppercase
-                selColours[i] = UppercaseFirst(selColours[i]);
+                selColours = Garage.ListParkedVehiclesColours();
+            }
+            else
+            {
+                for (int i = 0; i < selColours.Count(); i++)
+                {
+                    // First letter uppercase
+                    selColours[i] = UppercaseFirst(selColours[i]);
+                }
             }
 
-            return Garage.ProduceAdvancedList(
-                colourList: selColours, 
-                typeList: typeList, 
-                minWheels: 0,
-                maxWheels: int.MaxValue);
+            return Garage.ProduceAdvancedList
+            (
+                typeList: typeList,
+                colourList: selColours,
+                minWheels: minNumberOfWheels,
+                maxWheels: maxNumberOfWheels,
+                registrationNumber: registrationNumber,
+                minWeight: minWeight,
+                maxWeight: maxWeight
+            );
         }
 
 

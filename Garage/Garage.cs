@@ -79,6 +79,23 @@ namespace Garage
             return output.ToString();
         }
 
+        public string[] ListParkedVehiclesColours()
+        {
+            HashSet<string> colourSet = new HashSet<string>();
+
+            foreach (Vehicle vehicle in vehicles)
+            {
+                if (vehicle != null)
+                {
+                    colourSet.Add(vehicle.Colour);
+                }
+            }
+
+            string[] colourArr = colourSet.ToArray();
+
+            return colourArr;
+        }
+
 
         public string ListParkedVehiclesByType()
         {
@@ -126,7 +143,7 @@ namespace Garage
             return output.ToString();
         }
 
-        public string ProduceAdvancedList(string[] colourList, List<Type> typeList, int minWheels, int maxWheels /*, double minWeight, double maxWeight*/)
+        public string ProduceAdvancedList(List<Type> typeList, string[] colourList, int minWheels, int maxWheels, string registrationNumber , double minWeight, double maxWeight)
         {
             string output = ""; // TODO stringbuilder
             //vehicles[0].
@@ -137,11 +154,12 @@ namespace Garage
                 from vehic in vehicles
                 where vehic != null
                 where typeList.Contains(vehic.GetType())
+                where colourList.Contains(vehic.Colour)
                 where vehic.NumberOfWheels >= minWheels
                 where vehic.NumberOfWheels <= maxWheels
+                where vehic.RegistrationNumber == registrationNumber.ToUpper()
                 /*where vehic.Weight >= minWeight
                 where vehic.Weight <= maxWeight*/
-                where colourList.Contains(vehic.Colour)
                 select vehic;
 
             foreach (Vehicle veh in query)
