@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Garage
+﻿namespace Garage
 {
     public class Motorcycle : Vehicle
     {
@@ -16,7 +12,6 @@ namespace Garage
 
         public override string ToString()
         {
-            
             return $"{base.ToString()}, Engine volume: {EngineVolume}";
         }
     }

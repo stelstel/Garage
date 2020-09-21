@@ -198,7 +198,7 @@ namespace Garage
             } while (!correctInput);
 
             correctInput = false;
-            int minWheels = 0;
+            int minWheels;
 
             do
             {
@@ -341,12 +341,9 @@ namespace Garage
         {
             int numberOfParkingSpaces =25;
             garageHandler.CreateGarage(numberOfParkingSpaces);
-            
-            
+                        
             if (garageHandler.SeedParkVehicles() == true)
             {
-                
-
                 Ui.Print($"\nGarage with {numberOfParkingSpaces} parking spaces created.\n{garageHandler.VehiclesSeeded} vehicles have been parked in the garage\nPress enter to continue");
                 Ui.GetInput();
             }
@@ -380,7 +377,7 @@ namespace Garage
             }
             else
             {
-                PrintIncorrectInputWarning(". No garage exists. Create a garage first");
+                PrintIncorrectInputWarning("No garage exists. Create a garage");
             }
         }
 

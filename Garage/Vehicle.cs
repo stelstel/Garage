@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Garage
+﻿namespace Garage
 {
     public class Vehicle : IVehicle
     {
@@ -31,7 +28,6 @@ namespace Garage
         {
             Weight = weight;
             RegistrationNumber = registrationNumber;
-            // string strB = String.Copy(strA); 
             Colour = colour;
             NumberOfWheels = numberOfWheels;
         }
@@ -47,6 +43,5 @@ namespace Garage
             return $"{this.GetType().Name}, Regnummer: {RegistrationNumber}, Colour: {Colour}";
         }
         #endregion
-
     }
 }

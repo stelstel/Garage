@@ -10,7 +10,7 @@ namespace Garage
         #region Properties **************************************************************
 
         public Garage<Vehicle> Garage { get; set; }
-        public int VehiclesSeeded { get; set; } = 15;
+        public int VehiclesSeeded { get; set; } = 20;
 
         #endregion
 
@@ -44,6 +44,11 @@ namespace Garage
             seededVehicles[12] = new Motorcycle(400, "YUO453", "Grey", 3, 400);
             seededVehicles[13] = new Car(1500, "flo741", "Blue", 4, 3);
             seededVehicles[14] = new Car(1604.54, "RTY428", "Black", 4, 4);
+            seededVehicles[15] = new Bus(2604.33, "FKO222", "Pink", 6, 92);
+            seededVehicles[16] = new Boat(604.12, "LHA746", "Grey", 0, 6.54);
+            seededVehicles[17] = new Airplane(2604.78, "SAS001", "Blue", 4, 402);
+            seededVehicles[18] = new Car(1478.23, "POF488", "Black", 4, 4);
+            seededVehicles[19] = new Car(1803.11, "LYQ972", "Yellow", 4, 2);
 
             foreach (var seededVehicle in seededVehicles)
             {
@@ -82,6 +87,7 @@ namespace Garage
 
             return success;
         }
+
 
         /// <summary>
         /// Validates registration number
