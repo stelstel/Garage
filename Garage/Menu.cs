@@ -633,7 +633,7 @@ namespace Garage
 
             do
             {
-                Ui.Print($"Input weight of the {vehicleType}: ");
+                Ui.Print($"Input weight of the {vehicleType.ToLower()}: ");
 
                 if (!double.TryParse(Ui.GetInput(), out weight))
                     { PrintIncorrectInputWarning("input"); }
@@ -645,7 +645,7 @@ namespace Garage
 
             do
             {
-                Ui.Print($"Input the registration number of the {vehicleType}:");
+                Ui.Print($"Input the registration number of the {vehicleType.ToLower()}:");
                 registrationNumber = Ui.GetInput();
                 char[] regNum = registrationNumber.ToCharArray();
 
@@ -659,7 +659,7 @@ namespace Garage
 
             do
             {
-                Ui.Print($"Input the colour of the {vehicleType}:");
+                Ui.Print($"Input the colour of the {vehicleType.ToLower()}:");
                 colour = Ui.GetInput();
 
                 if (colour.Length >= 3 && !colour.Any(c => char.IsDigit(c)))
@@ -672,7 +672,7 @@ namespace Garage
 
             do
             {
-                Ui.Print($"Input how many wheels the {vehicleType} has:");
+                Ui.Print($"Input how many wheels the {vehicleType.ToLower()} has:");
                 string wheels = Ui.GetInput();
                 bool intOK = Int32.TryParse(wheels, out numberOfWheels);
 
