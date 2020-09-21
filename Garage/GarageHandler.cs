@@ -10,15 +10,17 @@ namespace Garage
         #region Properties **************************************************************
 
         public Garage<Vehicle> Garage { get; set; }
+        public int VehiclesSeeded { get; set; } = 15;
 
         #endregion
 
         #region methods *****************************************************************
 
-        public bool SeedParkVehicles() // Todo seed more vehicles
+        public bool SeedParkVehicles()
         {
             bool success = false;
-            Vehicle[] seededVehicles = new Vehicle[15];
+
+            Vehicle[] seededVehicles = new Vehicle[VehiclesSeeded];
 
             seededVehicles[0] = new Car(
                 weight:             1490.2, 
@@ -51,10 +53,12 @@ namespace Garage
             return success;
         }
 
+
         public void CreateGarage(int parkingSpaces)
         {
             Garage = new Garage<Vehicle>(parkingSpaces);
         }
+
 
         public bool TryToPark(Vehicle vehicle, bool printConfirmation)
         {
@@ -93,51 +97,16 @@ namespace Garage
             }
             else
             {
-            return false;
+                return false;
             }
         }
 
 
         public string HandleFilteredSearch(List<Type> userTypeList, string selectedColours, int minNumberOfWheels, int maxNumberOfWheels, string registrationNumber, double minWeight, double maxWeight)
         {
-            //List<Type> typeList = new List<Type>();
-            //List<Type> colourList = new List<Type>();
-
             // Remove all spaces
             selectedColours = Regex.Replace(selectedColours, @"\s+", "");
-
             string[] selColours = selectedColours.Split(",");
-
-            //foreach (string typ in selTypes)
-            //{
-            //    switch (typ.ToLower())
-            //    {
-            //        case "airplane":
-            //            typeList.Add(Type.GetType("Garage.Airplane, Garage"));
-            //            break;
-            //        case "boat":
-            //            typeList.Add(Type.GetType("Garage.Boat, Garage"));
-            //            break;
-            //        case "bus":
-            //            typeList.Add(Type.GetType("Garage.Bus, Garage"));
-            //            break;
-            //        case "car":
-            //            typeList.Add(Type.GetType("Garage.Car, Garage"));
-            //            break;
-            //        case "motorcycle":
-            //            typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
-            //            break;
-            //        //case "*":
-            //        //    typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
-            //        //    typeList.Add(Type.GetType("Garage.Boat, Garage"));
-            //        //    typeList.Add(Type.GetType("Garage.Bus, Garage"));
-            //        //    typeList.Add(Type.GetType("Garage.Car, Garage"));
-            //        //    typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
-            //        //    break;
-            //        default:
-            //            break;
-            //    }
-            //}
 
             if (selColours.First() != "*")
             {

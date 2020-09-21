@@ -166,7 +166,7 @@ namespace Garage
 
                 if (correctType == false)
                 {
-                    PrintIncorrectInputWarning("");
+                    PrintIncorrectInputWarning("No vehicle of that type in garage. ");
                 }
           
                 if (userSelectedTypes.Length > 0)
@@ -345,7 +345,9 @@ namespace Garage
             
             if (garageHandler.SeedParkVehicles() == true)
             {
-                Ui.Print($"\nGarage with {numberOfParkingSpaces} parking spaces created.\n15 vehicles have been parked in the garage\nPress enter to continue");
+                
+
+                Ui.Print($"\nGarage with {numberOfParkingSpaces} parking spaces created.\n{garageHandler.VehiclesSeeded} vehicles have been parked in the garage\nPress enter to continue");
                 Ui.GetInput();
             }
         }
