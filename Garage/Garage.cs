@@ -171,9 +171,6 @@ namespace Garage
         {
             StringBuilder output = new StringBuilder();
 
-            // Console.WriteLine( typeList.ElementAt(0).Name );
-            // Console.WriteLine(vehicles[0].GetType().Name);
-
             IEnumerable<Vehicle> query = 
                 from vehic in vehicles
                 where vehic != null

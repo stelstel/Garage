@@ -300,7 +300,7 @@ namespace Garage
         /// <summary>
         /// Unpark car
         /// </summary>
-        private static void RemoveVehicle()
+        public static void RemoveVehicle()
         {
             bool regNumOK = false;
             string registrationNum;

@@ -1,23 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Garage;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace Garage.Tests
 {
     [TestClass()]
     public class GarageTests
     {
-        [TestMethod()]
-        public void GarageTest()
-        {
-
-        }
-
-        [TestMethod()]
-        public void UnparkVehicleTest()
-        {
-
-        }
-
         [TestMethod()]
         public void ListParkedVehiclesTest()
         {
@@ -30,7 +20,6 @@ namespace Garage.Tests
 
             // Assert
             Assert.AreEqual(expectedOutput, actualOutput);
-
         }
 
         [TestMethod()]
@@ -55,19 +44,17 @@ namespace Garage.Tests
         public void ListParkedVehiclesByType_duplicate_reg_num_exception_Test()
         {
             // Arrange 
-            Garage.Garage<Vehicle> garage =new Garage<Vehicle>(10);
+            Garage.Garage<Vehicle> garage = new Garage<Vehicle>(10);
 
             Car car = new Car(10, "qwe789", "Blue", 4, 4);
             Bus bus = new Bus(10, "qwe789", "Blue", 4, 40);
-            
+
             // Act
             garage.ParkVehicle(car);
             garage.ParkVehicle(car);
-            
 
             // Assert
             // Exception
-
         }
 
         [TestMethod()]
@@ -78,8 +65,6 @@ namespace Garage.Tests
 
             Car car = new Car(10, "aaa456", "Blue", 4, 4);
             Bus bus = new Bus(10, "bbb123", "Blue", 4, 40);
-
-
 
             string expectedOutput = "Vehicles in garage, by type:\n-------------------------------------------------------------\n";
             expectedOutput += "Bus(s): 1\n";
