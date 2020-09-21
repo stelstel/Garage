@@ -98,48 +98,46 @@ namespace Garage
         }
 
 
-        public string HandleFilteredSearch(string selectedTypes, string selectedColours, int minNumberOfWheels, int maxNumberOfWheels, string registrationNumber, double minWeight, double maxWeight)
+        public string HandleFilteredSearch(List<Type> userTypeList, string selectedColours, int minNumberOfWheels, int maxNumberOfWheels, string registrationNumber, double minWeight, double maxWeight)
         {
-            List<Type> typeList = new List<Type>();
-            List<Type> colourList = new List<Type>();
+            //List<Type> typeList = new List<Type>();
+            //List<Type> colourList = new List<Type>();
 
             // Remove all spaces
-            selectedTypes = Regex.Replace(selectedTypes, @"\s+", "");
             selectedColours = Regex.Replace(selectedColours, @"\s+", "");
 
-            string[] selTypes = selectedTypes.Split(",");
             string[] selColours = selectedColours.Split(",");
 
-            foreach (string typ in selTypes)
-            {
-                switch (typ.ToLower())
-                {
-                    case "airplane":
-                        typeList.Add(Type.GetType("Garage.Airplane, Garage"));
-                        break;
-                    case "boat":
-                        typeList.Add(Type.GetType("Garage.Boat, Garage"));
-                        break;
-                    case "bus":
-                        typeList.Add(Type.GetType("Garage.Bus, Garage"));
-                        break;
-                    case "car":
-                        typeList.Add(Type.GetType("Garage.Car, Garage"));
-                        break;
-                    case "motorcycle":
-                        typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
-                        break;
-                    //case "*":
-                    //    typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
-                    //    typeList.Add(Type.GetType("Garage.Boat, Garage"));
-                    //    typeList.Add(Type.GetType("Garage.Bus, Garage"));
-                    //    typeList.Add(Type.GetType("Garage.Car, Garage"));
-                    //    typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
-                    //    break;
-                    default:
-                        break;
-                }
-            }
+            //foreach (string typ in selTypes)
+            //{
+            //    switch (typ.ToLower())
+            //    {
+            //        case "airplane":
+            //            typeList.Add(Type.GetType("Garage.Airplane, Garage"));
+            //            break;
+            //        case "boat":
+            //            typeList.Add(Type.GetType("Garage.Boat, Garage"));
+            //            break;
+            //        case "bus":
+            //            typeList.Add(Type.GetType("Garage.Bus, Garage"));
+            //            break;
+            //        case "car":
+            //            typeList.Add(Type.GetType("Garage.Car, Garage"));
+            //            break;
+            //        case "motorcycle":
+            //            typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+            //            break;
+            //        //case "*":
+            //        //    typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+            //        //    typeList.Add(Type.GetType("Garage.Boat, Garage"));
+            //        //    typeList.Add(Type.GetType("Garage.Bus, Garage"));
+            //        //    typeList.Add(Type.GetType("Garage.Car, Garage"));
+            //        //    typeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+            //        //    break;
+            //        default:
+            //            break;
+            //    }
+            //}
 
             if (selColours.First() != "*")
             {
@@ -152,7 +150,7 @@ namespace Garage
 
             return Garage.ProduceAdvancedList
             (
-                typeList:   typeList,
+                typeList:   userTypeList,
                 colourList: selColours,
                 minWheels:  minNumberOfWheels,
                 maxWheels:  maxNumberOfWheels,

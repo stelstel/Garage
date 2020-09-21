@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Garage
 {
@@ -70,7 +71,7 @@ namespace Garage
             Ui.PrintLine("3: List the vehicles in the garage");
             Ui.PrintLine("4: List number of vehicles in the garage by type");
             Ui.PrintLine("5: Remove car from garage");
-            Ui.PrintLine("6: Filtered list of vehicles in garage");
+            Ui.PrintLine("6: Advanced search of vehicles in garage");
             Ui.PrintLine("0: Exit");
         }
 
@@ -112,13 +113,62 @@ namespace Garage
         private static void FilteredList()
         {
             bool correctInput = false;
+            bool correctType = false;
             string userSelectedTypes;
+            List<Type> userTypeList = new List<Type>();
 
             do
             {
                 Ui.Print("Choose type(s) of vehicle, comma separated. Use * as wildcard: ");
                 userSelectedTypes = Ui.GetInput();
 
+                // Remove all spaces
+                userSelectedTypes = Regex.Replace(userSelectedTypes, @"\s+", "");
+                
+                string[] userSelTypes = userSelectedTypes.Split(",");
+
+                foreach (string typ in userSelTypes)
+                {
+                    switch (typ.ToLower())
+                    {
+                        case "airplane":
+                            userTypeList.Add(Type.GetType("Garage.Airplane, Garage"));
+                            break;
+                        case "boat":
+                            userTypeList.Add(Type.GetType("Garage.Boat, Garage"));
+                            break;
+                        case "bus":
+                            userTypeList.Add(Type.GetType("Garage.Bus, Garage"));
+                            break;
+                        case "car":
+                            userTypeList.Add(Type.GetType("Garage.Car, Garage"));
+                            break;
+                        case "motorcycle":
+                            userTypeList.Add(Type.GetType("Garage.Motorcycle, Garage"));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                IEnumerable<Type> vehicleTypes = garageHandler.Garage.getVehicleTypes();
+
+                foreach (Type vehicleType in vehicleTypes)
+                {
+                    for (int i = 0; i < userTypeList.Count(); i++)
+                    {
+                        if (vehicleType.Name.Equals(userTypeList.ElementAt(i).Name, StringComparison.OrdinalIgnoreCase))
+                        {
+                            correctType = true;   
+                        }
+                    }
+                }
+
+                if (correctType == false)
+                {
+                    PrintIncorrectInputWarning("");
+                }
+          
                 if (userSelectedTypes.Length > 0)
                 {
                     correctInput = true;
@@ -127,7 +177,7 @@ namespace Garage
                 {
                     PrintIncorrectInputWarning("");
                 }
-            } while (!correctInput);
+            } while (!correctInput || !correctType );
 
             correctInput = false;
             string userSelectedColours;
@@ -173,7 +223,6 @@ namespace Garage
             do
             {
                 Ui.Print("Choose maximum number of wheels: ");
-
                 string tempString = Ui.GetInput();
                 int.TryParse(tempString, out maxWheels);
 
@@ -208,12 +257,13 @@ namespace Garage
             correctInput = false;
             double minWeight;
 
-            do // TODO validate as in maxWheels and minWheels
+            do
             {
                 Ui.Print("Choose minimum weight: ");
-                double.TryParse(Ui.GetInput(), out minWeight);
+                string tempString = Ui.GetInput();
+                double.TryParse(tempString, out minWeight);
 
-                if (minWeight >= 0)
+                if (tempString.Length > 0 && minWeight >= 0)
                 {
                     correctInput = true;
                 }
@@ -226,12 +276,13 @@ namespace Garage
             correctInput = false;
             double maxWeight;
 
-            do // TODO validate as in maxWheels and minWheels
+            do 
             {
                 Ui.Print("Choose maximum weight: ");
-                double.TryParse(Ui.GetInput(), out maxWeight);
+                string tempString = Ui.GetInput();
+                double.TryParse(tempString, out maxWeight);
 
-                if (maxWeight >= 0 && maxWeight < int.MaxValue)
+                if (tempString.Length > 0 && maxWeight >= 0 && maxWeight < int.MaxValue)
                 {
                     correctInput = true;
                 }
@@ -241,7 +292,7 @@ namespace Garage
                 }
             } while (!correctInput);
 
-            Ui.Print($"\n{garageHandler.HandleFilteredSearch(userSelectedTypes, userSelectedColours, minWheels, maxWheels, regNum, minWeight, maxWeight)}\nPress enter to continue!");
+            Ui.Print($"\n{garageHandler.HandleFilteredSearch(userTypeList/*userSelectedTypes*/, userSelectedColours, minWheels, maxWheels, regNum, minWeight, maxWeight)}\nPress enter to continue!");
             Ui.GetInput();
         }
 
@@ -288,7 +339,7 @@ namespace Garage
 
         public static void CreateGarageAndVehicles()
         {
-            int numberOfParkingSpaces = 25;
+            int numberOfParkingSpaces =25;
             garageHandler.CreateGarage(numberOfParkingSpaces);
             
             

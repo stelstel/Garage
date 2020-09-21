@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Garage
@@ -26,22 +27,45 @@ namespace Garage
 
         #region Methods *****************************************************************
 
-        public void ParkVehicle(Vehicle vehicle) // TODO if no spaces left???
+        public void ParkVehicle(Vehicle vehicle)
         {
-            foreach (Vehicle veh in vehicles)
+            int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
+
+            if (firstEmptyArraySpace >= 0)
             {
-                if (veh != null)
+                foreach (Vehicle veh in vehicles)
                 {
-                    // Vehicle with the same registration number is already parked
-                    if (veh.RegistrationNumber == vehicle.RegistrationNumber)
+                    if (veh != null)
                     {
-                        throw new ArgumentException($"A vehicle with the registration number {veh.RegistrationNumber} is already parked in the garage");
+                        // Vehicle with the same registration number is already parked
+                        if (veh.RegistrationNumber == vehicle.RegistrationNumber)
+                        {
+                            throw new ArgumentException($"A vehicle with the registration number {veh.RegistrationNumber} is already parked in the garage");
+                        }
                     }
                 }
+                vehicles[firstEmptyArraySpace] = vehicle;
             }
+            else
+            {
+                throw new Exception("Sorry. No free parkingspaces!");
+            }
+        }
 
-            int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
-            vehicles[firstEmptyArraySpace] = vehicle;
+        
+        /// <summary>
+        /// All the types of vehicles parked in the garage
+        /// </summary>
+        /// <returns>Types</returns>
+        public IEnumerable<Type> getVehicleTypes()
+        {
+            Type parentType = typeof(Vehicle);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Type[] types = assembly.GetTypes();
+
+            IEnumerable<Type> subclasses = types.Where(t => t.BaseType == parentType);
+
+            return subclasses;
         }
 
 
@@ -146,6 +170,9 @@ namespace Garage
         public string ProduceAdvancedList(List<Type> typeList, string[] colourList, int minWheels, int maxWheels, string registrationNumber , double minWeight, double maxWeight)
         {
             StringBuilder output = new StringBuilder();
+
+            // Console.WriteLine( typeList.ElementAt(0).Name );
+            // Console.WriteLine(vehicles[0].GetType().Name);
 
             IEnumerable<Vehicle> query = 
                 from vehic in vehicles
