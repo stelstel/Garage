@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Garage
 {
-    
     public class Boat : Vehicle
     {
         public double Length { get; set; }

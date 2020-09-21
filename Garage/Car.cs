@@ -19,5 +19,4 @@ namespace Garage
             return $"{base.ToString()}, Number of doors: {NumberOfDoors}";
         }
     }
-
 }

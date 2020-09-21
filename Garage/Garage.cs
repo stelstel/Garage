@@ -126,7 +126,6 @@ namespace Garage
             StringBuilder output = new StringBuilder("Vehicles in garage, by type:\n-------------------------------------------------------------\n");
             Dictionary<string, int> typeNumberDict = new Dictionary<string, int>();
 
-
             typeNumberDict.Add("Airplane", 0);
             typeNumberDict.Add("Boat", 0);
             typeNumberDict.Add("Bus", 0);
