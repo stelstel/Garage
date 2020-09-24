@@ -413,7 +413,7 @@ namespace Garage
             {
                 if (garageHandler.SeedParkVehicles() == true)
                 {
-                    Ui.Print("Eight vehicles has been added to the garage");
+                    Ui.Print($"{garageHandler.VehiclesSeeded} vehicles has been added to the garage");
                     Ui.GetInput();
                 }
             }
@@ -456,7 +456,7 @@ namespace Garage
                 int numberOfPassengers;
                 do
                 {
-                    Ui.Print($"Input how many passengers the {vehicleType} has:");
+                    Ui.Print($"Input how many passengers the {vehicleType} can seat:");
                     bool intOK = Int32.TryParse(Ui.GetInput(), out numberOfPassengers);
 
                     if (numberOfPassengers < 0 || !intOK)

@@ -1,4 +1,6 @@
-﻿namespace Garage
+﻿using System;
+
+namespace Garage
 {
     /// <summary>
     /// Prints to and reads
@@ -10,11 +12,21 @@
         /// <summary>
         /// Reads input
         /// </summary>
-        /// <returns>input</returns>
+        /// <returns>input string</returns>
         public string GetInput()
         {
             return consoleUI.GetInput();
         }
+
+        /// <summary>
+        /// Reads one character from input
+        /// </summary>
+        /// <returns>input as ConsoleKeyInfo</returns>
+        public ConsoleKeyInfo ReadKey()
+        {
+            return consoleUI.ReadKey();
+        }
+
 
         /// <summary>
         /// Prints string

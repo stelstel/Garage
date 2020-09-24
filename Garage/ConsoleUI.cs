@@ -17,6 +17,15 @@ namespace Garage
         }
 
         /// <summary>
+        /// Reads one character from Console
+        /// </summary>
+        /// <returns>User input as ConsoleKeyInfo</returns>
+        public ConsoleKeyInfo ReadKey()
+        {
+            return Console.ReadKey();
+        }
+
+        /// <summary>
         /// Prints string to Console
         /// </summary>
         /// <param name="message">string to print</param>

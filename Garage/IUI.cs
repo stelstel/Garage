@@ -1,4 +1,6 @@
-﻿namespace Garage
+﻿using System;
+
+namespace Garage
 {
     interface IUI
     {
@@ -7,6 +9,12 @@
         /// </summary>
         /// <returns>input</returns>
         string GetInput();
+
+        /// <summary>
+        /// Reads one character from input
+        /// </summary>
+        /// <returns>input as ConsoleKeyInfo</returns>
+        public ConsoleKeyInfo ReadKey();
 
         /// <summary>
         /// Prints string
