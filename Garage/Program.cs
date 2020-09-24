@@ -2,12 +2,11 @@
 {
     class Program
     {
-        public static UI Ui { get; set; } = new UI();
-        public static Garage<Vehicle> Garage { get; set; }
+        private static UI ui { get; set; } = new UI();
 
         static void Main()
         {
-            Menu.Run();
+            Menu.Run(ui);
         }
     }
 }

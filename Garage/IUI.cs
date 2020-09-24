@@ -2,7 +2,7 @@
 
 namespace Garage
 {
-    interface IUI
+    public interface IUI
     {
         /// <summary>
         /// Reads input

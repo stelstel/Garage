@@ -5,7 +5,7 @@ namespace Garage
     /// <summary>
     /// Prints to and reads
     /// </summary>
-    internal class UI : IUI
+    public class UI : IUI
     {
         readonly ConsoleUI consoleUI = new ConsoleUI();
 
@@ -41,7 +41,7 @@ namespace Garage
         /// Prints string ending with line break
         /// </summary>
         /// <param name="message">string to print</param>
-        public void PrintLine(string message = "")
+        public void PrintLine(string message)
         {
             consoleUI.PrintLine(message);
         }
