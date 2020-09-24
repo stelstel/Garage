@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Garage
@@ -9,7 +10,7 @@ namespace Garage
     {
         #region Properties **************************************************************
 
-        public Garage<Vehicle> Garage { get; set; }
+        private Garage<Vehicle> garage;
         public int VehiclesSeeded { get; set; } = 20;
 
         #endregion
@@ -23,11 +24,11 @@ namespace Garage
             Vehicle[] seededVehicles = new Vehicle[VehiclesSeeded];
 
             seededVehicles[0] = new Car(
-                weight:             1490.2, 
-                registrationNumber: "iop789", 
-                colour:             "Blue", 
-                numberOfWheels:     4, 
-                numberOfDoors:      4
+                weight: 1490.2,
+                registrationNumber: "iop789",
+                colour: "Blue",
+                numberOfWheels: 4,
+                numberOfDoors: 4
             );
 
             seededVehicles[1] = new Boat(1000, "abc123", "Yellow", 0, 8.25);
@@ -61,7 +62,15 @@ namespace Garage
 
         public void CreateGarage(int parkingSpaces)
         {
-            Garage = new Garage<Vehicle>(parkingSpaces);
+            //garage = new Garage<Vehicle>(parkingSpaces);
+            garage = new Garage<Vehicle>(parkingSpaces);
+
+            //foreach (var vehicle in garage)
+            //{
+
+            //}
+
+            //var rodaFordon = garage.Where(v => v.Colour == "Red");
         }
 
 
@@ -71,7 +80,7 @@ namespace Garage
 
             try
             {
-                Garage.ParkVehicle(vehicle);
+                garage.ParkVehicle(vehicle);
 
                 if (printConfirmation)
                 {
@@ -94,7 +103,8 @@ namespace Garage
         /// </summary>
         /// <param name="regNum">String containing registration number</param>
         /// <returns></returns>
-        public bool ValidateRegNum(string regNum) {
+        public bool ValidateRegNum(string regNum)
+        {
             if (regNum.Length == 6 &&
                             Char.IsLetter(regNum[0]) && Char.IsLetter(regNum[1]) && Char.IsLetter(regNum[2]) &&
                             Char.IsDigit(regNum[3]) && Char.IsDigit(regNum[4]) && Char.IsDigit(regNum[5]))
@@ -123,15 +133,15 @@ namespace Garage
                 }
             }
 
-            return Garage.ProduceAdvancedList
+            return garage.ProduceAdvancedList
             (
-                typeList:   userTypeList,
+                typeList: userTypeList,
                 colourList: selColours,
-                minWheels:  minNumberOfWheels,
-                maxWheels:  maxNumberOfWheels,
+                minWheels: minNumberOfWheels,
+                maxWheels: maxNumberOfWheels,
                 registrationNumber: registrationNumber,
-                minWeight:  minWeight,
-                maxWeight:  maxWeight
+                minWeight: minWeight,
+                maxWeight: maxWeight
             );
         }
 
@@ -145,6 +155,80 @@ namespace Garage
             char[] a = s.ToCharArray();
             a[0] = char.ToUpper(a[0]);
             return new string(a);
+        }
+
+        internal bool IsCreated()
+        {
+            return garage != null;
+        }
+
+        internal string ListParkedVehiclesByType()
+        {
+            //var result = garage.GroupBy(v => v.GetType().Name)
+            //            .Select(s => new CountDTO()
+            //            {
+            //                Name = s.Key,
+            //                Count = s.Count()
+            //            });
+
+            StringBuilder output = new StringBuilder("Vehicles in garage, by type:\n-------------------------------------------------------------\n");
+            Dictionary<string, int> typeNumberDict = new Dictionary<string, int>();
+
+            typeNumberDict.Add("Airplane", 0);
+            typeNumberDict.Add("Boat", 0);
+            typeNumberDict.Add("Bus", 0);
+            typeNumberDict.Add("Car", 0);
+            typeNumberDict.Add("Motorcycle", 0);
+
+            foreach (var vehicle in garage)
+            {
+                for (int i = 0; i < typeNumberDict.Count; i++)
+                {
+                    // Vehicle in garage == vehicle in the list counting different types of vehicles
+                    if (String.Equals(vehicle.GetType().Name, typeNumberDict.ElementAt(i).Key))
+                    {
+                        typeNumberDict[typeNumberDict.ElementAt(i).Key] = typeNumberDict.ElementAt(i).Value + 1;
+                    }
+                }
+            }
+
+            int totalNumVehicles = 0;
+
+            foreach (var typeNumber in typeNumberDict)
+            {
+                totalNumVehicles += typeNumber.Value;
+            }
+
+            foreach (var typeNumber in typeNumberDict)
+            {
+                if (typeNumber.Value > 0)
+                {
+                    output.Append($"{typeNumber.Key}(s): {typeNumber.Value}\n");
+                }
+            }
+
+            output.Append($"-----------------------------------------\nTotal: {totalNumVehicles} vehicles");
+            return output.ToString();
+        }
+
+        internal string ListParkedVehicles()
+        {
+            StringBuilder output = new StringBuilder("Vehicles in garage:\n-------------------------------------------------------------\n");
+
+            foreach (var vehicle in garage)
+            {
+                output.Append(vehicle.ToString());
+                output.Append("\n");
+            }
+            return output.ToString();
+        }
+
+        internal bool UnparkVehicle(string registrationNum)
+        {
+            var found = garage.FirstOrDefault(v => v.RegistrationNumber == registrationNum);
+            if (found is null) return false;
+
+            return garage.UnparkVehicle(found);
         }
         #endregion
     }

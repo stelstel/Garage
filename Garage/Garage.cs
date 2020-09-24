@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Garage
 {
-    public class Garage<T> : IEnumerable<T> where T : Vehicle
+    public class Garage<T> : IEnumerable<T> where T : IVehicle
     {
         #region Properties **************************************************************
 
-        private Vehicle[] vehicles;
+        private T[] vehicles;
 
         public object Current => throw new NotImplementedException();
         #endregion
@@ -20,20 +20,20 @@ namespace Garage
         #region Constructors ************************************************************
         public Garage(int numberOfParkingSpaces)
         {
-            vehicles = new Vehicle[numberOfParkingSpaces];
+            vehicles = new T[numberOfParkingSpaces];
         }
         #endregion
 
 
         #region Methods *****************************************************************
 
-        public void ParkVehicle(Vehicle vehicle)
+        public void ParkVehicle(T vehicle)
         {
             int firstEmptyArraySpace = Array.IndexOf(vehicles, null);
 
             if (firstEmptyArraySpace >= 0)
             {
-                foreach (Vehicle veh in vehicles)
+                foreach (T veh in vehicles)
                 {
                     if (veh != null)
                     {
@@ -57,7 +57,7 @@ namespace Garage
         /// All the types of vehicles parked in the garage
         /// </summary>
         /// <returns>Types</returns>
-        public IEnumerable<Type> getVehicleTypes()
+        public IEnumerable<Type> GetVehicleTypes()
         {
             Type parentType = typeof(Vehicle);
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -69,45 +69,28 @@ namespace Garage
         }
 
 
-        public bool UnparkVehicle(string regNum)
+        public bool UnparkVehicle(T vehicle)
         {
             bool unparkingSuccess = false;
 
             for (int i = 0; i < vehicles.Length - 1; i++)
             {
-                if (regNum == vehicles[i]?.RegistrationNumber)
+                if (vehicles[i].Equals(vehicle))
                 {
-                    vehicles[i] = null;
+                    vehicles[i] = default;
                     unparkingSuccess = true;
                 }
             }
             return unparkingSuccess;
         }
 
-        /// <summary>
-        ///     Creates a string containing of parked vehicles
-        /// </summary>
-        /// <returns>String containing parked vehicles</returns>
-        public string ListParkedVehicles()
-        {
-            StringBuilder output = new StringBuilder("Vehicles in garage:\n-------------------------------------------------------------\n");
-
-            foreach (Vehicle vehicle in vehicles)
-            {
-                if (vehicle != null)
-                {
-                    output.Append(vehicle.ToString());
-                    output.Append("\n");
-                }
-            }
-            return output.ToString();
-        }
+        
 
         public string[] ListParkedVehiclesColours()
         {
             HashSet<string> colourSet = new HashSet<string>();
 
-            foreach (Vehicle vehicle in vehicles)
+            foreach (T vehicle in vehicles)
             {
                 if (vehicle != null)
                 {
@@ -121,58 +104,13 @@ namespace Garage
         }
 
 
-        public string ListParkedVehiclesByType()
-        {
-            StringBuilder output = new StringBuilder("Vehicles in garage, by type:\n-------------------------------------------------------------\n");
-            Dictionary<string, int> typeNumberDict = new Dictionary<string, int>();
-
-            typeNumberDict.Add("Airplane", 0);
-            typeNumberDict.Add("Boat", 0);
-            typeNumberDict.Add("Bus", 0);
-            typeNumberDict.Add("Car", 0);
-            typeNumberDict.Add("Motorcycle", 0);
-
-            foreach (Vehicle vehicle in vehicles)
-            {
-                if (vehicle != null)
-                {
-                    for (int i = 0; i < typeNumberDict.Count; i++)
-                    {
-                        // Vehicle in garage == vehicle in the list counting different types of vehicles
-                        if (String.Equals(vehicle.GetType().Name, typeNumberDict.ElementAt(i).Key))
-                        {
-                            typeNumberDict[typeNumberDict.ElementAt(i).Key] = typeNumberDict.ElementAt(i).Value + 1;
-                        }
-                    }
-                }
-            }
-
-            int totalNumVehicles = 0;
-
-            foreach (var typeNumber in typeNumberDict)
-            {
-                totalNumVehicles += typeNumber.Value;
-            }
-
-            foreach (var typeNumber in typeNumberDict)
-            {
-                if (typeNumber.Value > 0)
-                {
-                    output.Append($"{typeNumber.Key}(s): {typeNumber.Value}\n");
-                }
-            }
-
-            output.Append($"-----------------------------------------\nTotal: {totalNumVehicles} vehicles");
-            return output.ToString();
-        }
-
         public string ProduceAdvancedList(List<Type> typeList, string[] colourList, int minWheels, int maxWheels, string registrationNumber , double minWeight, double maxWeight)
         {
             StringBuilder output = new StringBuilder();
 
-            IEnumerable<Vehicle> query = 
+            IEnumerable<T> query = 
                 from vehic in vehicles
-                where vehic != null
+                where !vehic.Equals(default)
                 select vehic;
 
             if (typeList.Count > 0)
@@ -211,7 +149,7 @@ namespace Garage
                     where vehic.Weight <= maxWeight
                     select vehic;
 
-            foreach (Vehicle veh in query)
+            foreach (T veh in query)
             {
                 output.Append($"{veh}\n");
             }
@@ -222,7 +160,11 @@ namespace Garage
 
         public IEnumerator<T> GetEnumerator()
         {
-            return GetEnumerator();
+            foreach (var vehicle in vehicles)
+            {
+                if (vehicle != null) 
+                    yield return vehicle;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
