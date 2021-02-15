@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -157,12 +158,27 @@ namespace Garage
             return new string(a);
         }
 
+        /// <summary>
+        /// All the types of vehicles parked in the garage
+        /// </summary>
+        /// <returns>Types</returns>
+        internal IEnumerable<Type> getVehicleTypes()
+        {
+            Type parentType = typeof(Vehicle);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Type[] types = assembly.GetTypes();
+
+            IEnumerable<Type> subclasses = types.Where(t => t.BaseType == parentType);
+
+            return subclasses;
+        }
+
         internal bool IsCreated()
         {
             return garage != null;
         }
 
-        internal string ListParkedVehiclesByType()
+        public string ListParkedVehiclesByType()
         {
             //var result = garage.GroupBy(v => v.GetType().Name)
             //            .Select(s => new CountDTO()
@@ -211,7 +227,7 @@ namespace Garage
             return output.ToString();
         }
 
-        internal string ListParkedVehicles()
+        public string ListParkedVehicles()
         {
             StringBuilder output = new StringBuilder("Vehicles in garage:\n-------------------------------------------------------------\n");
 

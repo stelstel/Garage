@@ -57,16 +57,16 @@ namespace Garage
         /// All the types of vehicles parked in the garage
         /// </summary>
         /// <returns>Types</returns>
-        public IEnumerable<Type> GetVehicleTypes()
-        {
-            Type parentType = typeof(Vehicle);
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Type[] types = assembly.GetTypes();
+        //public IEnumerable<Type> GetVehicleTypes()
+        //{
+        //    Type parentType = typeof(Vehicle);
+        //    Assembly assembly = Assembly.GetExecutingAssembly();
+        //    Type[] types = assembly.GetTypes();
 
-            IEnumerable<Type> subclasses = types.Where(t => t.BaseType == parentType);
+        //    IEnumerable<Type> subclasses = types.Where(t => t.BaseType == parentType);
 
-            return subclasses;
-        }
+        //    return subclasses;
+        //}
 
 
         public bool UnparkVehicle(T vehicle)

@@ -6,6 +6,8 @@ namespace Garage.Tests
     [TestClass()]
     public class GarageTests
     {
+        static GarageHandler garageHandler = new GarageHandler();
+
         [TestMethod()]
         public void ListParkedVehiclesTest()
         {
@@ -14,7 +16,7 @@ namespace Garage.Tests
 
             // Act
             Garage.Garage<Vehicle> garage = new Garage.Garage<Vehicle>(5);
-            string actualOutput = garage.ListParkedVehicles();
+            string actualOutput = garageHandler.ListParkedVehicles();
 
             // Assert
             Assert.AreEqual(expectedOutput, actualOutput);
@@ -31,7 +33,7 @@ namespace Garage.Tests
 
             // Act
             garage.ParkVehicle(vehicle);
-            string actualOutput = garage.ListParkedVehicles();
+            string actualOutput = garageHandler.ListParkedVehicles();
 
             /// Assert
             Assert.AreEqual(expectedOutput, actualOutput);
@@ -72,7 +74,7 @@ namespace Garage.Tests
             //// Act
             garage.ParkVehicle(car);
             garage.ParkVehicle(bus);
-            string actualOutput = garage.ListParkedVehiclesByType();
+            string actualOutput = garageHandler.ListParkedVehiclesByType();
 
             // Assert
             Assert.AreEqual(expectedOutput, actualOutput);

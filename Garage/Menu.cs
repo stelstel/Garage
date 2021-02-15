@@ -158,7 +158,7 @@ namespace Garage
                     }
                 }
 
-                IEnumerable<Type> vehicleTypes = garageHandler.Garage.getVehicleTypes();
+                IEnumerable<Type> vehicleTypes = garageHandler.getVehicleTypes();
 
                 foreach (Type vehicleType in vehicleTypes)
                 {
